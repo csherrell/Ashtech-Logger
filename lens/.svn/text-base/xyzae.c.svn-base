@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include "../gps.h"
+#include "xyzae.h"
+
+void lens_print_xyzae(struct str_satellite_position *xyzae,
+          unsigned int rcvtime,
+          FILE *csv)
+{
+     if(csv)
+     {
+          fprintf(csv,"%d, %d, %f, %f, %f, %f, %f, %f\n",
+                    rcvtime,
+                    xyzae->svprn,
+                    xyzae->x,
+                    xyzae->y,
+                    xyzae->z,
+                    xyzae->range,
+                    xyzae->azimuth,
+                    xyzae->elevation);
+          fflush(csv);
+     }
+}

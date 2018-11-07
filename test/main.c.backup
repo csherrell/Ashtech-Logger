@@ -1,0 +1,1302 @@
+/*! LaasSim Program */
+
+/*
+#define INFILE "/home/sherrell/gg12_data/2005.12.12/2005.12.12.log"
+#define INFILE   "inFile"
+*/
+
+#define INFILE   "verify6.csv"
+
+#define PRN_FILE "prn.log"
+
+#define _ISOC9X_SOURCE  1
+#define _ISOC99_SOURCE  1
+#include <math.h>
+
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+#include "utils_string.h"
+#include "crc_16bit.h"
+
+struct gg12_mca_new
+{
+     unsigned short sequence;  /* 2  Sequence ID (units of 50 ms, mod 30 min) */
+     unsigned short left;      /* 1  Number of remaining MCA msg to be sent */
+     unsigned short svprn;     /* 1  Satellite PRN number (1 - 56) */
+     unsigned short elev;      /* 1  Elevation angle (degrees) */
+     unsigned short azim;      /* 1  Azimuth angle (2 deg increments) */
+     unsigned short chnind;    /* 1  Channel (1 - 12) assigned to the sat */
+     unsigned short warning;   /* 1  See Table 4.39  */
+     unsigned short goodbad;   /* 1  Indicates the quality of measurement */
+     unsigned short polarity;  /* 1  This number is either zero or five:
+                                  0 - the satellite has just been locked
+                                  5 - meaning the first frame of the
+                                  message has been found  */
+     unsigned short ireg;      /* 1  Signal-to-noise measurement (db Hz) */
+     unsigned short qa_phase;  /* 1  Not used; always zero */
+     double         full_phase;/* 8  Full carrier phase (measured in cycles) */
+     double         raw_range; /* 8  Raw range (in seconds) to the satellite
+                                  receive time - transmitted time = raw range */
+     int            doppler;   /* 4  doppler measurement (10-4 Hz) */
+     int            smoothing; /* 4  Smoothing Data */
+     unsigned int   checksum;  /* 1  XOR checksum of above data */
+     /* Total Bytes: 37 */
+};
+
+
+struct gg12_xyz_new
+{
+     int rcvtime;
+     short Total_Satellites;
+
+     short   sv;
+     double  satx;
+     double  saty;
+     double  satz;
+     double  range;
+};
+
+struct gg12_snv_new
+{
+     short   wn;        /* 2  GPS week number */
+     int     tow;       /* 4  Seconds of GPS week */
+     float   tgd;       /* 4  Group delay (seconds) */
+     int     aodc;      /* 4  Clock data issue */
+     int     toc;       /* 4  Clock data reference time in seconds */
+     float   af2;       /* 4  Clock correction (sec/sec2) */
+     float   af1;       /* 4  Clock correction (sec/sec) */
+     float   af0;       /* 4  Clock correction (sec) */
+     int     aode;      /* 4  Orbit data issue */
+     float   deltan;    /* 4  Mean anomaly correction (semicirc/sec) */
+     double  m0;        /* 8  Mean anomaly at ref. time (semicirc) */
+     double  e;         /* 8  Eccentricity */
+     double  roota;     /* 8  Sqr root of semi-major axis (met 1/2) */
+     int     toe;       /* 4  Reference time for orbit (sec) */
+     float   cic;       /* 4  Harmonic correction term (radians) */
+     float   crc;       /* 4  Harmonic correction term (meters) */
+     float   cis;       /* 4  Harmonic correction term (radians) */
+     float   crs;       /* 4  Harmonic correction term (meters) */
+     float   cuc;       /* 4  Harmonic correction term (radians) */
+     float   cus;       /* 4  Harmonic correction term (radians) */
+     double  omega0;    /* 8  Longitude of ascending node (semicircles) */
+     double  omega;     /* 8  Argument of perigee (semicircles) */
+     double  i0;        /* 8  Inclination angle (semicircles) */
+     float   omegadot;  /* 4  Rate of right ascension (semicircles/sec) */
+     float   idot;      /* 4  Rate of inclination (semicircles/sec) */
+     short   accuracy;  /* 2  User range accuracy */
+     short   health;    /* 2  Satellite health */
+     short   fit;       /* 2  Curve fit interval */
+     short   prnnum;    /* 1  Satellite PRN number minus 1 (0 to 31) */
+     short   res;       /* 1  Reserved character */
+};
+
+
+/* Roof Data **************************************************************************************************/
+
+/* GPS Location */
+/* ROOF */
+static const double xrld =  -675846.6843;
+static const double yrld = -5173307.6231;
+static const double zrld =  3657198.7184;
+/* LAAS 4 */
+/*
+   static const double xrld =  -677867.0751;
+   static const double yrld = -5171231.5563;
+   static const double zrld =  3659707.7396;
+   */
+/* LAAS 6 */
+/*
+   static const double xrld =  -677873.5677;
+   static const double yrld = -5171223.7104;
+   static const double zrld =  3659719.3725;
+   */
+/* LAAS 7 */
+/*
+   static const double xrld =  -677883.8698;
+   static const double yrld = -5171212.1842;
+   static const double zrld =  3659731.0743;
+   */
+
+/* latitude: 35.2107606849; */
+static const double latitude  = 0.6145437060832786478;
+/* static const double longitude = -97.4430319623; */
+static const double longitude = -1.7007017408682060798;
+static const double altitude = 0;
+
+/* Constants - Explicit ***************************************************************************************/
+/*! LAAS Ground Facility Low Level Requirment
+ *  Introduction
+ *  Section 1.1
+ */
+#define number_of_satellites         32 /* Number of Satellite in the GPS Constalation */
+#define number_of_gps_sources         8 /* How many GPS cards. Two per Referece Receiver */
+#define number_of_reference_receivers 4 /* Reference Receivers */
+
+/* Position ***************************************************************************************************/
+struct Position
+{
+     double x;
+     double y;
+     double z;
+     double el;
+     double az;
+};
+
+
+/* Minimum Data Set *******************************************************************************************/
+#define GMDS_COMPLETE 7
+struct GPS_Minimum_Data_Set
+{
+     int    complete;     /* "0" No XYZ, MCA, or SNV; "1" has MCA; "2" has XYZ; "4" has SNV */
+     /* "3" MCA, XYZ; "5" MCA, SNV; "6" XYZ, SNV; "7" GMDS_COMPLETE */
+     short  svprn;        /* From MCA */
+     long   rcvtime;      /* From XYZ */
+     unsigned int goodbad;    /* From MCA */
+     double raw_range;    /* From MCA */
+     double full_phase;   /* From MCA */
+
+     struct Position position;
+
+     double PR_s;
+     double PR_sc;
+     double PR_sca;
+} gmds[number_of_satellites][number_of_gps_sources];
+
+struct SatelliteInformation
+{
+     double correction;
+     double correction_previous;
+     long   rcvtime;
+     long   rcvtime_previous; 
+     struct Position xyz_current; 
+     struct Position xyz_previous; 
+} PR[32];
+
+struct Receiver_Error
+{
+     double clock_error;      
+     int    prn_count;           /* Nc */
+} r_err[8];
+
+/**
+ *  LAAS Ground Facility Low Level Requirment
+ *  Multipath Probability Check
+ *  Section 
+ */
+static const int  DIPOLE   = 0;
+static const int  HELIBOWL = 1;
+
+/**
+  LAAS Ground Facility Low Level Requirment
+  Additional Message Flag
+  Section 3.2.1.2
+  */
+static const int    amf = 0;
+
+/**
+  LAAS Ground Facility Low Level Requirment
+  Measurment Type
+  Section 3.2.1.4
+  */
+static const int    mt  = 0;
+
+/**
+  LAAS Ground Facility Low Level Requirment
+  Ephemeris Decorrelation Paramenter
+  Section 3.2.1.6
+  */
+static const int    p_value  = 0;
+
+/**
+  LAAS Ground Facility Low Level Requirment
+  Smoothed Pseudorange
+  Section 3.2.2.3.2
+  */
+static const long nominal_carrier_frequency =  1575420000;
+
+/**
+  LAAS Ground Facility Low Level Requirment
+  Smoothed Pseudorange
+  Section 2.4
+  */
+double hardware_bias[4];
+double offset[4];
+
+/** Constants - Implicit ***************************************************************************************/
+
+/**
+  LAAS Ground Facility Low Level Requirment
+  Multipath Probability Check
+  Section 
+  */
+/* static const float  MULTIPATH_THRESHOLD = 11.7; */
+
+/* Constants - Universal **************************************************************************************/
+static const double PI = 3.14159265358979323846;
+
+/* Speed of light: meters / second */
+static const int  C = 299792458;    
+
+static const int  GPS_LEAP_SECONDS  = 13;
+static const int  UTIME_AT_GPS_EPOCH = 315964800;
+static const int  SECONDS_IN_WEEK    = (7 * 24 * 60 * 60);
+static const int  MILLI_SECONDS_IN_WEEK = (7 * 24 * 60 * 60 * 1000);
+/*
+*/
+
+/* Constants - Application Specific --------------------------------------------------------------------------*/
+#define BUFSIZE 8000
+
+#define N 200                                     /* 200 elements at 0.5 sec intervals = 100s of history */
+
+/*-------------------------------------------------------------------------------------------------------------*/
+
+static double PR_Smooth_History[number_of_satellites][8];
+static double PHI_History[number_of_satellites][8];                 /* Previous Accumulated Phase    */
+static int    PR_First[number_of_satellites][8];
+static double PR_corr_history[number_of_satellites];
+
+/*
+   static long   last_update_time[number_of_satellites];
+   static long   current_update_time[number_of_satellites];
+   */
+
+static double urcvtime = 0;
+static unsigned long   crcvtime = 0;
+static long   current_time = 0;
+static char   identifier[5];
+
+/*
+   static long  current_rcvtime  = 0;
+   static long  previous_rcvtime[number_of_satellites];
+   */
+
+static FILE *prnFile = 0;
+
+struct _RR
+{
+     double x;
+     double y;
+     double z;
+     double lat;
+     double lon;
+     double alt;
+} RR[number_of_gps_sources];
+
+struct _RR centroid;
+
+struct elevation_table
+{
+     double history[N];
+     int head;                                     /* Next avaliable position in the history array */
+     int first;                                    /* The first elevation stored */
+     /* first will be 0 util 200 elevations are stored then it will be head + 1 */
+     int last;                                     /* The last elevation stored */
+     /* The is head - 1 */
+     int history_count;
+
+     double elevation;
+} elev[number_of_satellites];
+
+/***************************************************************************************************************/
+     void
+print_xyz_position()
+{
+     int prn = 0;
+     for(prn=0; prn < number_of_satellites; prn++)
+     {
+          printf("Current  X: %f, Y:%f, Z:%f\n", PR[prn].xyz_current.x, PR[prn].xyz_current.y, PR[prn].xyz_current.z);
+          printf("Previous X: %f, Y:%f, Z:%f\n", PR[prn].xyz_previous.x, PR[prn].xyz_previous.y, PR[prn].xyz_previous.z);
+     }
+}
+
+     void
+print_csv(FILE *gmdsFile)
+{
+     int prn = 0;
+     int antenna = 0;
+     int count = 0;
+
+     for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+     {
+          count = 0;
+          for(prn = 0; prn < number_of_satellites; prn++)
+          {
+               if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+               {
+                    fprintf(gmdsFile,"%d,%d,%d,%ld,%d,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f,%0.4f\n",
+                              antenna, count++, prn, gmds[prn][antenna].rcvtime, gmds[prn][antenna].goodbad,
+                              gmds[prn][antenna].raw_range, gmds[prn][antenna].full_phase,
+                              gmds[prn][antenna].position.x, gmds[prn][antenna].position.y, gmds[prn][antenna].position.z,
+                              gmds[prn][antenna].position.az, gmds[prn][antenna].position.el);
+               }
+          }
+     }
+     fprintf(gmdsFile,"\n");
+}
+
+     void
+print_table()
+{
+     int prn = 0;
+     int antenna = 0;
+
+     printf("Print Table\n");
+     printf("SNV XYZ MCA Value\n");
+     printf(" 0   0   0    0\n");
+     printf(" 0   0   1    1\n");
+     printf(" 0   1   0    2\n");
+     printf(" 0   1   1    3\n");
+     printf(" 1   0   0    4\n");
+     printf(" 1   0   1    5\n");
+     printf(" 1   1   0    6\n");
+     printf(" 1   1   1    7\n");
+     printf("Antenna:  0  1  2  3  4  5  6  7\n");
+     for(prn = 0; prn < number_of_satellites; prn++)
+     {
+          printf("PRN %2d:  ", prn);
+          for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+          {
+               printf("%2d ", gmds[prn][antenna].complete);
+          }
+          printf("\n");
+     }
+}
+
+/***************************************************************************************************************/
+
+     void
+process_xyz(char inputBuffer[], FILE *invalidPRN, int antennaId)
+{
+     struct gg12_xyz_new st_xyz;
+
+     memset(&st_xyz,0,sizeof(struct gg12_xyz_new));
+     memset(identifier,0,5);
+
+     sscanf(inputBuffer,"%4s, %lf, %lu, %d, %hd, %hd, %lf, %lf, %lf, %lf\n",
+               identifier, &urcvtime, &crcvtime,
+               &st_xyz.rcvtime, &st_xyz.Total_Satellites,
+               &st_xyz.sv, &st_xyz.satx, &st_xyz.saty,
+               &st_xyz.satz, &st_xyz.range);
+
+     /*
+        printf("%s, %1.4f, %ld, %d, %d, %d, %1.9f, %1.9f, %1.9f, %1.9f\n",
+        identifier, urcvtime, crcvtime,
+        st_xyz.rcvtime, st_xyz.Total_Satellites,
+        st_xyz.sv, st_xyz.satx, st_xyz.saty,
+        st_xyz.satz, st_xyz.range);
+        printf("XYZ - PRN: %d, ANT: %d, COMPLETE: %d\n",st_xyz.sv, antennaId, gmds[st_xyz.sv][antennaId].complete);
+        */
+
+     if((st_xyz.sv == 0) || (st_xyz.sv > number_of_satellites))
+     {
+          fprintf(invalidPRN,"%s, %1.4f, %ld, %d, %d, %d, %1.9f, %1.9f, %1.9f, %1.9f\n",
+                    identifier, urcvtime, crcvtime,
+                    st_xyz.rcvtime, st_xyz.Total_Satellites,
+                    st_xyz.sv, st_xyz.satx, st_xyz.saty,
+                    st_xyz.satz, st_xyz.range);
+          return;
+     }
+
+     printf("XYZ\n");
+     st_xyz.sv -= 1;
+     gmds[st_xyz.sv][antennaId].complete |= 0x02;
+     gmds[st_xyz.sv][antennaId].rcvtime  = st_xyz.rcvtime;
+     gmds[st_xyz.sv][antennaId].position.x = st_xyz.satx;
+     gmds[st_xyz.sv][antennaId].position.y = st_xyz.saty;
+     gmds[st_xyz.sv][antennaId].position.z = st_xyz.satz;
+
+     current_time = st_xyz.rcvtime;
+}
+
+/***************************************************************************************************************/
+
+     void
+process_mca(char inputBuffer[], FILE *invalidPRN, FILE *invalidSignalIntegrity, int antennaId)
+{
+     struct gg12_mca_new st_mca;
+
+     printf("MCA\n");
+     memset(&st_mca,0,sizeof(struct gg12_mca_new));
+     memset(identifier,0,5);
+
+     sscanf(inputBuffer,"%4s, %lf, %lu, %hu, %hu, %hu, %hu, %hu, %hu, %hu, %hu, %hu, %hu, %hu, %lf, %lf, %d, %d\n",
+               identifier, &urcvtime, &crcvtime,
+               &st_mca.sequence, &st_mca.left, &st_mca.svprn, &st_mca.elev, &st_mca.azim,
+               &st_mca.chnind, &st_mca.warning, &st_mca.goodbad, &st_mca.polarity,
+               &st_mca.ireg, &st_mca.qa_phase, &st_mca.full_phase, &st_mca.raw_range,
+               &st_mca.doppler, &st_mca.smoothing);
+
+     /* Valid PRN Check */
+     if((st_mca.svprn == 0) || (st_mca.svprn > number_of_satellites))
+     {
+          fprintf(invalidPRN, "%s, %0.4f, %ld, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %0.24f, %0.24f, %d, %d\n",
+                    identifier, urcvtime, crcvtime,
+                    st_mca.sequence, st_mca.left, st_mca.svprn, st_mca.elev, st_mca.azim,
+                    st_mca.chnind, st_mca.warning, st_mca.goodbad, st_mca.polarity,
+                    st_mca.ireg, st_mca.qa_phase, st_mca.full_phase, st_mca.raw_range,
+                    st_mca.doppler, st_mca.smoothing);
+          return;
+     }
+
+
+     printf("MCA\n%s, %0.4f, %ld, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %0.24f, %0.24f, %d, %d\n",
+               identifier, urcvtime, crcvtime,
+               st_mca.sequence, st_mca.left, st_mca.svprn, st_mca.elev, st_mca.azim,
+               st_mca.chnind, st_mca.warning, st_mca.goodbad, st_mca.polarity,
+               st_mca.ireg, st_mca.qa_phase, st_mca.full_phase, st_mca.raw_range,
+               st_mca.doppler, st_mca.smoothing);
+
+     printf("MCA\n");
+     st_mca.svprn -= 1;
+     gmds[st_mca.svprn][antennaId].complete  |= 0x01;
+     gmds[st_mca.svprn][antennaId].svprn      = st_mca.svprn;
+     gmds[st_mca.svprn][antennaId].goodbad    = st_mca.goodbad;
+     gmds[st_mca.svprn][antennaId].raw_range  = st_mca.raw_range;
+     gmds[st_mca.svprn][antennaId].full_phase  = st_mca.full_phase;
+     gmds[st_mca.svprn][antennaId].position.el = (double) st_mca.elev;
+     gmds[st_mca.svprn][antennaId].position.az = (double) st_mca.azim;
+     printf("1 MCA - PRN: %d, ANT: %d, AZ: %f, EL: %f\n",
+               st_mca.svprn, antennaId, gmds[st_mca.svprn][antennaId].position.az, gmds[st_mca.svprn][antennaId].position.el);
+
+}
+
+/***************************************************************************************************************/
+
+     void
+process_snv(char inputBuffer[], FILE *invalidPRN, struct gg12_snv_new snvArray[number_of_satellites])
+{
+     struct gg12_snv_new st_snv;
+
+     memset(&st_snv,0,sizeof(struct gg12_snv_new));
+     memset(identifier,0,5);
+
+     sscanf(inputBuffer,"%4s, %lf, %lu, %hd, %d, %f, %d, %d, %f, %f, %f, %d, %f, %lf, %lf, %lf, %d, %f, %f, %f, %f, %f, %f, %lf, %lf, %lf, %f, %f, %hd, %hd, %hd, %hd, %hd\n",
+               identifier, &urcvtime, &crcvtime,
+               &st_snv.wn, &st_snv.tow, &st_snv.tgd, &st_snv.aodc, &st_snv.toc, &st_snv.af2,
+               &st_snv.af1, &st_snv.af0, &st_snv.aode, &st_snv.deltan, &st_snv.m0, &st_snv.e,
+               &st_snv.roota, &st_snv.toe, &st_snv.cic, &st_snv.crc, &st_snv.cis, &st_snv.crs,
+               &st_snv.cuc, &st_snv.cus, &st_snv.omega0, &st_snv.omega,  &st_snv.i0, &st_snv.omegadot,
+               &st_snv.idot, &st_snv.accuracy, &st_snv.health, &st_snv.fit, &st_snv.prnnum, &st_snv.res);
+
+     printf("%s, %0.4f, %ld, %d, %d, %0.24f, %d, %d, %0.24f, %0.24f, %0.24f, %d, %0.24f, %0.24f, %0.24f, %0.24f, %d, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %d, %d, %d, %d, %d\n",
+               identifier, urcvtime, crcvtime,
+               st_snv.wn, st_snv.tow, st_snv.tgd, st_snv.aodc, st_snv.toc, st_snv.af2,
+               st_snv.af1, st_snv.af0, st_snv.aode, st_snv.deltan, st_snv.m0, st_snv.e,
+               st_snv.roota, st_snv.toe, st_snv.cic, st_snv.crc, st_snv.cis, st_snv.crs,
+               st_snv.cuc, st_snv.cus, st_snv.omega0, st_snv.omega,  st_snv.i0, st_snv.omegadot,
+               st_snv.idot, st_snv.accuracy, st_snv.health, st_snv.fit, st_snv.prnnum, st_snv.res);
+
+     if(st_snv.prnnum > number_of_satellites)
+     {
+          fprintf(invalidPRN, "%s, %0.4f, %ld, %d, %d, %0.24f, %d, %d, %0.24f, %0.24f, %0.24f, %d, %0.24f, %0.24f, %0.24f, %0.24f, %d, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %d, %d, %d, %d, %d\n",
+                    identifier, urcvtime, crcvtime,
+                    st_snv.wn, st_snv.tow, st_snv.tgd, st_snv.aodc, st_snv.toc, st_snv.af2,
+                    st_snv.af1, st_snv.af0, st_snv.aode, st_snv.deltan, st_snv.m0, st_snv.e,
+                    st_snv.roota, st_snv.toe, st_snv.cic, st_snv.crc, st_snv.cis, st_snv.crs,
+                    st_snv.cuc, st_snv.cus, st_snv.omega0, st_snv.omega,  st_snv.i0, st_snv.omegadot,
+                    st_snv.idot, st_snv.accuracy, st_snv.health, st_snv.fit, st_snv.prnnum, st_snv.res);
+          return;
+     }
+
+     printf("SNV: %d\n", st_snv.prnnum);
+     gmds[st_snv.prnnum][0].complete  |= 0x04;
+     gmds[st_snv.prnnum][1].complete  |= 0x04;
+     gmds[st_snv.prnnum][2].complete  |= 0x04;
+     gmds[st_snv.prnnum][3].complete  |= 0x04;
+     gmds[st_snv.prnnum][4].complete  |= 0x04;
+     gmds[st_snv.prnnum][5].complete  |= 0x04;
+     gmds[st_snv.prnnum][6].complete  |= 0x04;
+     gmds[st_snv.prnnum][7].complete  |= 0x04;
+     memcpy(&snvArray[st_snv.prnnum],&st_snv, sizeof(struct gg12_snv_new));
+}
+
+/***************************************************************************************************************/
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Azimuth / Elevation and Reception Mask
+   Section 2.3
+   */
+     void
+average_xyz_position()
+{
+     int prn = 0;
+     int antenna = 0;
+     int prn_counter[32];
+
+     double pte = 0;
+     double ptn = 0;
+     double ptu = 0;
+
+     double xs = 0;
+     double ys = 0;
+     double zs = 0;
+     double xrrc = 0;
+     double yrrc = 0;
+     double zrrc = 0;
+     double lambda = 0;
+     double phi = 0;
+     double delta_x = 0;
+     double delta_y = 0;
+     double delta_z = 0;
+     double distance = 0;
+     double elevation = 0;
+     double azimuth = 0;
+
+
+     memset(&prn_counter,0,sizeof(prn_counter));
+
+     /* Sum XYZ Values */
+     for(prn = 0; prn < number_of_satellites; prn++)
+     {
+          PR[prn].xyz_current.x = 0;
+          PR[prn].xyz_current.y = 0;
+          PR[prn].xyz_current.z = 0;
+          for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+          {
+               if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+               {
+                    PR[prn].xyz_current.x += gmds[prn][antenna].position.x;
+                    PR[prn].xyz_current.y += gmds[prn][antenna].position.y;
+                    PR[prn].xyz_current.z += gmds[prn][antenna].position.z;
+                    prn_counter[prn]++;
+                    printf("2 MCA - PRN: %d, ANT: %d, AZ: %f, EL: %f\n",
+                              prn, antenna, gmds[prn][antenna].position.az, gmds[prn][antenna].position.el);
+               }
+          }
+     }
+     printf("DONE: 1\n");
+
+     antenna = 0;
+     for(prn = 0; prn < number_of_satellites; prn++)
+     {
+          if(prn_counter[prn] != 0)
+          {
+               PR[prn].xyz_current.x /= (double) prn_counter[prn]; 
+               PR[prn].xyz_current.y /= (double) prn_counter[prn]; 
+               PR[prn].xyz_current.z /= (double) prn_counter[prn]; 
+
+
+               xs = PR[prn].xyz_current.x;
+               ys = PR[prn].xyz_current.y;
+               zs = PR[prn].xyz_current.z;
+               xrrc   =  centroid.x;
+               yrrc   =  centroid.y;
+               zrrc   =  centroid.z;
+               lambda =  centroid.lon;
+               phi    =  centroid.lat;
+
+               delta_x = (xs - xrrc);
+               delta_y = (ys - yrrc);
+               delta_z = (zs - zrrc);
+               distance = pow((pow(delta_x,2) + pow(delta_y,2) + pow(delta_z,2)), .5);
+
+               pte = (double) ((delta_x * (-1 * sin(lambda))) + (delta_y * cos(lambda))) / distance;
+               ptn = (double) ((delta_x*-1*sin(phi)*cos(lambda)) + (delta_y * -1*sin(phi)*sin(lambda)) + (delta_z*cos(phi)))/ distance;
+               ptu = (double) ((delta_x*cos(phi)*cos(lambda)) + (delta_y * cos(phi)*sin(lambda)) + (delta_z*sin(phi)))/ distance;
+
+               elevation = (180 / PI) * asin(ptu);
+               printf("PRN: %d\n",prn + 1);
+               printf("SatX:  %05.15f\n",xs);
+               printf("SatY:  %05.15f\n",ys);
+               printf("SatZ:  %05.15f\n",zs);
+               printf("RowTu: %05.15f\n",ptu);
+               printf("RowTe: %05.15f\n",pte);
+               printf("RowTn: %05.15f\n",ptn);
+               printf("Elevation: GG12: %f,    CALC: %f\n",gmds[prn][antenna].position.el, elevation);
+
+               if(pte >= 0)
+                    azimuth = (180 / PI) * acos(ptn / sin(acos(ptu)));
+               else 
+                    azimuth = 360 - ((180 / PI) * acos(ptn / sin(acos(ptu))));
+
+
+               printf("Azimuth:   GG12: %f,   CALC: %f\n",gmds[prn][antenna].position.az, azimuth);
+               printf("3 MCA - PRN: %d, ANT: %d, AZ: %f, EL: %f\n",
+                         prn, antenna, gmds[prn][antenna].position.az, gmds[prn][antenna].position.el);
+
+               gmds[prn][antenna].position.az =  azimuth;
+               gmds[prn][antenna].position.el =  elevation;
+
+          }
+     }
+}
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Signal Integrity Check
+   Section 
+   */
+     void
+signal_integrity_check(int prn, int antenna)
+{
+     if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+     {
+          /* Signal Integrity Check */
+          if(gmds[prn][antenna].goodbad != 24)
+          {
+               memset(&gmds[prn][antenna],0,sizeof(struct GPS_Minimum_Data_Set));
+          }
+     }
+}
+
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Modified Z Count
+   Section 3.2.1.1
+   */
+     double
+modified_z_count(long rcvtime)
+{
+     return ((rcvtime % 1200000) / 1000);
+}
+
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   GG12 Receiver Hardware Bias Calibration
+   Section 2.4
+   */
+     void
+gg12_receiver_hardware_bias_calibration()
+{
+     int prn = 0;
+     int antenna = 0;
+     double sum = 0;
+     double dipole_sum = 0;
+     int i = 0;
+
+     for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+     {
+          for(prn = 0; prn < number_of_satellites; prn++)
+          {
+               if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+               {
+                    sum += PR_Smooth_History[prn][antenna];
+               }
+          }
+
+          if((antenna % 2) == DIPOLE)
+          {
+               dipole_sum += sum;
+          }
+          else
+          {
+               hardware_bias[i++]  = (sum - dipole_sum) / 2;
+          }
+     }
+}
+
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Number of Measurements
+   Section 3.2.1.3
+   */
+     int
+number_of_measurements()
+{
+     int prn = 0;
+     int antenna = 0;
+     int count = 0;
+
+     for(prn = 0; prn < number_of_satellites; prn++)
+     {
+          for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+          {
+               if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+                    count++;
+          }
+     }
+     return count;
+}
+
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Ephemeris CRC
+   Section 3.2.1.6
+   */
+
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Pseudorange Correction
+   Section 3.2.2.3.4
+   */
+
+/* Kepler's Equation Solver */
+     double
+solve_transendental_equation(double M, double e)
+{
+     double epsilon = 0.00000000000001;
+
+     double E0 = M;
+     double E1 = 0;
+
+     int done = 0;
+
+     while(!done)
+     {
+          E1 = M + (e * sin(E0));
+
+          if(fabs(E0 - E1) <= epsilon * fabs(E0))
+               done = 1;
+
+          E0 = E1;
+     }
+     return E0;
+}
+
+     double
+calculate_clock_correction(int rcvtime, struct gg12_snv_new *snv, float R)
+{
+     double F = -4.442807633e-10;
+     double mu = 3.986005e14;
+     double E_k = 0;
+     double t = 0;
+     double T_sv_gps = 0;
+     double M_k = 0;
+     double delta_t_r = 0;
+
+     t = ((rcvtime / 1000) - R);
+
+     M_k = snv->m0 * PI + (pow((mu / pow(snv->roota,6)),0.5) + snv->deltan * PI) * (t - snv->toe);
+
+     E_k = solve_transendental_equation(M_k, snv->e);
+
+     delta_t_r = F * snv->e * snv->roota * sin(E_k);
+
+     T_sv_gps = snv->af0 + (snv->af1*(t - snv->toc)) + (snv->af2 * pow((t - snv->toc),2)) + delta_t_r - snv->tgd;
+
+     printf("rcvtime:       %d\n",rcvtime);
+     printf("R:             %2.24f\n",R);
+     printf("t:             %2.24f\n",t);
+     printf("toc:           %d\n",snv->toc);
+     printf("t-toc:         %2.24f\n\n",t - snv->toc);
+
+     printf("F:             %2.24f\n",F);
+     printf("e:             %2.24f\n",snv->e);
+     printf("roota:         %2.24f\n",snv->roota);
+     printf("M_k:           %2.24f\n",M_k);
+     printf("Ek:            %2.24f\n",E_k);
+
+     printf("af0:           %2.24f\n",snv->af0);
+     printf("af1:           %2.24f\n",snv->af1);
+     printf("af2:           %2.24f\n",snv->af2);
+     printf("af1*(t-toc):   %2.24f\n",(snv->af1*(t - snv->toc)));
+     printf("af2*(t-toc)^2: %2.24f\n",(snv->af2 * pow((t - snv->toc),2)));
+     printf("tgd:           %2.24f\n",snv->tgd);
+     printf("delta_t_r:     %2.24f\n",delta_t_r);
+
+     return T_sv_gps;
+}
+
+
+     void
+pseudorange_correction(int prn, int antenna, struct gg12_snv_new snvArray[32])
+{
+
+     /*******************************************************************/
+
+     double R = 0;
+
+     /*******************************************************************/
+
+     double TNS = 0;                               /* Total Numver of Samples. S / T  */
+     /* S and T are Constant for now */
+     int    S      = 100;                          /* Time Filter Constant */
+     double T      = 0.5;                          /* Sample Period        */
+
+     double PR_r   = 0;                            /* Pseudorange Raw      */
+
+     double PR_s   = 0;                            /* Pseudorange Smoothed */
+     double PR_s_p = 0;                            /* Previous Smoothed Pseudorange */
+
+     double PHI    = 0;                            /* Accumulated Phase    */
+     double PHI_p  = 0;                            /* Previous Accumulated Phase */
+
+     /*******************************************************************/
+
+     double T_sv_gps = 0;
+
+
+     /*******************************************************************/
+
+     /*
+        double receiver_clock_error[number_of_gps_sources];
+        int    N_c[number_of_gps_sources];
+        double PR_corr[number_of_satellites];
+        int rr = 0;
+        */
+
+     /*******************************************************************/
+
+
+     TNS = S / T;
+
+     /**************************/
+     if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+     {
+
+          /* 
+             LAAS Ground Facility Low Level Requirment
+             Calculate the Predicted Range
+             Section 3.2.2.3.1
+             */
+          printf("X - GPS:%f REF:%f\n",gmds[prn][antenna].position.x, xrld);
+          printf("X - GPS:%f REF:%f\n",gmds[prn][antenna].position.x, xrld);
+          printf("Y - GPS:%f REF:%f\n",gmds[prn][antenna].position.y, yrld);
+          printf("Z - GPS:%f REF:%f\n",gmds[prn][antenna].position.z, zrld);
+          R = pow(pow(gmds[prn][antenna].position.x - xrld,2) +
+                    pow(gmds[prn][antenna].position.y - yrld,2) +
+                    pow(gmds[prn][antenna].position.z - zrld,2),.5) / C;
+
+
+          /* 
+             LAAS Ground Facility Low Level Requirment
+             Smoothed Pseudorange
+             Section 3.2.2.3.2
+             */
+          /* Store the raw range */
+          PR_r = gmds[prn][antenna].raw_range;
+          PHI  = gmds[prn][antenna].full_phase / nominal_carrier_frequency;
+          /* If there is not a Previous Smoothed Pseudorange then use the current mca raw_range */
+          if(PR_First[prn][antenna] == 0)
+          {
+               PR_s = PR_r;
+               PR_First[prn][antenna] = 1;
+          }
+          else
+          {
+               /* Previous Smoothed Pseudorange */
+               PR_s_p = PR_Smooth_History[prn][antenna];
+               /* Previous Accumulated Phase */
+               PHI_p  = PHI_History[prn][antenna];
+
+               printf("PHI:    %0.24f\n", PHI);
+               printf("PR_r:   %0.24f\n", PR_r);
+               printf("PHI_p:  %0.24f\n", PHI_p);
+               printf("PR_s_p: %0.24f\n", PR_s_p);
+
+               /* Section 3.2.2.3.2 Formula */
+               PR_s = (((1 / TNS) * PR_r) + (((TNS - 1) / TNS) * (PR_s_p + PHI - PHI_p)));
+
+               printf("PR_s:   %0.24f(s)\n", PR_s);
+          }
+
+          /* Add the New Accumulated Phase and Smoothed Pseduorange to the history */
+          PHI_History[prn][antenna] = PHI;
+          PR_Smooth_History[prn][antenna] = PR_s;
+          gmds[prn][antenna].PR_s = PR_s;
+
+          /* 
+             LAAS Ground Facility Low Level Requirment
+             Smoothed Pseudorange
+             Section 3.2.2.3.4
+             */
+          T_sv_gps = calculate_clock_correction(gmds[prn][antenna].rcvtime, &snvArray[prn], R);
+
+          /* 
+             LAAS Ground Facility Low Level Requirment
+             Smoothed Pseudorange
+             Section 3.2.2.3.3
+             */
+          gmds[prn][antenna].PR_sc = R - PR_s - T_sv_gps;
+
+          printf("PRN: %d, RANGE: %2.24f\n", prn, R);
+          printf("PRN: %d, PR_s: %2.24f\n", prn, PR_s);
+          printf("PRN: %d, T_sv_gps: %2.24f\n", prn, T_sv_gps);
+          printf("PRN: %d, PR_s_c: %0.24f(s)\n", prn, gmds[prn][antenna].PR_sc);
+          printf("PRN: %d, PR_s_c: %0.24f(m)\n\n",prn, gmds[prn][antenna].PR_sc * C);
+
+          gmds[prn][antenna].PR_sc *= C;
+
+          r_err[antenna].clock_error += gmds[prn][antenna].PR_sc;
+          r_err[antenna].prn_count++;
+     }
+     fprintf(prnFile,"%f, %f, ", PR_r, PR_s);
+
+}
+
+
+     void
+calculate_PR_sca()
+{
+     /* 
+        LAAS Ground Facility Low Level Requirment
+        Smoothed Pseudorange
+        Section 3.2.2.3.5
+        */
+     int antenna = 0;
+     int prn     = 0;
+     int N_cd    = 0;
+     int N_ch    = 0;
+     double sum_dipole = 0;
+     double sum_helibowl = 0;
+     double overlap_count = 0;
+     double RCE_h = 0;
+     double RCE_d = 0;
+     int RR    = 0;
+
+     for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+     {
+          for(prn = 0; prn < number_of_satellites; prn++)
+          {
+               printf("ANT: %d, PRN: %d\n", antenna, prn);
+               if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+               {
+                    if((antenna % 2) == DIPOLE)
+                    {
+                         printf("ANT: %d, PRN: %d,  PR_sc: %f\n", antenna, prn, gmds[prn][antenna].PR_sc);
+                         sum_dipole += gmds[prn][antenna].PR_sc;
+                         N_cd++;
+                    }
+                    else
+                    {
+                         printf("ANT: %d, PRN: %d,  PR_sc: %f\n", antenna, prn, gmds[prn][antenna].PR_sc);
+                         sum_helibowl += gmds[prn][antenna].PR_sc;
+                         N_ch++;
+                    }
+               }
+          }
+     }
+
+     if(N_ch != 0)
+     {
+          RCE_h = sum_helibowl / N_ch;
+          printf("SUM: %f, N_ch: %d, RCE_h: %0.25f\n",sum_helibowl, N_ch,  RCE_h);
+     }
+
+     if(N_cd != 0)
+     {
+          RCE_d = sum_dipole / N_cd;
+          printf("SUM: %f, N_cd: %d, RCE_d: %0.25f\n",sum_dipole, N_cd, RCE_d);
+     }
+
+
+     /* Need to reorg if statement and a alarm*/
+     if(N_cd < 4)
+     {
+
+          RR=0;
+          sum_helibowl = 0;
+          sum_dipole = 0;
+          overlap_count = 0;
+          for(antenna = 0; antenna < number_of_gps_sources; antenna+=2)
+          {
+               for(prn = 0; prn < number_of_satellites; prn++)
+               {
+                    if((gmds[prn][antenna].complete == GMDS_COMPLETE) && (gmds[prn][antenna+1].complete == GMDS_COMPLETE))
+                    {
+                         sum_dipole = gmds[prn][antenna].PR_sc;
+                         sum_helibowl = gmds[prn][antenna+1].PR_sc;
+                         overlap_count++;
+                    }
+               }
+               offset[RR] = (sum_helibowl / overlap_count) -  (sum_dipole / overlap_count);
+               RR++;
+          }
+
+          RR=0;
+          for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+          {
+               for(prn = 0; prn < number_of_satellites; prn++)
+               {
+                    if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+                    {
+                         if((antenna % 2) == DIPOLE)
+                         {
+                              gmds[prn][antenna].PR_sca = gmds[prn][antenna].PR_sc + offset[RR];
+                         }
+                         else
+                         {
+                              gmds[prn][antenna].PR_sca = gmds[prn][antenna].PR_sc - RCE_h - hardware_bias[RR];
+                         }
+                    }
+               }
+               RR++;
+          }
+     } 
+     else
+     {
+          RR=0;
+          for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+          {
+               for(prn = 0; prn < number_of_satellites; prn++)
+               {
+                    if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+                    {
+                         if((antenna % 2) == DIPOLE)
+                         {
+                              gmds[prn][antenna].PR_sca = gmds[prn][antenna].PR_sc - RCE_d + hardware_bias[RR];
+                         }
+                         else
+                         {
+                              gmds[prn][antenna].PR_sca = gmds[prn][antenna].PR_sc - RCE_h - hardware_bias[RR];
+                              printf("PR_sca: %f\n", gmds[prn][antenna].PR_sca);
+                         }
+                    }
+               }
+               RR++;
+          }
+     }
+
+
+     /* Do Selection of Helibowl or Dipole*/
+     for(antenna = 0; antenna < number_of_reference_receivers; antenna+=2)
+     {
+          for(prn = 0; prn < number_of_satellites; prn++)
+          {
+               if((gmds[prn][antenna].complete == GMDS_COMPLETE) && (gmds[prn][antenna+1].complete == GMDS_COMPLETE))
+               {
+                    if(N_ch >= N_cd)
+                    {
+                         printf("Use Helibowl\n");
+                         memset(&gmds[prn][antenna],0,sizeof(struct GPS_Minimum_Data_Set));
+                         gmds[prn][antenna].complete |= 0x04;
+                    } else {
+                         printf("Use Dipole\n");
+                         memset(&gmds[prn][antenna+1],0,sizeof(struct GPS_Minimum_Data_Set));
+                         gmds[prn][antenna].complete |= 0x04;
+                    }
+               } else if((gmds[prn][antenna].complete == GMDS_COMPLETE)) {
+                    printf("Use Dipole\n");
+               } else if((gmds[prn][antenna+1].complete == GMDS_COMPLETE)) {
+                    printf("Use Helibowl\n");
+               }
+          }
+     }
+}
+
+     void
+calculate_PRcorr_BValues(struct gg12_snv_new snvArray[number_of_satellites])
+{
+     /*******************************************************************/
+
+     double RRC = 0;
+
+     int M_n     = 0;
+     /*******************************************************************/
+
+     double B1 = 0;
+     double B2 = 0;
+     double B3 = 0;
+     double B4 = 0;
+
+     /*******************************************************************/
+
+     int antenna = 0;
+     int prn = 0;
+
+     for(prn = 0; prn < number_of_satellites; prn++)
+     {
+          M_n = 0;
+          for(antenna = 0; antenna < number_of_reference_receivers; antenna++)
+          {
+               if(gmds[prn][antenna].complete == GMDS_COMPLETE)
+               {
+                    PR[prn].correction += gmds[prn][antenna].PR_sca;
+                    M_n++;
+               }
+          }
+
+          if(M_n)
+          {
+               /*
+                  PR_corr[prn] = (PR_corr[prn] / M_n) * C;
+                  */
+               PR[prn].correction = (PR[prn].correction / M_n);
+
+               /* 
+                  LAAS Ground Facility Low Level Requirment
+                  Range Rate Correction
+                  Section 
+                  */
+               RRC = (PR[prn].correction - PR[prn].correction_previous) / 
+                    (PR[prn].rcvtime - PR[prn].rcvtime_previous);
+
+               /* 
+                  LAAS Ground Facility Low Level Requirment
+                  B-Values
+                  Section 
+                  */
+               /* How does this work now */
+               B1 = PR[prn].correction - (gmds[prn][2].PR_sca + gmds[prn][3].PR_sca + gmds[prn][4].PR_sca);
+               B2 = PR[prn].correction - (gmds[prn][1].PR_sca + gmds[prn][3].PR_sca + gmds[prn][4].PR_sca);
+               B3 = PR[prn].correction - (gmds[prn][1].PR_sca + gmds[prn][2].PR_sca + gmds[prn][4].PR_sca);
+               B4 = PR[prn].correction - (gmds[prn][1].PR_sca + gmds[prn][2].PR_sca + gmds[prn][3].PR_sca);
+          }
+     }
+}
+
+/***************************************************************************************************************/
+
+/* 
+   LAAS Ground Facility Low Level Requirment
+   Sigma Preudorange Ground
+   Section 
+   */
+
+/***************************************************************************************************************/
+
+int main()
+{
+     FILE *inputFile = 0;
+     FILE *invalidPRN = 0;
+     FILE *invalidSignalIntegrity = 0;
+     FILE *gmdsFile = 0;
+
+     char *inputFile_fgets_ret_val = 0;
+     char inputBuffer[BUFSIZE];
+     char msg_type[4];
+
+     struct gg12_snv_new snvArray[number_of_satellites];
+
+     int antennaId = 0;
+
+     int i = 0;
+
+     int prn = 0;
+     int antenna = 0;
+
+     for(i=0;i < number_of_gps_sources;i++)
+     {
+          RR[i].x = xrld;
+          RR[i].y = yrld;
+          RR[i].z = zrld;
+          RR[i].lat = latitude;
+          RR[i].lon = longitude;
+          RR[i].alt = altitude;
+     }
+
+     for(i=0;i < number_of_gps_sources;i++)
+     {
+          centroid.x += RR[i].x;
+          centroid.y += RR[i].y;
+          centroid.z += RR[i].z;
+          centroid.lat += RR[i].lat;
+          centroid.lon += RR[i].lon;
+          centroid.alt += RR[i].alt;
+     }
+
+     centroid.x /= number_of_gps_sources;
+     centroid.y /= number_of_gps_sources;
+     centroid.z /= number_of_gps_sources;
+     centroid.lat /= number_of_gps_sources;
+     centroid.lon /= number_of_gps_sources;
+     centroid.alt /= number_of_gps_sources;
+
+     printf("ROOF     : X: %f, Y: %f, Z: %f, LAT: %f, LON: %f, ALT: %f\n",xrld, yrld, zrld, latitude, longitude, altitude);
+     printf("Centroid : X: %f, Y: %f, Z: %f, LAT: %f, LON: %f, ALT: %f\n",centroid.x, centroid.y, centroid.z, centroid.lat, centroid.lon, centroid.alt);
+
+     memset(inputBuffer,0,BUFSIZE);
+     memset(msg_type,0,4);
+
+     memset(elev,0,sizeof(elev));
+
+     memset(snvArray,0,(sizeof(snvArray)));
+
+     memset(PR_Smooth_History, 0, sizeof(PR_Smooth_History));
+     memset(PHI_History,0,sizeof(PHI_History));    /* Previous Accumulated Phase    */
+     memset(PR_First,0,sizeof(PR_First));
+
+     memset(PR_corr_history,0,sizeof(PR_corr_history));
+
+     memset(gmds,0,(sizeof(gmds)));
+
+     if(0 == (inputFile = fopen(INFILE,"r")))
+     {
+          printf("ERROR: inFile, ERRNO: %d, %s\n",errno, strerror(errno));
+          exit(0);
+     }
+
+     if(0 == (gmdsFile = fopen("gmds.log","w")))
+     {
+          printf("ERROR: gmds.log, ERRNO: %d, %s\n",errno, strerror(errno));
+          exit(0);
+     }
+
+     if(0 == (invalidPRN = fopen("invalid_prn.log","w")))
+     {
+          printf("ERROR: invalid_prn.log, ERRNO: %d, %s\n",errno, strerror(errno));
+          exit(0);
+     }
+
+     if(0 == (invalidSignalIntegrity = fopen("invalid_signal_integrity.log","w")))
+     {
+          printf("ERROR: invalid_signal_integrity.log, ERRNO: %d, %s\n",errno, strerror(errno));
+          exit(0);
+     }
+
+     if(0 == (prnFile = fopen(PRN_FILE,"w")))
+     {
+          printf("ERROR: prn.log, ERRNO: %d, %s\n",errno, strerror(errno));
+          exit(0);
+     }
+
+     while(0 != (inputFile_fgets_ret_val = fgets(inputBuffer,BUFSIZE,inputFile)))
+     {
+          /* :r file_name in vi to make this work */
+          /* else use \r\n */
+          if(strcmp("\n",inputBuffer) != 0)
+          {
+               sprintf(msg_type, "%.*s", 3, inputBuffer);
+               antennaId = atoi(&inputBuffer[3]);
+               if(strcmp("MCA", msg_type) == 0)
+               {
+                    process_mca(inputBuffer, invalidPRN, invalidSignalIntegrity, antennaId);
+               }
+               else if (strcmp("SNV", msg_type) == 0)
+               {
+                    process_snv(inputBuffer, invalidPRN, snvArray);
+               }
+               else if (strcmp("XYZ", msg_type) == 0)
+               {
+                    process_xyz(inputBuffer, invalidPRN, antennaId);
+               } else {
+                    printf("ELSE: \"%s\"\n",inputBuffer);
+                    printf("ELSE: %X\n",inputBuffer[0]);
+               }
+          }
+          else
+          {
+               printf("All Data -----------------------------------------\n");
+               print_table();
+
+               average_xyz_position();
+               /*            print_xyz_position(); */
+
+               prn = 0;
+               antenna = 0;
+
+               for(prn = 0; prn < number_of_satellites; prn++)
+               {
+                    for(antenna = 0; antenna < number_of_gps_sources; antenna++)
+                    {
+                         pseudorange_correction(prn,antenna,snvArray);
+                    }
+               }
+
+               calculate_PR_sca();
+               print_csv(gmdsFile);
+
+
+               /*            ephemeris_crc(snvArray);   */
+
+          }
+     }
+     printf("Exit Program\n");
+     return 0;
+}

@@ -1,0 +1,981 @@
+#
+# Makefile for LAAS ground software
+#
+WARNINGS = -Wall -Wextra -ansi -pedantic
+
+MOST_WARNINGS = -pedantic  -Wextra  -Wall  -Waggregate-return                 \
+			-Wno-attributes -Wc++-compat -Wcast-align  -Wcast-qual  -Wchar-subscripts         \
+			-Wcomment -Wconversion -Wno-deprecated-declarations -Wdisabled-optimization      \
+			-Wno-div-by-zero -Wno-endif-labels                                                \
+			-Wfloat-equal  -Wformat  -Wformat=2 -Wno-format-extra-args                        \
+			-Wformat-nonliteral -Wformat-security  -Wformat-y2k -Wimplicit                   \
+			-Wimplicit-function-declaration -Wimplicit-int -Wimport -Wno-import -Winit-self   \
+			-Winline -Wno-int-to-pointer-cast -Winvalid-pch             \
+			-Wunsafe-loop-optimizations  -Wlong-long -Wmain                 \
+			-Wmissing-braces -Wmissing-field-initializers -Wmissing-format-attribute         \
+			-Wmissing-include-dirs -Wmissing-noreturn -Wno-multichar  -Wnonnull -Wpacked      \
+			-Wpadded -Wparentheses -Wpointer-arith  -Wno-pointer-to-int-cast                  \
+			-Wredundant-decls -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare          \
+			-Wstack-protector -Wstrict-aliasing -Wstrict-aliasing=2 -Wswitch                  \
+			-Wswitch-default -Wswitch-enum -Wsystem-headers -Wtrigraphs -Wundef               \
+			-Wuninitialized -Wunknown-pragmas -Wno-pragmas -Wunreachable-code -Wunused        \
+			-Wunused-function -Wunused-label -Wunused-parameter -Wunused-value                \
+			-Wunused-variable  -Wvariadic-macros -Wvolatile-register-var -Wwrite-strings      \
+			-Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes                   \
+			-Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wtraditional         \
+			-Wdeclaration-after-statement -Wpointer-sign
+
+ALL_WARNINGS = -pedantic  -pedantic-errors -w  -Wextra  -Wall  -Waggregate-return \
+			-Wno-attributes -Wc++-compat -Wcast-align  -Wcast-qual  -Wchar-subscripts         \
+			-Wcomment -Wconversion -Wno-deprecated-declarations -Wdisabled-optimization      \
+			-Wno-div-by-zero -Wno-endif-labels -Werror  -Werror-implicit-function-declaration \
+			-Wfatal-errors -Wfloat-equal  -Wformat  -Wformat=2 -Wno-format-extra-args         \
+			-Wformat-nonliteral -Wformat-security  -Wformat-y2k -Wimplicit                   \
+			-Wimplicit-function-declaration -Wimplicit-int -Wimport -Wno-import -Winit-self   \
+			-Winline -Wno-int-to-pointer-cast -Winvalid-pch             \
+			-Wunsafe-loop-optimizations  -Wlong-long -Wmain                 \
+			-Wmissing-braces -Wmissing-field-initializers -Wmissing-format-attribute         \
+			-Wmissing-include-dirs -Wmissing-noreturn -Wno-multichar  -Wnonnull -Wpacked      \
+			-Wpadded -Wparentheses -Wpointer-arith  -Wno-pointer-to-int-cast                  \
+			-Wredundant-decls -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare          \
+			-Wstack-protector -Wstrict-aliasing -Wstrict-aliasing=2 -Wswitch                  \
+			-Wswitch-default -Wswitch-enum -Wsystem-headers -Wtrigraphs -Wundef               \
+			-Wuninitialized -Wunknown-pragmas -Wno-pragmas -Wunreachable-code -Wunused        \
+			-Wunused-function -Wunused-label -Wunused-parameter -Wunused-value                \
+			-Wunused-variable  -Wvariadic-macros -Wvolatile-register-var -Wwrite-strings      \
+			-Wbad-function-cast -Wmissing-declarations -Wmissing-prototypes                   \
+			-Wnested-externs -Wold-style-definition -Wstrict-prototypes -Wtraditional         \
+			-Wdeclaration-after-statement -Wpointer-sign
+
+
+CC = cc
+#CFLAGS = -O1 -std=c89 -Wall -Wextra -Wcomment -Wformat -Wmain -Wparentheses -Wswitch -Wunused -Wuninitialized -Wundef -Winline -Wmissing-declarations -Wlong-long -Wfloat-equal -Wunreachable-code -ansi -pedantic -g2 -ggdb2 -D__USE_POSIX -D_XOPEN_SOURCE
+#CFLAGS = -std=c89 $(WARNINGS) -g2 -ggdb2 -D__USE_POSIX -D_XOPEN_SOURCE
+CFLAGS = -std=c89 $(WARNINGS) -g3 -ggdb3 -D__USE_POSIX -D_XOPEN_SOURCE
+
+#CFLAGS = -Werror -ansi -pedantic -g2 -ggdb2 -D__USE_POSIX -D_XOPEN_SOURCE
+#CFLAGS = -g2 -Wall -pedantic
+#CFLAGS = -ggdb2 -Wall -Wshadow -Wwrite-strings -Wconversion \
+#         -Wsign-compare -Wredundant-decls
+
+# options for gcc 3.x versions
+# -Wfloat-equal -Wpadded -Wunreachable-code -std=c99
+
+LDLIBS  = -lm -lgdbm
+LDPATHS =
+
+TELERAD = telerad/utils_string.c     \
+		telerad/crc_16bit.c        \
+		telerad/crc_32bit.c        \
+		telerad/ephemeris_crc.c    \
+		telerad/laasMessage.c      \
+		telerad/laasMessageType1.c \
+		telerad/laasMessageType2.c \
+		telerad/laasMessageType4.c \
+		telerad/telerad.c
+
+ASHTECH = ashtech/shift_buffer.c \
+		ashtech/ashtech.c      \
+		ashtech/gg12.c         \
+		ashtech/gg12w.c        \
+		ashtech/zxtreme.c
+
+LENS =    lens/xyzae.c     \
+		lens/pseudorange_calculations.c  \
+		lens/laas_calculation_sequence.c \
+		lens/measurement_block.c
+
+GDBM_DICTIONARY = gdbm/gdbm_dictionary.c
+
+BINARY_SEARCH = binary_search/binary_search.c
+
+SRCS = key_value_parser.c           \
+	LAASInit.c                     \
+	serial.c                       \
+	find_string.c                  \
+	conversions.c                  \
+	time_conversions.c             \
+	$(TELERAD)                     \
+	$(ASHTECH)                     \
+	satellite_position.c           \
+	azimuth_elevation.c            \
+	source_availability_duration.c \
+	$(LENS)                        \
+	$(GDBM_DICTIONARY)             \
+	$(BINARY_SEARCH)               \
+	snv_update.c                   \
+	main.c
+
+OBJS = $(SRCS:.c=.o)
+
+EXEC = laas
+
+all: $(EXEC)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(EXEC): $(OBJS)
+	$(CC) -o $(EXEC) $(OBJS) $(LDPATHS) $(LDLIBS)
+
+clean:
+	rm -f $(OBJS) $(EXEC) core laas.db
+
+empty:
+	rm -f $(OBJS) $(EXEC) core laas.db tags
+
+docs:
+	doxygen Doxyfile; sudo cp -Rvu doxygen/html/. /var/www/lgf
+
+count:
+	wc *.c *.h */*.c */*.h
+
+wc: count
+
+tags:
+	ctags -R
+# DO NOT DELETE
+
+./find_string.o: /usr/include/sys/types.h /usr/include/features.h
+./find_string.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./find_string.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./find_string.o: /usr/include/gnu/stubs-64.h /usr/include/bits/types.h
+./find_string.o: /usr/include/bits/typesizes.h /usr/include/time.h
+./find_string.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./find_string.o: /usr/include/endian.h /usr/include/bits/endian.h
+./find_string.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./find_string.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+./find_string.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+./find_string.o: /usr/include/bits/pthreadtypes.h /usr/include/string.h
+./find_string.o: /usr/include/xlocale.h
+./main.o: /usr/include/math.h /usr/include/features.h
+./main.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./main.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./main.o: /usr/include/gnu/stubs-64.h /usr/include/bits/huge_val.h
+./main.o: /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h
+./main.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./main.o: /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h
+./main.o: /usr/include/signal.h /usr/include/bits/sigset.h
+./main.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./main.o: /usr/include/bits/signum.h /usr/include/time.h
+./main.o: /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h
+./main.o: /usr/include/bits/sigcontext.h
+./main.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./main.o: /usr/include/bits/sigstack.h /usr/include/bits/pthreadtypes.h
+./main.o: /usr/include/bits/sigthread.h /usr/include/sys/stat.h
+./main.o: /usr/include/bits/stat.h /usr/include/sys/types.h
+./main.o: /usr/include/endian.h /usr/include/bits/endian.h
+./main.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./main.o: /usr/include/bits/select.h /usr/include/bits/time.h
+./main.o: /usr/include/sys/sysmacros.h /usr/include/errno.h
+./main.o: /usr/include/bits/errno.h /usr/include/linux/errno.h
+./main.o: /usr/include/asm/errno.h /usr/include/asm-generic/errno.h
+./main.o: /usr/include/asm-generic/errno-base.h /usr/include/sys/time.h
+./main.o: /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h
+./main.o: /usr/include/wchar.h
+./main.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./main.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+./main.o: /usr/include/stdlib.h /usr/include/alloca.h /usr/include/string.h
+./main.o: /usr/include/xlocale.h /usr/include/unistd.h
+./main.o: /usr/include/bits/posix_opt.h /usr/include/bits/confname.h
+./main.o: /usr/include/getopt.h /usr/include/fcntl.h
+./main.o: /usr/include/bits/fcntl.h /usr/include/termios.h
+./main.o: /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h
+./main.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./main.o: /usr/include/gdbm.h LAASInit.h laas.h time_struct.h gps.h
+./main.o: ashtech/ashtech.h time_struct.h ashtech/gg12.h
+./main.o: ashtech/shift_buffer.h laas.h gps.h binary_search/binary_search.h
+./main.o: ashtech/ashtech.h ashtech/gg12w.h ashtech/zxtreme.h
+./main.o: telerad/telerad.h telerad/laasMessage.h telerad/laasMessageType1.h
+./main.o: telerad/laasMessageType2.h telerad/laasMessageType4.h serial.h
+./main.o: time_conversions.h satellite_position.h azimuth_elevation.h
+./main.o: snv_update.h lens/xyzae.h lens/xyzae.h
+./main.o: binary_search/binary_search.h gdbm/gdbm_dictionary.h
+./main.o: lens/laas_calculation_sequence.h
+./serial.o: /usr/include/stdio.h /usr/include/features.h
+./serial.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./serial.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./serial.o: /usr/include/gnu/stubs-64.h
+./serial.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./serial.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./serial.o: /usr/include/libio.h /usr/include/_G_config.h
+./serial.o: /usr/include/wchar.h
+./serial.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./serial.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+./serial.o: /usr/include/string.h /usr/include/xlocale.h
+./serial.o: /usr/include/unistd.h /usr/include/bits/posix_opt.h
+./serial.o: /usr/include/bits/confname.h /usr/include/getopt.h
+./serial.o: /usr/include/fcntl.h /usr/include/bits/fcntl.h
+./serial.o: /usr/include/sys/types.h /usr/include/time.h
+./serial.o: /usr/include/endian.h /usr/include/bits/endian.h
+./serial.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./serial.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+./serial.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+./serial.o: /usr/include/bits/pthreadtypes.h /usr/include/errno.h
+./serial.o: /usr/include/bits/errno.h /usr/include/linux/errno.h
+./serial.o: /usr/include/asm/errno.h /usr/include/asm-generic/errno.h
+./serial.o: /usr/include/asm-generic/errno-base.h /usr/include/termios.h
+./serial.o: /usr/include/bits/termios.h /usr/include/sys/ttydefaults.h
+./satellite_position.o: /usr/include/stdio.h /usr/include/features.h
+./satellite_position.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./satellite_position.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./satellite_position.o: /usr/include/gnu/stubs-64.h
+./satellite_position.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./satellite_position.o: /usr/include/bits/types.h
+./satellite_position.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./satellite_position.o: /usr/include/_G_config.h /usr/include/wchar.h
+./satellite_position.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./satellite_position.o: /usr/include/bits/stdio_lim.h
+./satellite_position.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+./satellite_position.o: /usr/include/xlocale.h /usr/include/math.h
+./satellite_position.o: /usr/include/bits/huge_val.h
+./satellite_position.o: /usr/include/bits/huge_valf.h
+./satellite_position.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+./satellite_position.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+./satellite_position.o: /usr/include/bits/mathcalls.h /usr/include/stdlib.h
+./satellite_position.o: /usr/include/sys/types.h /usr/include/time.h
+./satellite_position.o: /usr/include/endian.h /usr/include/bits/endian.h
+./satellite_position.o: /usr/include/bits/byteswap.h
+./satellite_position.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./satellite_position.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+./satellite_position.o: /usr/include/sys/sysmacros.h
+./satellite_position.o: /usr/include/bits/pthreadtypes.h
+./satellite_position.o: /usr/include/alloca.h satellite_position.h laas.h
+./satellite_position.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./satellite_position.o: time_struct.h /usr/include/sys/time.h
+./satellite_position.o: ashtech/ashtech.h /usr/include/gdbm.h time_struct.h
+./satellite_position.o: gps.h mathematical_constants.h
+./key_value_parser.o: /usr/include/string.h /usr/include/features.h
+./key_value_parser.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./key_value_parser.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./key_value_parser.o: /usr/include/gnu/stubs-64.h
+./key_value_parser.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./key_value_parser.o: /usr/include/xlocale.h /usr/include/ctype.h
+./key_value_parser.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./key_value_parser.o: /usr/include/endian.h /usr/include/bits/endian.h
+./key_value_parser.o: /usr/include/bits/byteswap.h /usr/include/stdio.h
+./key_value_parser.o: /usr/include/libio.h /usr/include/_G_config.h
+./key_value_parser.o: /usr/include/wchar.h
+./key_value_parser.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./key_value_parser.o: /usr/include/bits/stdio_lim.h
+./key_value_parser.o: /usr/include/bits/sys_errlist.h
+./key_value_parser.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./key_value_parser.o: key_value_parser.h
+./time_conversions.o: /usr/include/stdio.h /usr/include/features.h
+./time_conversions.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./time_conversions.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./time_conversions.o: /usr/include/gnu/stubs-64.h
+./time_conversions.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./time_conversions.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./time_conversions.o: /usr/include/libio.h /usr/include/_G_config.h
+./time_conversions.o: /usr/include/wchar.h
+./time_conversions.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./time_conversions.o: /usr/include/bits/stdio_lim.h
+./time_conversions.o: /usr/include/bits/sys_errlist.h /usr/include/stdlib.h
+./time_conversions.o: /usr/include/sys/types.h /usr/include/time.h
+./time_conversions.o: /usr/include/endian.h /usr/include/bits/endian.h
+./time_conversions.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./time_conversions.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+./time_conversions.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+./time_conversions.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./time_conversions.o: /usr/include/string.h /usr/include/xlocale.h
+./time_conversions.o: /usr/include/math.h /usr/include/bits/huge_val.h
+./time_conversions.o: /usr/include/bits/huge_valf.h
+./time_conversions.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+./time_conversions.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+./time_conversions.o: /usr/include/bits/mathcalls.h time_conversions.h
+./time_conversions.o: /usr/include/sys/time.h laas.h
+./time_conversions.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./time_conversions.o: time_struct.h
+./lens/measurement_block.o: /usr/include/stdio.h /usr/include/features.h
+./lens/measurement_block.o: /usr/include/bits/predefs.h
+./lens/measurement_block.o: /usr/include/sys/cdefs.h
+./lens/measurement_block.o: /usr/include/bits/wordsize.h
+./lens/measurement_block.o: /usr/include/gnu/stubs.h
+./lens/measurement_block.o: /usr/include/gnu/stubs-64.h
+./lens/measurement_block.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./lens/measurement_block.o: /usr/include/bits/types.h
+./lens/measurement_block.o: /usr/include/bits/typesizes.h
+./lens/measurement_block.o: /usr/include/libio.h /usr/include/_G_config.h
+./lens/measurement_block.o: /usr/include/wchar.h
+./lens/measurement_block.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./lens/measurement_block.o: /usr/include/bits/stdio_lim.h
+./lens/measurement_block.o: /usr/include/bits/sys_errlist.h
+./lens/measurement_block.o: /usr/include/string.h /usr/include/xlocale.h
+./lens/measurement_block.o: /usr/include/math.h /usr/include/bits/huge_val.h
+./lens/measurement_block.o: /usr/include/bits/huge_valf.h
+./lens/measurement_block.o: /usr/include/bits/huge_vall.h
+./lens/measurement_block.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./lens/measurement_block.o: /usr/include/bits/mathdef.h
+./lens/measurement_block.o: /usr/include/bits/mathcalls.h gps.h
+./lens/measurement_block.o: ./lens/measurement_block.h laas.h
+./lens/laas_calculation_sequence.o: /usr/include/stdio.h
+./lens/laas_calculation_sequence.o: /usr/include/features.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/predefs.h
+./lens/laas_calculation_sequence.o: /usr/include/sys/cdefs.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/wordsize.h
+./lens/laas_calculation_sequence.o: /usr/include/gnu/stubs.h
+./lens/laas_calculation_sequence.o: /usr/include/gnu/stubs-64.h
+./lens/laas_calculation_sequence.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/types.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/typesizes.h
+./lens/laas_calculation_sequence.o: /usr/include/libio.h
+./lens/laas_calculation_sequence.o: /usr/include/_G_config.h
+./lens/laas_calculation_sequence.o: /usr/include/wchar.h
+./lens/laas_calculation_sequence.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/stdio_lim.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/sys_errlist.h
+./lens/laas_calculation_sequence.o: /usr/include/string.h
+./lens/laas_calculation_sequence.o: /usr/include/xlocale.h gps.h
+./lens/laas_calculation_sequence.o: time_struct.h laas.h ./ashtech/ashtech.h
+./lens/laas_calculation_sequence.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./lens/laas_calculation_sequence.o: /usr/include/gdbm.h /usr/include/time.h
+./lens/laas_calculation_sequence.o: ./ashtech/gg12.h ashtech/shift_buffer.h
+./lens/laas_calculation_sequence.o: binary_search/binary_search.h
+./lens/laas_calculation_sequence.o: ashtech/ashtech.h ./satellite_position.h
+./lens/laas_calculation_sequence.o: laas.h time_struct.h
+./lens/laas_calculation_sequence.o: /usr/include/sys/time.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/time.h
+./lens/laas_calculation_sequence.o: /usr/include/sys/select.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/select.h
+./lens/laas_calculation_sequence.o: /usr/include/bits/sigset.h
+./lens/laas_calculation_sequence.o: ashtech/ashtech.h gps.h
+./lens/laas_calculation_sequence.o: ./azimuth_elevation.h ./snv_update.h
+./lens/laas_calculation_sequence.o: lens/xyzae.h
+./lens/laas_calculation_sequence.o: ./lens/pseudorange_calculations.h
+./lens/laas_calculation_sequence.o: ./lens/measurement_block.h
+./lens/xyzae.o: /usr/include/stdio.h /usr/include/features.h
+./lens/xyzae.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./lens/xyzae.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./lens/xyzae.o: /usr/include/gnu/stubs-64.h
+./lens/xyzae.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./lens/xyzae.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./lens/xyzae.o: /usr/include/libio.h /usr/include/_G_config.h
+./lens/xyzae.o: /usr/include/wchar.h
+./lens/xyzae.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./lens/xyzae.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+./lens/xyzae.o: gps.h lens/xyzae.h
+./lens/pseudorange_calculations.o: /usr/include/stdio.h
+./lens/pseudorange_calculations.o: /usr/include/features.h
+./lens/pseudorange_calculations.o: /usr/include/bits/predefs.h
+./lens/pseudorange_calculations.o: /usr/include/sys/cdefs.h
+./lens/pseudorange_calculations.o: /usr/include/bits/wordsize.h
+./lens/pseudorange_calculations.o: /usr/include/gnu/stubs.h
+./lens/pseudorange_calculations.o: /usr/include/gnu/stubs-64.h
+./lens/pseudorange_calculations.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./lens/pseudorange_calculations.o: /usr/include/bits/types.h
+./lens/pseudorange_calculations.o: /usr/include/bits/typesizes.h
+./lens/pseudorange_calculations.o: /usr/include/libio.h
+./lens/pseudorange_calculations.o: /usr/include/_G_config.h
+./lens/pseudorange_calculations.o: /usr/include/wchar.h
+./lens/pseudorange_calculations.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./lens/pseudorange_calculations.o: /usr/include/bits/stdio_lim.h
+./lens/pseudorange_calculations.o: /usr/include/bits/sys_errlist.h
+./lens/pseudorange_calculations.o: /usr/include/string.h
+./lens/pseudorange_calculations.o: /usr/include/xlocale.h /usr/include/math.h
+./lens/pseudorange_calculations.o: /usr/include/bits/huge_val.h
+./lens/pseudorange_calculations.o: /usr/include/bits/huge_valf.h
+./lens/pseudorange_calculations.o: /usr/include/bits/huge_vall.h
+./lens/pseudorange_calculations.o: /usr/include/bits/inf.h
+./lens/pseudorange_calculations.o: /usr/include/bits/nan.h
+./lens/pseudorange_calculations.o: /usr/include/bits/mathdef.h
+./lens/pseudorange_calculations.o: /usr/include/bits/mathcalls.h
+./lens/pseudorange_calculations.o: ./mathematical_constants.h laas.h gps.h
+./lens/pseudorange_calculations.o: ./satellite_position.h laas.h
+./lens/pseudorange_calculations.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./lens/pseudorange_calculations.o: time_struct.h /usr/include/time.h
+./lens/pseudorange_calculations.o: /usr/include/sys/time.h
+./lens/pseudorange_calculations.o: /usr/include/bits/time.h
+./lens/pseudorange_calculations.o: /usr/include/sys/select.h
+./lens/pseudorange_calculations.o: /usr/include/bits/select.h
+./lens/pseudorange_calculations.o: /usr/include/bits/sigset.h
+./lens/pseudorange_calculations.o: ashtech/ashtech.h /usr/include/gdbm.h
+./lens/pseudorange_calculations.o: time_struct.h gps.h ./ashtech/ashtech.h
+./lens/pseudorange_calculations.o: ./lens/pseudorange_calculations.h
+./ashtech/gg12w.o: /usr/include/stdio.h /usr/include/features.h
+./ashtech/gg12w.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./ashtech/gg12w.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./ashtech/gg12w.o: /usr/include/gnu/stubs-64.h
+./ashtech/gg12w.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./ashtech/gg12w.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./ashtech/gg12w.o: /usr/include/libio.h /usr/include/_G_config.h
+./ashtech/gg12w.o: /usr/include/wchar.h
+./ashtech/gg12w.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./ashtech/gg12w.o: /usr/include/bits/stdio_lim.h
+./ashtech/gg12w.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+./ashtech/gg12w.o: /usr/include/xlocale.h /usr/include/time.h
+./ashtech/gg12w.o: /usr/include/sys/time.h /usr/include/bits/time.h
+./ashtech/gg12w.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./ashtech/gg12w.o: /usr/include/bits/sigset.h /usr/include/gdbm.h
+./ashtech/gg12w.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./ashtech/gg12w.o: /usr/include/endian.h /usr/include/bits/endian.h
+./ashtech/gg12w.o: /usr/include/bits/byteswap.h /usr/include/sys/sysmacros.h
+./ashtech/gg12w.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./ashtech/gg12w.o: laas.h ./find_string.h ./conversions.h ./ashtech/gg12w.h
+./ashtech/gg12w.o: ashtech/shift_buffer.h ashtech/ashtech.h
+./ashtech/shift_buffer.o: /usr/include/string.h /usr/include/features.h
+./ashtech/shift_buffer.o: /usr/include/bits/predefs.h
+./ashtech/shift_buffer.o: /usr/include/sys/cdefs.h
+./ashtech/shift_buffer.o: /usr/include/bits/wordsize.h
+./ashtech/shift_buffer.o: /usr/include/gnu/stubs.h
+./ashtech/shift_buffer.o: /usr/include/gnu/stubs-64.h
+./ashtech/shift_buffer.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./ashtech/shift_buffer.o: /usr/include/xlocale.h ashtech/shift_buffer.h
+./ashtech/shift_buffer.o: /usr/include/stdio.h /usr/include/bits/types.h
+./ashtech/shift_buffer.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./ashtech/shift_buffer.o: /usr/include/_G_config.h /usr/include/wchar.h
+./ashtech/shift_buffer.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./ashtech/shift_buffer.o: /usr/include/bits/stdio_lim.h
+./ashtech/shift_buffer.o: /usr/include/bits/sys_errlist.h laas.h
+./ashtech/ashtech.o: /usr/include/stdio.h /usr/include/features.h
+./ashtech/ashtech.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./ashtech/ashtech.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./ashtech/ashtech.o: /usr/include/gnu/stubs-64.h
+./ashtech/ashtech.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./ashtech/ashtech.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./ashtech/ashtech.o: /usr/include/libio.h /usr/include/_G_config.h
+./ashtech/ashtech.o: /usr/include/wchar.h
+./ashtech/ashtech.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./ashtech/ashtech.o: /usr/include/bits/stdio_lim.h
+./ashtech/ashtech.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+./ashtech/ashtech.o: /usr/include/xlocale.h /usr/include/time.h
+./ashtech/ashtech.o: /usr/include/sys/time.h /usr/include/bits/time.h
+./ashtech/ashtech.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./ashtech/ashtech.o: /usr/include/bits/sigset.h /usr/include/gdbm.h
+./ashtech/ashtech.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./ashtech/ashtech.o: /usr/include/endian.h /usr/include/bits/endian.h
+./ashtech/ashtech.o: /usr/include/bits/byteswap.h
+./ashtech/ashtech.o: /usr/include/sys/sysmacros.h
+./ashtech/ashtech.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./ashtech/ashtech.o: ./find_string.h ./conversions.h gps.h time_struct.h
+./ashtech/ashtech.o: ./time_conversions.h laas.h
+./ashtech/ashtech.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./ashtech/ashtech.o: time_struct.h laas.h ashtech/ashtech.h
+./ashtech/zxtreme.o: /usr/include/stdio.h /usr/include/features.h
+./ashtech/zxtreme.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./ashtech/zxtreme.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./ashtech/zxtreme.o: /usr/include/gnu/stubs-64.h
+./ashtech/zxtreme.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./ashtech/zxtreme.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./ashtech/zxtreme.o: /usr/include/libio.h /usr/include/_G_config.h
+./ashtech/zxtreme.o: /usr/include/wchar.h
+./ashtech/zxtreme.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./ashtech/zxtreme.o: /usr/include/bits/stdio_lim.h
+./ashtech/zxtreme.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+./ashtech/zxtreme.o: /usr/include/xlocale.h /usr/include/time.h
+./ashtech/zxtreme.o: /usr/include/sys/time.h /usr/include/bits/time.h
+./ashtech/zxtreme.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./ashtech/zxtreme.o: /usr/include/bits/sigset.h /usr/include/gdbm.h
+./ashtech/zxtreme.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./ashtech/zxtreme.o: /usr/include/endian.h /usr/include/bits/endian.h
+./ashtech/zxtreme.o: /usr/include/bits/byteswap.h
+./ashtech/zxtreme.o: /usr/include/sys/sysmacros.h
+./ashtech/zxtreme.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./ashtech/zxtreme.o: laas.h ./find_string.h ./conversions.h
+./ashtech/zxtreme.o: ./ashtech/zxtreme.h ashtech/shift_buffer.h
+./ashtech/zxtreme.o: ashtech/ashtech.h
+./ashtech/gg12.o: /usr/include/stdio.h /usr/include/features.h
+./ashtech/gg12.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./ashtech/gg12.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./ashtech/gg12.o: /usr/include/gnu/stubs-64.h
+./ashtech/gg12.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./ashtech/gg12.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./ashtech/gg12.o: /usr/include/libio.h /usr/include/_G_config.h
+./ashtech/gg12.o: /usr/include/wchar.h
+./ashtech/gg12.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./ashtech/gg12.o: /usr/include/bits/stdio_lim.h
+./ashtech/gg12.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+./ashtech/gg12.o: /usr/include/xlocale.h /usr/include/time.h
+./ashtech/gg12.o: /usr/include/sys/time.h /usr/include/bits/time.h
+./ashtech/gg12.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./ashtech/gg12.o: /usr/include/bits/sigset.h /usr/include/gdbm.h
+./ashtech/gg12.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./ashtech/gg12.o: /usr/include/endian.h /usr/include/bits/endian.h
+./ashtech/gg12.o: /usr/include/bits/byteswap.h /usr/include/sys/sysmacros.h
+./ashtech/gg12.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./ashtech/gg12.o: laas.h ./find_string.h ./conversions.h time_struct.h
+./ashtech/gg12.o: ./time_conversions.h laas.h
+./ashtech/gg12.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./ashtech/gg12.o: time_struct.h ./gdbm/gdbm_dictionary.h
+./ashtech/gg12.o: binary_search/binary_search.h gps.h ./snv_update.h
+./ashtech/gg12.o: ashtech/ashtech.h gps.h ./ashtech/gg12.h
+./ashtech/gg12.o: ashtech/shift_buffer.h ashtech/ashtech.h
+./conversions.o: /usr/include/stdio.h /usr/include/features.h
+./conversions.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./conversions.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./conversions.o: /usr/include/gnu/stubs-64.h
+./conversions.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./conversions.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./conversions.o: /usr/include/libio.h /usr/include/_G_config.h
+./conversions.o: /usr/include/wchar.h
+./conversions.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./conversions.o: /usr/include/bits/stdio_lim.h
+./conversions.o: /usr/include/bits/sys_errlist.h /usr/include/string.h
+./conversions.o: /usr/include/xlocale.h /usr/include/unistd.h
+./conversions.o: /usr/include/bits/posix_opt.h /usr/include/bits/confname.h
+./conversions.o: /usr/include/getopt.h /usr/include/fcntl.h
+./conversions.o: /usr/include/bits/fcntl.h /usr/include/sys/types.h
+./conversions.o: /usr/include/time.h /usr/include/endian.h
+./conversions.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+./conversions.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./conversions.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+./conversions.o: /usr/include/sys/sysmacros.h
+./conversions.o: /usr/include/bits/pthreadtypes.h /usr/include/errno.h
+./conversions.o: /usr/include/bits/errno.h /usr/include/linux/errno.h
+./conversions.o: /usr/include/asm/errno.h /usr/include/asm-generic/errno.h
+./conversions.o: /usr/include/asm-generic/errno-base.h /usr/include/math.h
+./conversions.o: /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h
+./conversions.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+./conversions.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+./conversions.o: /usr/include/bits/mathcalls.h conversions.h
+./gdbm/gdbm_dictionary.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./gdbm/gdbm_dictionary.o: /usr/include/sys/time.h /usr/include/features.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/predefs.h
+./gdbm/gdbm_dictionary.o: /usr/include/sys/cdefs.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/wordsize.h
+./gdbm/gdbm_dictionary.o: /usr/include/gnu/stubs.h
+./gdbm/gdbm_dictionary.o: /usr/include/gnu/stubs-64.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/types.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/typesizes.h /usr/include/time.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/time.h /usr/include/sys/select.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/select.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/sigset.h /usr/include/stdio.h
+./gdbm/gdbm_dictionary.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./gdbm/gdbm_dictionary.o: /usr/include/libio.h /usr/include/_G_config.h
+./gdbm/gdbm_dictionary.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/sys_errlist.h
+./gdbm/gdbm_dictionary.o: /usr/include/string.h /usr/include/xlocale.h
+./gdbm/gdbm_dictionary.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./gdbm/gdbm_dictionary.o: /usr/include/endian.h /usr/include/bits/endian.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/byteswap.h
+./gdbm/gdbm_dictionary.o: /usr/include/sys/sysmacros.h
+./gdbm/gdbm_dictionary.o: /usr/include/bits/pthreadtypes.h
+./gdbm/gdbm_dictionary.o: /usr/include/alloca.h
+./gdbm/gdbm_dictionary.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./gdbm/gdbm_dictionary.o: /usr/include/sys/stat.h /usr/include/bits/stat.h
+./gdbm/gdbm_dictionary.o: laas.h gps.h ./gdbm/gdbm_dictionary.h
+./gdbm/gdbm_dictionary.o: /usr/include/gdbm.h binary_search/binary_search.h
+./telerad/crc_16bit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/laasMessageType4.o: /usr/include/math.h /usr/include/features.h
+./telerad/laasMessageType4.o: /usr/include/bits/predefs.h
+./telerad/laasMessageType4.o: /usr/include/sys/cdefs.h
+./telerad/laasMessageType4.o: /usr/include/bits/wordsize.h
+./telerad/laasMessageType4.o: /usr/include/gnu/stubs.h
+./telerad/laasMessageType4.o: /usr/include/gnu/stubs-64.h
+./telerad/laasMessageType4.o: /usr/include/bits/huge_val.h
+./telerad/laasMessageType4.o: /usr/include/bits/huge_valf.h
+./telerad/laasMessageType4.o: /usr/include/bits/huge_vall.h
+./telerad/laasMessageType4.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./telerad/laasMessageType4.o: /usr/include/bits/mathdef.h
+./telerad/laasMessageType4.o: /usr/include/bits/mathcalls.h
+./telerad/laasMessageType4.o: /usr/include/stdio.h
+./telerad/laasMessageType4.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/laasMessageType4.o: /usr/include/bits/types.h
+./telerad/laasMessageType4.o: /usr/include/bits/typesizes.h
+./telerad/laasMessageType4.o: /usr/include/libio.h /usr/include/_G_config.h
+./telerad/laasMessageType4.o: /usr/include/wchar.h
+./telerad/laasMessageType4.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/laasMessageType4.o: /usr/include/bits/stdio_lim.h
+./telerad/laasMessageType4.o: /usr/include/bits/sys_errlist.h
+./telerad/laasMessageType4.o: /usr/include/string.h /usr/include/xlocale.h
+./telerad/laasMessageType4.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./telerad/laasMessageType4.o: /usr/include/time.h /usr/include/endian.h
+./telerad/laasMessageType4.o: /usr/include/bits/endian.h
+./telerad/laasMessageType4.o: /usr/include/bits/byteswap.h
+./telerad/laasMessageType4.o: /usr/include/sys/select.h
+./telerad/laasMessageType4.o: /usr/include/bits/select.h
+./telerad/laasMessageType4.o: /usr/include/bits/sigset.h
+./telerad/laasMessageType4.o: /usr/include/bits/time.h
+./telerad/laasMessageType4.o: /usr/include/sys/sysmacros.h
+./telerad/laasMessageType4.o: /usr/include/bits/pthreadtypes.h
+./telerad/laasMessageType4.o: /usr/include/alloca.h
+./telerad/laasMessageType4.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/laasMessageType4.o: laas.h telerad/laasMessageType4.h
+./telerad/laasMessageType4.o: ./telerad/utils_string.h ./telerad/crc_32bit.h
+./telerad/telerad.o: /usr/include/string.h /usr/include/features.h
+./telerad/telerad.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./telerad/telerad.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./telerad/telerad.o: /usr/include/gnu/stubs-64.h
+./telerad/telerad.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/telerad.o: /usr/include/xlocale.h /usr/include/stdio.h
+./telerad/telerad.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./telerad/telerad.o: /usr/include/libio.h /usr/include/_G_config.h
+./telerad/telerad.o: /usr/include/wchar.h
+./telerad/telerad.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/telerad.o: /usr/include/bits/stdio_lim.h
+./telerad/telerad.o: /usr/include/bits/sys_errlist.h /usr/include/stdlib.h
+./telerad/telerad.o: /usr/include/sys/types.h /usr/include/time.h
+./telerad/telerad.o: /usr/include/endian.h /usr/include/bits/endian.h
+./telerad/telerad.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./telerad/telerad.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+./telerad/telerad.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+./telerad/telerad.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./telerad/telerad.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/telerad.o: laas.h ./telerad/utils_string.h ./telerad/crc_32bit.h
+./telerad/telerad.o: telerad/laasMessageType1.h telerad/laasMessage.h
+./telerad/telerad.o: telerad/laasMessageType2.h telerad/laasMessageType4.h
+./telerad/telerad.o: ./telerad/telerad.h
+./telerad/laasMessageType2.o: /usr/include/math.h /usr/include/features.h
+./telerad/laasMessageType2.o: /usr/include/bits/predefs.h
+./telerad/laasMessageType2.o: /usr/include/sys/cdefs.h
+./telerad/laasMessageType2.o: /usr/include/bits/wordsize.h
+./telerad/laasMessageType2.o: /usr/include/gnu/stubs.h
+./telerad/laasMessageType2.o: /usr/include/gnu/stubs-64.h
+./telerad/laasMessageType2.o: /usr/include/bits/huge_val.h
+./telerad/laasMessageType2.o: /usr/include/bits/huge_valf.h
+./telerad/laasMessageType2.o: /usr/include/bits/huge_vall.h
+./telerad/laasMessageType2.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./telerad/laasMessageType2.o: /usr/include/bits/mathdef.h
+./telerad/laasMessageType2.o: /usr/include/bits/mathcalls.h
+./telerad/laasMessageType2.o: /usr/include/stdio.h
+./telerad/laasMessageType2.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/laasMessageType2.o: /usr/include/bits/types.h
+./telerad/laasMessageType2.o: /usr/include/bits/typesizes.h
+./telerad/laasMessageType2.o: /usr/include/libio.h /usr/include/_G_config.h
+./telerad/laasMessageType2.o: /usr/include/wchar.h
+./telerad/laasMessageType2.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/laasMessageType2.o: /usr/include/bits/stdio_lim.h
+./telerad/laasMessageType2.o: /usr/include/bits/sys_errlist.h
+./telerad/laasMessageType2.o: /usr/include/string.h /usr/include/xlocale.h
+./telerad/laasMessageType2.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./telerad/laasMessageType2.o: /usr/include/time.h /usr/include/endian.h
+./telerad/laasMessageType2.o: /usr/include/bits/endian.h
+./telerad/laasMessageType2.o: /usr/include/bits/byteswap.h
+./telerad/laasMessageType2.o: /usr/include/sys/select.h
+./telerad/laasMessageType2.o: /usr/include/bits/select.h
+./telerad/laasMessageType2.o: /usr/include/bits/sigset.h
+./telerad/laasMessageType2.o: /usr/include/bits/time.h
+./telerad/laasMessageType2.o: /usr/include/sys/sysmacros.h
+./telerad/laasMessageType2.o: /usr/include/bits/pthreadtypes.h
+./telerad/laasMessageType2.o: /usr/include/alloca.h
+./telerad/laasMessageType2.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/laasMessageType2.o: ./telerad/utils_string.h
+./telerad/laasMessageType2.o: telerad/laasMessageType2.h laas.h
+./telerad/crc_32bit.o: /usr/include/stdio.h /usr/include/features.h
+./telerad/crc_32bit.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./telerad/crc_32bit.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./telerad/crc_32bit.o: /usr/include/gnu/stubs-64.h
+./telerad/crc_32bit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/crc_32bit.o: /usr/include/bits/types.h
+./telerad/crc_32bit.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./telerad/crc_32bit.o: /usr/include/_G_config.h /usr/include/wchar.h
+./telerad/crc_32bit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/crc_32bit.o: /usr/include/bits/stdio_lim.h
+./telerad/crc_32bit.o: /usr/include/bits/sys_errlist.h /usr/include/stdlib.h
+./telerad/crc_32bit.o: /usr/include/sys/types.h /usr/include/time.h
+./telerad/crc_32bit.o: /usr/include/endian.h /usr/include/bits/endian.h
+./telerad/crc_32bit.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./telerad/crc_32bit.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+./telerad/crc_32bit.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+./telerad/crc_32bit.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./telerad/crc_32bit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/crc_32bit.o: laas.h ./telerad/crc_32bit.h
+./telerad/laasMessageType1.o: /usr/include/math.h /usr/include/features.h
+./telerad/laasMessageType1.o: /usr/include/bits/predefs.h
+./telerad/laasMessageType1.o: /usr/include/sys/cdefs.h
+./telerad/laasMessageType1.o: /usr/include/bits/wordsize.h
+./telerad/laasMessageType1.o: /usr/include/gnu/stubs.h
+./telerad/laasMessageType1.o: /usr/include/gnu/stubs-64.h
+./telerad/laasMessageType1.o: /usr/include/bits/huge_val.h
+./telerad/laasMessageType1.o: /usr/include/bits/huge_valf.h
+./telerad/laasMessageType1.o: /usr/include/bits/huge_vall.h
+./telerad/laasMessageType1.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./telerad/laasMessageType1.o: /usr/include/bits/mathdef.h
+./telerad/laasMessageType1.o: /usr/include/bits/mathcalls.h
+./telerad/laasMessageType1.o: /usr/include/stdio.h
+./telerad/laasMessageType1.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/laasMessageType1.o: /usr/include/bits/types.h
+./telerad/laasMessageType1.o: /usr/include/bits/typesizes.h
+./telerad/laasMessageType1.o: /usr/include/libio.h /usr/include/_G_config.h
+./telerad/laasMessageType1.o: /usr/include/wchar.h
+./telerad/laasMessageType1.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/laasMessageType1.o: /usr/include/bits/stdio_lim.h
+./telerad/laasMessageType1.o: /usr/include/bits/sys_errlist.h
+./telerad/laasMessageType1.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./telerad/laasMessageType1.o: /usr/include/time.h /usr/include/endian.h
+./telerad/laasMessageType1.o: /usr/include/bits/endian.h
+./telerad/laasMessageType1.o: /usr/include/bits/byteswap.h
+./telerad/laasMessageType1.o: /usr/include/sys/select.h
+./telerad/laasMessageType1.o: /usr/include/bits/select.h
+./telerad/laasMessageType1.o: /usr/include/bits/sigset.h
+./telerad/laasMessageType1.o: /usr/include/bits/time.h
+./telerad/laasMessageType1.o: /usr/include/sys/sysmacros.h
+./telerad/laasMessageType1.o: /usr/include/bits/pthreadtypes.h
+./telerad/laasMessageType1.o: /usr/include/alloca.h /usr/include/string.h
+./telerad/laasMessageType1.o: /usr/include/xlocale.h
+./telerad/laasMessageType1.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/laasMessageType1.o: laas.h ./telerad/utils_string.h
+./telerad/laasMessageType1.o: telerad/laasMessageType1.h
+./telerad/utils_string.o: ./telerad/utils_string.h /usr/include/stdio.h
+./telerad/utils_string.o: /usr/include/features.h /usr/include/bits/predefs.h
+./telerad/utils_string.o: /usr/include/sys/cdefs.h
+./telerad/utils_string.o: /usr/include/bits/wordsize.h
+./telerad/utils_string.o: /usr/include/gnu/stubs.h
+./telerad/utils_string.o: /usr/include/gnu/stubs-64.h
+./telerad/utils_string.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/utils_string.o: /usr/include/bits/types.h
+./telerad/utils_string.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./telerad/utils_string.o: /usr/include/_G_config.h /usr/include/wchar.h
+./telerad/utils_string.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/utils_string.o: /usr/include/bits/stdio_lim.h
+./telerad/utils_string.o: /usr/include/bits/sys_errlist.h
+./telerad/utils_string.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./telerad/utils_string.o: /usr/include/time.h /usr/include/endian.h
+./telerad/utils_string.o: /usr/include/bits/endian.h
+./telerad/utils_string.o: /usr/include/bits/byteswap.h
+./telerad/utils_string.o: /usr/include/sys/select.h
+./telerad/utils_string.o: /usr/include/bits/select.h
+./telerad/utils_string.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+./telerad/utils_string.o: /usr/include/sys/sysmacros.h
+./telerad/utils_string.o: /usr/include/bits/pthreadtypes.h
+./telerad/utils_string.o: /usr/include/alloca.h /usr/include/string.h
+./telerad/utils_string.o: /usr/include/xlocale.h
+./telerad/ephemeris_crc.o: /usr/include/math.h /usr/include/features.h
+./telerad/ephemeris_crc.o: /usr/include/bits/predefs.h
+./telerad/ephemeris_crc.o: /usr/include/sys/cdefs.h
+./telerad/ephemeris_crc.o: /usr/include/bits/wordsize.h
+./telerad/ephemeris_crc.o: /usr/include/gnu/stubs.h
+./telerad/ephemeris_crc.o: /usr/include/gnu/stubs-64.h
+./telerad/ephemeris_crc.o: /usr/include/bits/huge_val.h
+./telerad/ephemeris_crc.o: /usr/include/bits/huge_valf.h
+./telerad/ephemeris_crc.o: /usr/include/bits/huge_vall.h
+./telerad/ephemeris_crc.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./telerad/ephemeris_crc.o: /usr/include/bits/mathdef.h
+./telerad/ephemeris_crc.o: /usr/include/bits/mathcalls.h /usr/include/stdio.h
+./telerad/ephemeris_crc.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/ephemeris_crc.o: /usr/include/bits/types.h
+./telerad/ephemeris_crc.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./telerad/ephemeris_crc.o: /usr/include/_G_config.h /usr/include/wchar.h
+./telerad/ephemeris_crc.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/ephemeris_crc.o: /usr/include/bits/stdio_lim.h
+./telerad/ephemeris_crc.o: /usr/include/bits/sys_errlist.h
+./telerad/ephemeris_crc.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./telerad/ephemeris_crc.o: /usr/include/time.h /usr/include/endian.h
+./telerad/ephemeris_crc.o: /usr/include/bits/endian.h
+./telerad/ephemeris_crc.o: /usr/include/bits/byteswap.h
+./telerad/ephemeris_crc.o: /usr/include/sys/select.h
+./telerad/ephemeris_crc.o: /usr/include/bits/select.h
+./telerad/ephemeris_crc.o: /usr/include/bits/sigset.h
+./telerad/ephemeris_crc.o: /usr/include/bits/time.h
+./telerad/ephemeris_crc.o: /usr/include/sys/sysmacros.h
+./telerad/ephemeris_crc.o: /usr/include/bits/pthreadtypes.h
+./telerad/ephemeris_crc.o: /usr/include/alloca.h /usr/include/string.h
+./telerad/ephemeris_crc.o: /usr/include/xlocale.h /usr/include/unistd.h
+./telerad/ephemeris_crc.o: /usr/include/bits/posix_opt.h
+./telerad/ephemeris_crc.o: /usr/include/bits/confname.h /usr/include/getopt.h
+./telerad/ephemeris_crc.o: /usr/include/fcntl.h /usr/include/bits/fcntl.h
+./telerad/ephemeris_crc.o: /usr/include/errno.h /usr/include/bits/errno.h
+./telerad/ephemeris_crc.o: /usr/include/linux/errno.h
+./telerad/ephemeris_crc.o: /usr/include/asm/errno.h
+./telerad/ephemeris_crc.o: /usr/include/asm-generic/errno.h
+./telerad/ephemeris_crc.o: /usr/include/asm-generic/errno-base.h
+./telerad/ephemeris_crc.o: /usr/include/termios.h /usr/include/bits/termios.h
+./telerad/ephemeris_crc.o: /usr/include/sys/ttydefaults.h
+./telerad/ephemeris_crc.o: /usr/include/signal.h /usr/include/bits/signum.h
+./telerad/ephemeris_crc.o: /usr/include/bits/siginfo.h
+./telerad/ephemeris_crc.o: /usr/include/bits/sigaction.h
+./telerad/ephemeris_crc.o: /usr/include/bits/sigcontext.h
+./telerad/ephemeris_crc.o: /usr/include/bits/sigstack.h
+./telerad/ephemeris_crc.o: /usr/include/bits/sigthread.h
+./telerad/ephemeris_crc.o: /usr/include/sys/time.h ./conversions.h
+./telerad/ephemeris_crc.o: ./telerad/crc_16bit.h ./telerad/ephemeris_crc.h
+./telerad/ephemeris_crc.o: ./ashtech/ashtech.h
+./telerad/ephemeris_crc.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/ephemeris_crc.o: /usr/include/gdbm.h time_struct.h
+./telerad/laasMessage.o: /usr/include/stdio.h /usr/include/features.h
+./telerad/laasMessage.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./telerad/laasMessage.o: /usr/include/bits/wordsize.h
+./telerad/laasMessage.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+./telerad/laasMessage.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./telerad/laasMessage.o: /usr/include/bits/types.h
+./telerad/laasMessage.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./telerad/laasMessage.o: /usr/include/_G_config.h /usr/include/wchar.h
+./telerad/laasMessage.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./telerad/laasMessage.o: /usr/include/bits/stdio_lim.h
+./telerad/laasMessage.o: /usr/include/bits/sys_errlist.h
+./telerad/laasMessage.o: /usr/include/string.h /usr/include/xlocale.h
+./telerad/laasMessage.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./telerad/laasMessage.o: /usr/include/time.h /usr/include/endian.h
+./telerad/laasMessage.o: /usr/include/bits/endian.h
+./telerad/laasMessage.o: /usr/include/bits/byteswap.h
+./telerad/laasMessage.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./telerad/laasMessage.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+./telerad/laasMessage.o: /usr/include/sys/sysmacros.h
+./telerad/laasMessage.o: /usr/include/bits/pthreadtypes.h
+./telerad/laasMessage.o: /usr/include/alloca.h
+./telerad/laasMessage.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./telerad/laasMessage.o: laas.h telerad/laasMessage.h
+./telerad/laasMessage.o: telerad/laasMessageType1.h
+./telerad/laasMessage.o: telerad/laasMessageType2.h
+./telerad/laasMessage.o: telerad/laasMessageType4.h ./telerad/utils_string.h
+./telerad/laasMessage.o: ./telerad/crc_32bit.h
+./LAASInit.o: /usr/include/stdlib.h /usr/include/features.h
+./LAASInit.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./LAASInit.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./LAASInit.o: /usr/include/gnu/stubs-64.h
+./LAASInit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./LAASInit.o: /usr/include/sys/types.h /usr/include/bits/types.h
+./LAASInit.o: /usr/include/bits/typesizes.h /usr/include/time.h
+./LAASInit.o: /usr/include/endian.h /usr/include/bits/endian.h
+./LAASInit.o: /usr/include/bits/byteswap.h /usr/include/sys/select.h
+./LAASInit.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+./LAASInit.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+./LAASInit.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+./LAASInit.o: /usr/include/stdio.h /usr/include/libio.h
+./LAASInit.o: /usr/include/_G_config.h /usr/include/wchar.h
+./LAASInit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./LAASInit.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+./LAASInit.o: /usr/include/string.h /usr/include/xlocale.h
+./LAASInit.o: /usr/include/errno.h /usr/include/bits/errno.h
+./LAASInit.o: /usr/include/linux/errno.h /usr/include/asm/errno.h
+./LAASInit.o: /usr/include/asm-generic/errno.h
+./LAASInit.o: /usr/include/asm-generic/errno-base.h /usr/include/unistd.h
+./LAASInit.o: /usr/include/bits/posix_opt.h /usr/include/bits/confname.h
+./LAASInit.o: /usr/include/getopt.h
+./LAASInit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./LAASInit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include-fixed/limits.h
+./LAASInit.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include-fixed/syslimits.h
+./LAASInit.o: /usr/include/limits.h /usr/include/bits/posix1_lim.h
+./LAASInit.o: /usr/include/bits/local_lim.h /usr/include/linux/limits.h
+./LAASInit.o: /usr/include/bits/posix2_lim.h /usr/include/math.h
+./LAASInit.o: /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h
+./LAASInit.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+./LAASInit.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+./LAASInit.o: /usr/include/bits/mathcalls.h /usr/include/sys/stat.h
+./LAASInit.o: /usr/include/bits/stat.h /usr/include/fcntl.h
+./LAASInit.o: /usr/include/bits/fcntl.h conversions.h laas.h time_struct.h
+./LAASInit.o: /usr/include/sys/time.h serial.h key_value_parser.h
+./LAASInit.o: find_string.h ashtech/ashtech.h /usr/include/gdbm.h
+./LAASInit.o: time_struct.h ashtech/gg12.h ashtech/shift_buffer.h laas.h
+./LAASInit.o: gps.h binary_search/binary_search.h ashtech/ashtech.h
+./LAASInit.o: ashtech/gg12w.h ashtech/zxtreme.h LAASInit.h gps.h
+./LAASInit.o: telerad/telerad.h telerad/laasMessage.h
+./LAASInit.o: telerad/laasMessageType1.h telerad/laasMessageType2.h
+./LAASInit.o: telerad/laasMessageType4.h time_conversions.h
+./binary_search/binary_search.o: /usr/include/stdio.h /usr/include/features.h
+./binary_search/binary_search.o: /usr/include/bits/predefs.h
+./binary_search/binary_search.o: /usr/include/sys/cdefs.h
+./binary_search/binary_search.o: /usr/include/bits/wordsize.h
+./binary_search/binary_search.o: /usr/include/gnu/stubs.h
+./binary_search/binary_search.o: /usr/include/gnu/stubs-64.h
+./binary_search/binary_search.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./binary_search/binary_search.o: /usr/include/bits/types.h
+./binary_search/binary_search.o: /usr/include/bits/typesizes.h
+./binary_search/binary_search.o: /usr/include/libio.h
+./binary_search/binary_search.o: /usr/include/_G_config.h
+./binary_search/binary_search.o: /usr/include/wchar.h
+./binary_search/binary_search.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./binary_search/binary_search.o: /usr/include/bits/stdio_lim.h
+./binary_search/binary_search.o: /usr/include/bits/sys_errlist.h
+./binary_search/binary_search.o: /usr/include/string.h /usr/include/xlocale.h
+./binary_search/binary_search.o: /usr/include/stdlib.h
+./binary_search/binary_search.o: /usr/include/sys/types.h /usr/include/time.h
+./binary_search/binary_search.o: /usr/include/endian.h
+./binary_search/binary_search.o: /usr/include/bits/endian.h
+./binary_search/binary_search.o: /usr/include/bits/byteswap.h
+./binary_search/binary_search.o: /usr/include/sys/select.h
+./binary_search/binary_search.o: /usr/include/bits/select.h
+./binary_search/binary_search.o: /usr/include/bits/sigset.h
+./binary_search/binary_search.o: /usr/include/bits/time.h
+./binary_search/binary_search.o: /usr/include/sys/sysmacros.h
+./binary_search/binary_search.o: /usr/include/bits/pthreadtypes.h
+./binary_search/binary_search.o: /usr/include/alloca.h
+./binary_search/binary_search.o: ./gdbm/gdbm_dictionary.h /usr/include/gdbm.h
+./binary_search/binary_search.o: binary_search/binary_search.h gps.h
+./source_availability_duration.o: /usr/include/math.h /usr/include/features.h
+./source_availability_duration.o: /usr/include/bits/predefs.h
+./source_availability_duration.o: /usr/include/sys/cdefs.h
+./source_availability_duration.o: /usr/include/bits/wordsize.h
+./source_availability_duration.o: /usr/include/gnu/stubs.h
+./source_availability_duration.o: /usr/include/gnu/stubs-64.h
+./source_availability_duration.o: /usr/include/bits/huge_val.h
+./source_availability_duration.o: /usr/include/bits/huge_valf.h
+./source_availability_duration.o: /usr/include/bits/huge_vall.h
+./source_availability_duration.o: /usr/include/bits/inf.h
+./source_availability_duration.o: /usr/include/bits/nan.h
+./source_availability_duration.o: /usr/include/bits/mathdef.h
+./source_availability_duration.o: /usr/include/bits/mathcalls.h
+./source_availability_duration.o: /usr/include/stdio.h
+./source_availability_duration.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./source_availability_duration.o: /usr/include/bits/types.h
+./source_availability_duration.o: /usr/include/bits/typesizes.h
+./source_availability_duration.o: /usr/include/libio.h
+./source_availability_duration.o: /usr/include/_G_config.h
+./source_availability_duration.o: /usr/include/wchar.h
+./source_availability_duration.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./source_availability_duration.o: /usr/include/bits/stdio_lim.h
+./source_availability_duration.o: /usr/include/bits/sys_errlist.h
+./source_availability_duration.o: /usr/include/string.h
+./source_availability_duration.o: /usr/include/xlocale.h
+./source_availability_duration.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./source_availability_duration.o: gps.h time_struct.h /usr/include/time.h
+./source_availability_duration.o: /usr/include/sys/time.h
+./source_availability_duration.o: /usr/include/bits/time.h
+./source_availability_duration.o: /usr/include/sys/select.h
+./source_availability_duration.o: /usr/include/bits/select.h
+./source_availability_duration.o: /usr/include/bits/sigset.h
+./source_availability_duration.o: ashtech/ashtech.h /usr/include/gdbm.h
+./source_availability_duration.o: time_struct.h mathematical_constants.h
+./source_availability_duration.o: satellite_position.h laas.h
+./source_availability_duration.o: azimuth_elevation.h
+./source_availability_duration.o: source_availability_duration.h
+./source_availability_duration.o: /usr/include/stdlib.h
+./source_availability_duration.o: /usr/include/sys/types.h
+./source_availability_duration.o: /usr/include/endian.h
+./source_availability_duration.o: /usr/include/bits/endian.h
+./source_availability_duration.o: /usr/include/bits/byteswap.h
+./source_availability_duration.o: /usr/include/sys/sysmacros.h
+./source_availability_duration.o: /usr/include/bits/pthreadtypes.h
+./source_availability_duration.o: /usr/include/alloca.h
+./snv_update.o: /usr/include/math.h /usr/include/features.h
+./snv_update.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./snv_update.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./snv_update.o: /usr/include/gnu/stubs-64.h /usr/include/bits/huge_val.h
+./snv_update.o: /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h
+./snv_update.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+./snv_update.o: /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h
+./snv_update.o: /usr/include/stdio.h
+./snv_update.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./snv_update.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+./snv_update.o: /usr/include/libio.h /usr/include/_G_config.h
+./snv_update.o: /usr/include/wchar.h
+./snv_update.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./snv_update.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+./snv_update.o: /usr/include/stdlib.h /usr/include/sys/types.h
+./snv_update.o: /usr/include/time.h /usr/include/endian.h
+./snv_update.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+./snv_update.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./snv_update.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+./snv_update.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+./snv_update.o: /usr/include/alloca.h /usr/include/string.h
+./snv_update.o: /usr/include/xlocale.h /usr/include/gdbm.h laas.h
+./snv_update.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./snv_update.o: time_struct.h /usr/include/sys/time.h gps.h ashtech/ashtech.h
+./snv_update.o: time_struct.h time_conversions.h satellite_position.h
+./snv_update.o: mathematical_constants.h gdbm/gdbm_dictionary.h
+./snv_update.o: binary_search/binary_search.h gps.h
+./snv_update.o: binary_search/binary_search.h azimuth_elevation.h
+./snv_update.o: source_availability_duration.h
+./azimuth_elevation.o: /usr/include/stdio.h /usr/include/features.h
+./azimuth_elevation.o: /usr/include/bits/predefs.h /usr/include/sys/cdefs.h
+./azimuth_elevation.o: /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h
+./azimuth_elevation.o: /usr/include/gnu/stubs-64.h
+./azimuth_elevation.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stddef.h
+./azimuth_elevation.o: /usr/include/bits/types.h
+./azimuth_elevation.o: /usr/include/bits/typesizes.h /usr/include/libio.h
+./azimuth_elevation.o: /usr/include/_G_config.h /usr/include/wchar.h
+./azimuth_elevation.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdarg.h
+./azimuth_elevation.o: /usr/include/bits/stdio_lim.h
+./azimuth_elevation.o: /usr/include/bits/sys_errlist.h /usr/include/math.h
+./azimuth_elevation.o: /usr/include/bits/huge_val.h
+./azimuth_elevation.o: /usr/include/bits/huge_valf.h
+./azimuth_elevation.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+./azimuth_elevation.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+./azimuth_elevation.o: /usr/include/bits/mathcalls.h laas.h
+./azimuth_elevation.o: /usr/lib/gcc/x86_64-linux-gnu/4.4/include/stdbool.h
+./azimuth_elevation.o: time_struct.h /usr/include/time.h
+./azimuth_elevation.o: /usr/include/sys/time.h /usr/include/bits/time.h
+./azimuth_elevation.o: /usr/include/sys/select.h /usr/include/bits/select.h
+./azimuth_elevation.o: /usr/include/bits/sigset.h gps.h ashtech/ashtech.h
+./azimuth_elevation.o: /usr/include/gdbm.h time_struct.h azimuth_elevation.h
+./azimuth_elevation.o: mathematical_constants.h

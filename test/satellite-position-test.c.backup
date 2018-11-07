@@ -1,0 +1,308 @@
+#include <stdio.h>
+#include <string.h>
+#include "../laas.h"
+#include "../gps.h"
+#include "../time_struct.h"
+#include "../ashtech/ashtech.h"
+#include "../satellite_position.h"
+
+/*
+#define SNV_INFILE  "20071007-KOUN-QA-TB-GG12-1.snv.csv"
+#define XYZ_INFILE  "20071007-KOUN-QA-TB-GG12-1.xyz.csv"
+*/
+
+#define SNV_INFILE  "/logs/20080206/20080206-KOUN-PROD-LM-1.snv.csv"
+#define XYZ_INFILE  "/logs/20080206/20080206-KOUN-PROD-TB-GG12W-1.xyz.csv"
+#define SAL_INFILE  "/logs/20080206/20080206-KOUN-PROD-LM-1.sal.csv"
+#define XYZ_OUTFILE "xyz.csv"
+
+void open_log_files(FILE **snv_infile, FILE **sal_infile, FILE **xyz_infile, FILE **xyz_outfile)
+{
+     if(((*snv_infile) = fopen(SNV_INFILE, "r")) != NULL)
+     {
+          printf("Opened SNV_INFILE\n");
+     } else {
+          perror("ERROR:DEBUG:Failed to open SNV_INFILE for reading");
+     }
+
+     if(((*sal_infile) = fopen(SAL_INFILE, "r")) != NULL)
+     {
+          printf("Opened SAL_INFILE\n");
+     } else {
+          perror("ERROR:DEBUG:Failed to open SAL_INFILE for reading");
+     }
+
+     if(((*xyz_infile) = fopen(XYZ_INFILE, "r")) != NULL)
+     {
+          printf("Opened XYZ_INFILE\n");
+     } else {
+          perror("ERROR:DEBUG:Failed to open XYZ_INFILE for reading");
+     }
+
+     if(((*xyz_outfile) = fopen(XYZ_OUTFILE, "w")) != NULL)
+     {
+          printf("Opened XYZ_OUTFILE\n");
+     } else {
+          perror("ERROR:DEBUG:Failed to open XYZ_OUTFILE for reading");
+     }
+}
+
+void close_log_files(FILE *snv_infile, FILE *xyz_infile, FILE *xyz_outfile)
+{
+     if(fclose(snv_infile) == 0)
+          printf("Closed SNV_INFILE\n");
+     if(fclose(xyz_infile) == 0)
+          printf("Closed XYZ_INFILE\n");
+     if(fclose(xyz_outfile) == 0)
+          printf("Closed XYZ_OUTFILE\n");
+}
+
+void
+initialize_snv_array(char inputBuffer[], struct str_ashtech_snv snvArray[NUMBER_OF_GPS_SATELLITES])
+{
+     struct str_ashtech_snv snv;
+
+     sscanf(inputBuffer,"%u, %d, %d, %f, %d, %d, %f, %f, %f, %d, %f, %lf, %lf, %lf, %d, %f, %f, %f, %f, %f, %f, %lf, %lf, %lf, %f, %f, %d, %d, %d, %d, %d\n",
+               &snv.time_received.gps.rcvtime,
+               &snv.wn,    &snv.tow,      &snv.tgd,    &snv.aodc,   &snv.toc,    &snv.af2,
+               &snv.af1,   &snv.af0,      &snv.aode,   &snv.deltan, &snv.m0,     &snv.e,
+               &snv.roota, &snv.toe,      &snv.cic,    &snv.crc,    &snv.cis,    &snv.crs,
+               &snv.cuc,   &snv.cus,      &snv.omega0, &snv.omega,  &snv.i0,     &snv.omegadot,
+               &snv.idot,  &snv.accuracy, &snv.health, &snv.fit,    &snv.prnnum, &snv.res);
+     snv.is_set = true;
+     
+
+     if(snv.prnnum > NUMBER_OF_GPS_SATELLITES)
+     {
+          /* Error Do not process */
+          printf("%d, %d, %d, %0.24f, %d, %d, %0.24f, %0.24f, %0.24f, %d, %0.24f, %0.24f, %0.24f, %0.24f, %d, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %0.24f, %d, %d, %d, %d, %d\n",
+                    snv.time_received.gps.rcvtime,
+                    snv.wn, snv.tow, snv.tgd, snv.aodc, snv.toc, snv.af2,
+                    snv.af1, snv.af0, snv.aode, snv.deltan, snv.m0, snv.e,
+                    snv.roota, snv.toe, snv.cic, snv.crc, snv.cis, snv.crs,
+                    snv.cuc, snv.cus, snv.omega0, snv.omega,  snv.i0, snv.omegadot,
+                    snv.idot, snv.accuracy, snv.health, snv.fit, snv.prnnum, snv.res);
+          return;
+     } else {
+          if(snvArray[snv.prnnum].is_set == false)
+          {
+               memcpy(&snvArray[snv.prnnum], &snv, sizeof(struct str_ashtech_snv));
+               snvArray[snv.prnnum].is_set = true;
+          }
+     }
+}
+
+void print_sal(unsigned int rcvtime, struct str_ashtech_sal *sal)
+{
+     printf("rcvtime  = %d\n", rcvtime);
+     printf("prn      = %d\n", sal->prn);
+     printf("health   = %d\n", sal->health);
+     printf("e        = %f\n", sal->e);
+     printf("toa      = %d\n", sal->toa);
+     printf("i0       = %f\n", sal->i0);
+     printf("omegadot = %f\n", sal->omegadot);
+     printf("roota    = %f\n", sal->roota);
+     printf("omega0   = %f\n", sal->omega0);
+     printf("omega    = %f\n", sal->omega);
+     printf("m0       = %f\n", sal->m0);
+     printf("af0      = %f\n", sal->af0);
+     printf("af1      = %f\n", sal->af1);
+     printf("wna      = %d\n", sal->wna);
+     printf("wn       = %d\n", sal->wn);
+     printf("tow      = %d\n\n", sal->tow);
+}
+
+void
+initialize_sal_array(char inputBuffer[], struct str_ashtech_sal salArray[NUMBER_OF_GPS_SATELLITES])
+{
+     struct str_ashtech_sal sal;
+
+     sscanf(inputBuffer,"%u, %d, %d, %f, %d, %f, %f, %lf, %lf, %lf, %lf, %f, %f, %d, %d, %d\n",
+               &sal.time_received.gps.rcvtime,
+               &sal.prn, &sal.health, &sal.e, &sal.toa, &sal.i0, 
+               &sal.omegadot,  &sal.roota, &sal.omega0, &sal.omega,
+               &sal.m0, &sal.af0, &sal.af1, &sal.wna, &sal.wn, &sal.tow);
+     sal.is_set = true;
+
+     /* print_sal(0, &sal); */
+     if(sal.prn < NUMBER_OF_GPS_SATELLITES)
+     {
+          if(salArray[sal.prn].is_set == false)
+          {
+               memcpy(&salArray[sal.prn], &sal, sizeof(struct str_ashtech_sal));
+               salArray[sal.prn].is_set = true;
+          }
+     }
+}
+
+void
+process_snv(char inputBuffer[], struct str_ashtech_snv *snv)
+{
+     memset(snv,0,sizeof(struct str_ashtech_snv));
+     sscanf(inputBuffer,"%u, %d, %d, %f, %d, %d, %f, %f, %f, %d, %f, %lf, %lf, %lf, %d, %f, %f, %f, %f, %f, %f, %lf, %lf, %lf, %f, %f, %d, %d, %d, %d, %d\n",
+               &snv->time_received.gps.rcvtime,
+               &snv->wn,    &snv->tow,      &snv->tgd,    &snv->aodc,   &snv->toc,    &snv->af2,
+               &snv->af1,   &snv->af0,      &snv->aode,   &snv->deltan, &snv->m0,     &snv->e,
+               &snv->roota, &snv->toe,      &snv->cic,    &snv->crc,    &snv->cis,    &snv->crs,
+               &snv->cuc,   &snv->cus,      &snv->omega0, &snv->omega,  &snv->i0,     &snv->omegadot,
+               &snv->idot,  &snv->accuracy, &snv->health, &snv->fit,    &snv->prnnum, &snv->res);
+}
+
+void
+process_sal(char inputBuffer[], struct str_ashtech_sal *sal)
+{
+     sscanf(inputBuffer,"%u, %d, %d, %f, %d, %f, %f, %lf, %lf, %lf, %lf, %f, %f, %d, %d, %d\n",
+               &sal->time_received.gps.rcvtime,
+               &sal->prn, &sal->health, &sal->e, &sal->toa, &sal->i0, 
+               &sal->omegadot,  &sal->roota, &sal->omega0, &sal->omega,
+               &sal->m0, &sal->af0, &sal->af1, &sal->wna, &sal->wn, &sal->tow);
+}
+
+     void
+process_xyz(char inputBuffer[], struct str_ashtech_xyz *xyz)
+{
+     sscanf(inputBuffer,"%u, %u, %u, %lf, %lf, %lf, %lf\n",
+               &xyz->rcvtime, &xyz->numSats,
+               &xyz->channel[0].sv,    &xyz->channel[0].x,      &xyz->channel[0].y,
+               &xyz->channel[0].z,     &xyz->channel[0].range);
+}
+
+
+void
+copy_snv(struct str_ashtech_snv *snv, struct str_ashtech_snv snvArray[NUMBER_OF_GPS_SATELLITES])
+{
+     if(snv->prnnum < NUMBER_OF_GPS_SATELLITES)
+     {
+          memcpy(&snvArray[snv->prnnum], snv, sizeof(struct str_ashtech_snv));
+     }
+}
+
+#define BUFSIZE 1000
+int main()
+{
+     FILE *snv_infile  = NULL;
+     FILE *sal_infile  = NULL;
+     FILE *xyz_infile  = NULL;
+     FILE *xyz_outfile = NULL;
+
+     char snvBuffer[BUFSIZE];
+     char salBuffer[BUFSIZE];
+     char xyzBuffer[BUFSIZE];
+     char *return_char = NULL;
+     struct str_ashtech_snv snvArray[NUMBER_OF_GPS_SATELLITES];
+     struct str_ashtech_sal salArray[NUMBER_OF_GPS_SATELLITES];
+     struct str_ashtech_snv snv;
+     struct str_ashtech_sal sal;
+     struct str_ashtech_xyz xyz;
+
+     struct str_location location;
+     struct str_satellite_position sat_pos_1;
+     struct str_satellite_position sat_pos_2;
+
+     memset(snvArray, 0, sizeof(struct str_ashtech_snv) * NUMBER_OF_GPS_SATELLITES);
+     memset(&snv, 0, sizeof(struct str_ashtech_snv));
+
+     memset(salArray, 0, sizeof(struct str_ashtech_sal) * NUMBER_OF_GPS_SATELLITES);
+     memset(&sal, 0, sizeof(struct str_ashtech_sal));
+
+     memset(&xyz, 0, sizeof(struct str_ashtech_xyz));
+     memset(&location, 0, sizeof(struct str_location));
+     memset(&sat_pos_1, 0, sizeof(struct str_satellite_position));
+     memset(&sat_pos_2, 0, sizeof(struct str_satellite_position));
+
+     location.x = -677736.175;
+     location.y = -5171015.741;
+     location.z = 3660053.531;
+     location.latitude = 35.24231912;
+     location.longitude = -97.46687713;
+     location.altitude = 342.3904;
+     
+     open_log_files(&snv_infile, &sal_infile, &xyz_infile, &xyz_outfile);
+
+     while(0 != (return_char = fgets(snvBuffer,BUFSIZE, snv_infile)))
+     {
+          initialize_snv_array(snvBuffer, snvArray);
+          memset(snvBuffer, 0, BUFSIZE);
+     }
+     rewind(snv_infile);
+
+     while(0 != (return_char = fgets(salBuffer,BUFSIZE, sal_infile)))
+     {
+          initialize_sal_array(salBuffer, salArray);
+          memset(salBuffer, 0, BUFSIZE);
+     }
+     rewind(sal_infile);
+
+/*
+     int i = 0;
+     for(i=0;i<NUMBER_OF_GPS_SATELLITES;i++)
+     {
+          if(snvArray[i].is_set == true)
+          {
+               printf("SAT: %d\n", snvArray[i].prnnum);
+          }
+     }
+*/
+     return_char = fgets(snvBuffer,BUFSIZE, snv_infile);
+     process_snv(snvBuffer, &snv);
+     return_char = fgets(salBuffer,BUFSIZE, sal_infile);
+     process_sal(salBuffer, &sal);
+
+     while(0 != (return_char = fgets(xyzBuffer,BUFSIZE, xyz_infile)))
+     {
+          process_xyz(xyzBuffer, &xyz);
+          /* printf("SNV: RCVTIME: %d\n", snv.time_received.gps.rcvtime); */
+          if(xyz.rcvtime == snv.time_received.gps.rcvtime)
+          {
+               if(snv.prnnum < NUMBER_OF_GPS_SATELLITES)
+               {
+                    printf("New SNV: %d\n", snv.prnnum);
+                    memset(&snvArray[snv.prnnum],0,sizeof(struct str_ashtech_snv));
+                    memcpy(&snvArray[snv.prnnum], &snv, sizeof(struct str_ashtech_snv));
+                    return_char = fgets(snvBuffer,BUFSIZE, snv_infile);
+                    process_snv(snvBuffer, &snv);
+               }
+          }
+
+          /* printf("SAL: RCVTIME: %d\n", sal.time_received.gps.rcvtime); */
+          if(xyz.rcvtime == sal.time_received.gps.rcvtime)
+          {
+               if(sal.prn < NUMBER_OF_GPS_SATELLITES)
+               {
+                    printf("New SAL: %d\n", sal.prn);
+                    memcpy(&salArray[sal.prn], &sal, sizeof(struct str_ashtech_sal));
+                    return_char = fgets(salBuffer,BUFSIZE, sal_infile);
+                    process_sal(salBuffer, &sal);
+               }
+          }
+          if(xyz.channel[0].sv < NUMBER_OF_GPS_SATELLITES + 1)
+          {
+               satellite_position((void *) &snvArray[(xyz.channel[0].sv - 1)], SNV,
+                         &location, PRr_NOMINAL, xyz.rcvtime, &sat_pos_1);
+/*
+               satellite_position((void *) &salArray[(xyz.channel[0].sv - 1)], SAL,
+                         &location, PRr_NOMINAL, xyz.rcvtime, &sat_pos_2);
+               printf("Distance ( Current): %f\n", get_satellite_distance(&sat_pos_1, &sat_pos_2));
+
+               satellite_position((void *) &snvArray[(xyz.channel[0].sv - 1)], SNV,
+                         &location, PRr_NOMINAL, xyz.rcvtime + 6 * 60 * 60 * 1000, &sat_pos_1);
+               satellite_position((void *) &salArray[(xyz.channel[0].sv - 1)], SAL,
+                         &location, PRr_NOMINAL, xyz.rcvtime + 6 * 60 * 60 * 1000, &sat_pos_2);
+               printf("Distance ( 6 Hours): %f\n\n", get_satellite_distance(&sat_pos_1, &sat_pos_2));
+
+               satellite_position((void *) &snvArray[(xyz.channel[0].sv - 1)], SNV,
+                         &location, PRr_NOMINAL, xyz.rcvtime + 12 * 60 * 60 * 1000, &sat_pos_1);
+               satellite_position((void *) &salArray[(xyz.channel[0].sv - 1)], SAL,
+                         &location, PRr_NOMINAL, xyz.rcvtime + 12 * 60 * 60 * 1000, &sat_pos_2);
+               printf("Distance (12 Hours): %f\n\n", get_satellite_distance(&sat_pos_1, &sat_pos_2));
+*/
+          }
+
+          memset(snvBuffer, 0, BUFSIZE);
+          memset(xyzBuffer, 0, BUFSIZE);
+     }
+
+     close_log_files(snv_infile, xyz_infile, xyz_outfile);
+
+     return 0;
+}

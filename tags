@@ -1,0 +1,1262 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.6	//
+ASHTECH_H	./ashtech/ashtech.h	2;"	d
+AZIMUTH_ELEVATION_H	./azimuth_elevation.h	2;"	d
+B1	./lens/measurement_block.h	/^     double B1;$/;"	m	struct:str_measurement_block
+B1	./telerad/laasMessageType1.h	/^        double B1;$/;"	m	struct:laasMessageType1::str_mesaurement_block
+B2	./lens/measurement_block.h	/^     double B2;$/;"	m	struct:str_measurement_block
+B2	./telerad/laasMessageType1.h	/^        double B2;$/;"	m	struct:laasMessageType1::str_mesaurement_block
+B3	./lens/measurement_block.h	/^     double B3;$/;"	m	struct:str_measurement_block
+B3	./telerad/laasMessageType1.h	/^        double B3;$/;"	m	struct:laasMessageType1::str_mesaurement_block
+B4	./lens/measurement_block.h	/^     double B4;$/;"	m	struct:str_measurement_block
+B4	./telerad/laasMessageType1.h	/^        double B4;$/;"	m	struct:laasMessageType1::str_mesaurement_block
+BINARY_SEARCH_H	./binary_search/binary_search.h	2;"	d
+BLINE	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+BUFSIZE	./test/main.c	252;"	d	file:
+BUFSIZE	./test/satellite-position-test.c	180;"	d	file:
+C	./mathematical_constants.h	/^static const double C  = 299792458.0;            \/* Speed of light icd-sec 20.3.3.3.3.1 (m\/s) *\/$/;"	v
+C	./test/main.c	/^static const int  C = 299792458;    $/;"	v	file:
+CAT1_MS_FEC	./telerad/telerad.h	37;"	d
+CAT1_MS_FEC_APPLIED	./telerad/telerad.h	38;"	d
+CAT1_MS_SSID	./telerad/telerad.h	36;"	d
+CAT1_MS_UNUSED	./telerad/telerad.h	35;"	d
+CA_COMMAND_SUCCESSFUL	./telerad/telerad.h	9;"	d
+CA_UNUSED	./telerad/telerad.h	8;"	d
+COM_1	./serial.h	11;"	d
+COM_2	./serial.h	12;"	d
+CRC_16_BIT_H	./telerad/crc_16bit.h	2;"	d
+CRC_32_BIT_H	./telerad/crc_32bit.h	2;"	d
+Calc_PR_s	./lens/pseudorange_calculations.c	/^void Calc_PR_s(struct str_prsc_filter *mca_filter)$/;"	f
+Calc_PR_sc	./lens/pseudorange_calculations.c	/^void Calc_PR_sc(struct str_ashtech_snv *snv,$/;"	f
+Calc_PR_sca	./lens/pseudorange_calculations.c	/^void Calc_PR_sca(double PRscArray[MAX_NUMBER_OF_REFERENCE_RECEIVERS][NUMBER_OF_GPS_SATELLITES],$/;"	f
+DATA_FILE	./laas.h	/^enum enum_data_source {SERIAL, DATA_FILE};$/;"	e	enum:enum_data_source
+DIPOLE	./test/main.c	/^static const int  DIPOLE   = 0;$/;"	v	file:
+DURATION	./ashtech/ashtech.h	35;"	d
+EPHEMERIS_ARCHIVE_SIZE	./gps.h	9;"	d
+F	./satellite_position.c	11;"	d	file:
+FAS_BLOCK_SIZE	./telerad/laasMessageType4.c	24;"	d	file:
+FFM	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+GDBM_DICTIONARY_H	./gdbm/gdbm_dictionary.h	2;"	d
+GG12	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+GG12W	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+GG12W_CHANNELS	./ashtech/gg12w.h	7;"	d
+GG12W_H	./ashtech/gg12w.h	2;"	d
+GG12_CHANNELS	./ashtech/gg12.h	10;"	d
+GG12_H	./ashtech/gg12.h	2;"	d
+GMDS_COMPLETE	./test/main.c	151;"	d	file:
+GPS_H	./gps.h	2;"	d
+GPS_LEAP_SECONDS	./test/main.c	/^static const int  GPS_LEAP_SECONDS  = 13;$/;"	v	file:
+GPS_LEAP_SECONDS	./time_conversions.h	13;"	d
+GPS_Minimum_Data_Set	./test/main.c	/^struct GPS_Minimum_Data_Set$/;"	s	file:
+HELIBOWL	./test/main.c	/^static const int  HELIBOWL = 1;$/;"	v	file:
+INFILE	./test/main.c	8;"	d	file:
+KEY_SEP	./key_value_parser.c	7;"	d	file:
+LAASINIT_H	./LAASInit.h	2;"	d
+LAAS_H	./laas.h	2;"	d
+LAAS_HEADER_SIZE	./laas.h	28;"	d
+LAAS_MESSAGE_H	./telerad/laasMessage.h	2;"	d
+LAAS_MESSAGE_TYPE_1_H	./telerad/laasMessageType1.h	2;"	d
+LAAS_MESSAGE_TYPE_2_H	./telerad/laasMessageType2.h	2;"	d
+LAAS_MESSAGE_TYPE_4_H	./telerad/laasMessageType4.h	2;"	d
+LINE_LENGTH	./LAASInit.c	30;"	d	file:
+MASK_AID	./telerad/laasMessageType4.c	31;"	d	file:
+MASK_AMF	./telerad/laasMessageType1.c	24;"	d	file:
+MASK_APD	./telerad/laasMessageType4.c	34;"	d	file:
+MASK_ATCH	./telerad/laasMessageType4.c	43;"	d	file:
+MASK_ATUS	./telerad/laasMessageType4.c	44;"	d	file:
+MASK_B1	./telerad/laasMessageType1.c	36;"	d	file:
+MASK_B2	./telerad/laasMessageType1.c	37;"	d	file:
+MASK_B3	./telerad/laasMessageType1.c	38;"	d	file:
+MASK_B4	./telerad/laasMessageType1.c	39;"	d	file:
+MASK_CWAT	./telerad/laasMessageType4.c	46;"	d	file:
+MASK_DLO	./telerad/laasMessageType4.c	47;"	d	file:
+MASK_DSL	./telerad/laasMessageType4.c	28;"	d	file:
+MASK_D_LAT	./telerad/laasMessageType4.c	41;"	d	file:
+MASK_D_LON	./telerad/laasMessageType4.c	42;"	d	file:
+MASK_ECRC	./telerad/laasMessageType1.c	28;"	d	file:
+MASK_ED	./telerad/laasMessageType1.c	27;"	d	file:
+MASK_FAS_CRC	./telerad/laasMessageType4.c	48;"	d	file:
+MASK_FAS_LAL	./telerad/laasMessageType4.c	50;"	d	file:
+MASK_FAS_VAL	./telerad/laasMessageType4.c	49;"	d	file:
+MASK_GCID	./telerad/laasMessageType2.c	17;"	d	file:
+MASK_GPA	./telerad/laasMessageType4.c	45;"	d	file:
+MASK_GSAD	./telerad/laasMessageType2.c	15;"	d	file:
+MASK_GSRR	./telerad/laasMessageType2.c	14;"	d	file:
+MASK_HEIGHT	./telerad/laasMessageType4.c	40;"	d	file:
+MASK_IOD	./telerad/laasMessageType1.c	32;"	d	file:
+MASK_KMECG	./telerad/laasMessageType2.c	30;"	d	file:
+MASK_KMECGL	./telerad/laasMessageType2.c	32;"	d	file:
+MASK_KMEPG	./telerad/laasMessageType2.c	29;"	d	file:
+MASK_KMEPGL	./telerad/laasMessageType2.c	31;"	d	file:
+MASK_LAT	./telerad/laasMessageType2.c	24;"	d	file:
+MASK_LAT	./telerad/laasMessageType4.c	38;"	d	file:
+MASK_LMV	./telerad/laasMessageType2.c	18;"	d	file:
+MASK_LON	./telerad/laasMessageType2.c	25;"	d	file:
+MASK_LON	./telerad/laasMessageType4.c	39;"	d	file:
+MASK_MT	./telerad/laasMessageType1.c	26;"	d	file:
+MASK_MUD	./telerad/laasMessageType2.c	28;"	d	file:
+MASK_MZC	./telerad/laasMessageType1.c	23;"	d	file:
+MASK_NOM	./telerad/laasMessageType1.c	25;"	d	file:
+MASK_OT	./telerad/laasMessageType4.c	29;"	d	file:
+MASK_PRC	./telerad/laasMessageType1.c	33;"	d	file:
+MASK_RI	./telerad/laasMessageType2.c	21;"	d	file:
+MASK_RI	./telerad/laasMessageType4.c	35;"	d	file:
+MASK_RL	./telerad/laasMessageType4.c	33;"	d	file:
+MASK_RN	./telerad/laasMessageType4.c	32;"	d	file:
+MASK_RPDS	./telerad/laasMessageType4.c	36;"	d	file:
+MASK_RPH	./telerad/laasMessageType2.c	26;"	d	file:
+MASK_RPID	./telerad/laasMessageType4.c	37;"	d	file:
+MASK_RRC	./telerad/laasMessageType1.c	34;"	d	file:
+MASK_RSDS	./telerad/laasMessageType2.c	27;"	d	file:
+MASK_RS_ID	./telerad/laasMessageType1.c	31;"	d	file:
+MASK_RU	./telerad/laasMessageType2.c	23;"	d	file:
+MASK_SAD	./telerad/laasMessageType1.c	29;"	d	file:
+MASK_SH	./telerad/laasMessageType2.c	22;"	d	file:
+MASK_SPARE1	./telerad/laasMessageType2.c	16;"	d	file:
+MASK_SPARE2	./telerad/laasMessageType2.c	19;"	d	file:
+MASK_SPG	./telerad/laasMessageType1.c	35;"	d	file:
+MASK_SSP	./telerad/laasMessageType4.c	30;"	d	file:
+MASK_SVIG	./telerad/laasMessageType2.c	20;"	d	file:
+MATHEMATICAL_CONSTANTS_H	./mathematical_constants.h	2;"	d
+MAX_ASHTECH_CHANNELS	./ashtech/ashtech.h	37;"	d
+MAX_BUFFER_SIZE	./laas.h	9;"	d
+MAX_LINE_LENGTH	./laas.h	8;"	d
+MAX_NUMBER_OF_BLINES	./laas.h	16;"	d
+MAX_NUMBER_OF_FAR_FIELD_MONITORS	./laas.h	20;"	d
+MAX_NUMBER_OF_GG12S	./laas.h	14;"	d
+MAX_NUMBER_OF_GG12WS	./laas.h	15;"	d
+MAX_NUMBER_OF_GPS	./laas.h	18;"	d
+MAX_NUMBER_OF_LOCAL_MONITORS	./laas.h	11;"	d
+MAX_NUMBER_OF_REFERENCE_RECEIVERS	./laas.h	13;"	d
+MAX_NUMBER_OF_REFERENCE_RECEIVER_FLAGS	./lens/pseudorange_calculations.c	167;"	d	file:
+MAX_NUMBER_OF_REFERENCE_STATIONS	./laas.h	12;"	d
+MAX_NUMBER_OF_SECTOR_MASK	./laas.h	23;"	d
+MAX_NUMBER_OF_SERIAL_DEVICES	./laas.h	21;"	d
+MAX_NUMBER_OF_TELERADS	./laas.h	19;"	d
+MAX_NUMBER_OF_ZXTREMES	./laas.h	17;"	d
+MCA	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+MCA_IDENTIFIER	./ashtech/ashtech.h	21;"	d
+MCA_PACKET_SIZE	./ashtech/ashtech.h	12;"	d
+MEDE	./gps.h	11;"	d
+MILLISECONDS_IN_DAY	./time_conversions.h	10;"	d
+MILLISECONDS_IN_HOUR	./time_conversions.h	11;"	d
+MILLI_SECONDS_IN_WEEK	./test/main.c	/^static const int  MILLI_SECONDS_IN_WEEK = (7 * 24 * 60 * 60 * 1000);$/;"	v	file:
+MIS	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+MIS_IDENTIFIER	./ashtech/ashtech.h	22;"	d
+MIS_PACKET_SIZE	./ashtech/ashtech.h	13;"	d
+MPC	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+MPC_IDENTIFIER	./ashtech/ashtech.h	23;"	d
+MPC_PACKET_SIZE	./ashtech/ashtech.h	14;"	d
+MU	./mathematical_constants.h	/^static const double MU = 3.986005e14;            \/* Earth's gravitational Par. icd-sec 20.3.3.3.3.1 (m^3\/s^2) *\/$/;"	v
+ModZcnt	./ashtech/ashtech.h	/^     unsigned int ModZcnt;         \/* 2 Modified Z count *\/$/;"	m	struct:str_ashtech_mis
+N	./lens/pseudorange_calculations.h	/^     double N;$/;"	m	struct:str_prsc_filter
+N	./test/main.c	254;"	d	file:
+NEW_LINE_LINE_FEED	./ashtech/ashtech.h	29;"	d
+NUMBER_OF_BLINES	./laas.h	/^     int NUMBER_OF_BLINES;$/;"	m	struct:str_limits
+NUMBER_OF_FAR_FIELD_MONITORS	./laas.h	/^     int NUMBER_OF_FAR_FIELD_MONITORS;$/;"	m	struct:str_limits
+NUMBER_OF_GG12S	./laas.h	/^     int NUMBER_OF_GG12S;$/;"	m	struct:str_limits
+NUMBER_OF_GG12WS	./laas.h	/^     int NUMBER_OF_GG12WS;$/;"	m	struct:str_limits
+NUMBER_OF_GPS	./laas.h	/^     int NUMBER_OF_GPS;$/;"	m	struct:str_limits
+NUMBER_OF_GPS_SATELLITES	./gps.h	7;"	d
+NUMBER_OF_LOCAL_MONITORS	./laas.h	/^     int NUMBER_OF_LOCAL_MONITORS;$/;"	m	struct:str_limits
+NUMBER_OF_REFERENCE_RECEIVER_CASES	./lens/pseudorange_calculations.c	168;"	d	file:
+NUMBER_OF_REFERENCE_STATIONS	./laas.h	/^     int NUMBER_OF_REFERENCE_STATIONS;$/;"	m	struct:str_limits
+NUMBER_OF_SERIAL_DEVICES	./laas.h	/^     int NUMBER_OF_SERIAL_DEVICES;$/;"	m	struct:str_limits
+NUMBER_OF_SIGMA_BINS	./lens/measurement_block.c	7;"	d	file:
+NUMBER_OF_TELERADS	./laas.h	/^     int NUMBER_OF_TELERADS;$/;"	m	struct:str_limits
+NUMBER_OF_ZXTREMES	./laas.h	/^     int NUMBER_OF_ZXTREMES;$/;"	m	struct:str_limits
+N_Limit	./lens/pseudorange_calculations.c	13;"	d	file:
+OMEGADOTE	./mathematical_constants.h	/^static const double OMEGADOTE = 7.2921151467e-5; \/* WGS84 Earth's rotation rate icd Table 20-IV (rad\/s) *\/$/;"	v
+PASH_HEADER	./ashtech/ashtech.h	30;"	d
+PASH_HEADER_SIZE	./ashtech/ashtech.h	31;"	d
+PASH_HEADER_TOTAL	./ashtech/ashtech.h	33;"	d
+PASH_TYPE_SIZE	./ashtech/ashtech.h	32;"	d
+PBN	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+PBN_IDENTIFIER	./ashtech/ashtech.h	24;"	d
+PBN_PACKET_SIZE	./ashtech/ashtech.h	15;"	d
+PHI_History	./test/main.c	/^static double PHI_History[number_of_satellites][8];                 \/* Previous Accumulated Phase    *\/$/;"	v	file:
+PI	./mathematical_constants.h	/^static const double PI = 3.1415926535898;        \/* IS-GPS-200 defines pi to be EXACTLY this value *\/$/;"	v
+PI	./test/main.c	/^static const double PI = 3.14159265358979323846;$/;"	v	file:
+PR	./test/main.c	/^} PR[32];$/;"	v	typeref:struct:SatelliteInformation
+PRN_FILE	./test/main.c	10;"	d	file:
+PR_First	./test/main.c	/^static int    PR_First[number_of_satellites][8];$/;"	v	file:
+PR_Smooth_History	./test/main.c	/^static double PR_Smooth_History[number_of_satellites][8];$/;"	v	file:
+PR_corr_history	./test/main.c	/^static double PR_corr_history[number_of_satellites];$/;"	v	file:
+PR_s	./test/main.c	/^     double PR_s;$/;"	m	struct:GPS_Minimum_Data_Set	file:
+PR_sc	./test/main.c	/^     double PR_sc;$/;"	m	struct:GPS_Minimum_Data_Set	file:
+PR_sca	./test/main.c	/^     double PR_sca;$/;"	m	struct:GPS_Minimum_Data_Set	file:
+PRr_NOMINAL	./gps.h	12;"	d
+PRsc_Limit	./lens/pseudorange_calculations.c	/^double PRsc_Limit = 100;$/;"	v
+PRsc_Max	./lens/pseudorange_calculations.c	12;"	d	file:
+Phase_Change_Max	./lens/pseudorange_calculations.c	14;"	d	file:
+Position	./test/main.c	/^struct Position$/;"	s	file:
+RAW	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+RR	./test/main.c	/^} RR[number_of_gps_sources];$/;"	v	typeref:struct:_RR
+RS_DSP_ERROR	./telerad/telerad.h	27;"	d
+RS_DSP_RAM_ERROR	./telerad/telerad.h	26;"	d
+RS_EEPROM_ERROR	./telerad/telerad.h	23;"	d
+RS_FLASH_MEMORY_ERROR	./telerad/telerad.h	25;"	d
+RS_FREQUENCY_SYNTHESIZER_OUT_OF_LOCK	./telerad/telerad.h	17;"	d
+RS_GPS_1PPS_NOT_PRESENT	./telerad/telerad.h	21;"	d
+RS_MICROPROCESSOR_RAM_ERROR	./telerad/telerad.h	24;"	d
+RS_RECEIVER_BIT_FAILURE	./telerad/telerad.h	14;"	d
+RS_RECEIVER_FAILURE	./telerad/telerad.h	15;"	d
+RS_RECEIVER_FALURE_UNUSED	./telerad/telerad.h	13;"	d
+RS_RECEIVER_NOT_READY	./telerad/telerad.h	16;"	d
+RS_RESERVED1	./telerad/telerad.h	30;"	d
+RS_SPARE1	./telerad/telerad.h	18;"	d
+RS_SPARE2	./telerad/telerad.h	22;"	d
+RS_SPARE3	./telerad/telerad.h	28;"	d
+RS_SPARE4	./telerad/telerad.h	29;"	d
+RS_VDC_SUPPLY_TOO_HIGH	./telerad/telerad.h	19;"	d
+RS_VDC_SUPPLY_TOO_LOW	./telerad/telerad.h	20;"	d
+Receiver_Error	./test/main.c	/^struct Receiver_Error$/;"	s	file:
+Reflect	./telerad/crc_16bit.c	/^Reflect(unsigned long ref, int ch) \/* value to be reflected, number of bits to reflect *\/$/;"	f
+SAL	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+SAL_IDENTIFIER	./ashtech/ashtech.h	25;"	d
+SAL_INFILE	./test/satellite-position-test.c	16;"	d	file:
+SAL_PACKET_SIZE	./ashtech/ashtech.h	16;"	d
+SATELLITE_POSITION_H	./satellite_position.h	2;"	d
+SEALEVEL_P1	./serial.h	13;"	d
+SEALEVEL_P2	./serial.h	14;"	d
+SEALEVEL_P3	./serial.h	15;"	d
+SEALEVEL_P4	./serial.h	16;"	d
+SEALEVEL_P5	./serial.h	17;"	d
+SEALEVEL_P6	./serial.h	18;"	d
+SEALEVEL_P7	./serial.h	19;"	d
+SEALEVEL_P8	./serial.h	20;"	d
+SECONDS_IN_WEEK	./test/main.c	/^static const int  SECONDS_IN_WEEK    = (7 * 24 * 60 * 60);$/;"	v	file:
+SECONDS_IN_WEEK	./time_conversions.h	15;"	d
+SERIAL	./laas.h	/^enum enum_data_source {SERIAL, DATA_FILE};$/;"	e	enum:enum_data_source
+SHIFT_BUFFER_H	./ashtech/shift_buffer.h	2;"	d
+SIDEREAL_DAY	./mathematical_constants.h	/^static const double SIDEREAL_DAY = 23.9344696;   \/* 1 sidereal day *\/$/;"	v
+SNR_Min	./lens/pseudorange_calculations.c	11;"	d	file:
+SNV	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+SNV_IDENTIFIER	./ashtech/ashtech.h	26;"	d
+SNV_INFILE	./test/satellite-position-test.c	14;"	d	file:
+SNV_PACKET_SIZE	./ashtech/ashtech.h	17;"	d
+SOURCE_AVAILABILITY_DURATION_H	./source_availability_duration.h	2;"	d
+SatelliteInformation	./test/main.c	/^struct SatelliteInformation$/;"	s	file:
+Select_RS	./lens/pseudorange_calculations.c	/^Select_RS(double PRsc_1[], int PRsc_1_i, double PRsc_2[], int PRsc_2_i, int Active)$/;"	f
+TELERAD	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+TELERAD_H	./telerad/telerad.h	2;"	d
+TIME_CONVERSIONS_H	./time_conversions.h	2;"	d
+TIME_STRUCT_H	./time_struct.h	2;"	d
+Total_Satellites	./test/main.c	/^     short Total_Satellites;$/;"	m	struct:gg12_xyz_new	file:
+UTIME_AT_GPS_EPOCH	./test/main.c	/^static const int  UTIME_AT_GPS_EPOCH = 315964800;$/;"	v	file:
+UTIME_AT_GPS_EPOCH	./time_conversions.h	14;"	d
+VAL_TERM	./key_value_parser.c	8;"	d	file:
+XYZ	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	e	enum:ashtech_type
+XYZAE_H	./lens/xyzae.h	2;"	d
+XYZ_IDENTIFIER	./ashtech/ashtech.h	27;"	d
+XYZ_INFILE	./test/satellite-position-test.c	15;"	d	file:
+XYZ_MAX_PACKET_SIZE	./ashtech/ashtech.h	19;"	d
+XYZ_MIN_PACKET_SIZE	./ashtech/ashtech.h	18;"	d
+XYZ_OUTFILE	./test/satellite-position-test.c	17;"	d	file:
+ZXTREME	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	e	enum:enum_device_type
+ZXTREME_CHANNELS	./ashtech/zxtreme.h	7;"	d
+ZXTREME_H	./ashtech/zxtreme.h	2;"	d
+_GNU_SOURCE	./telerad/telerad.c	2;"	d	file:
+_ISOC99_SOURCE	./main.c	9;"	d	file:
+_ISOC99_SOURCE	./snv_update.c	2;"	d	file:
+_ISOC99_SOURCE	./source_availability_duration.c	2;"	d	file:
+_ISOC99_SOURCE	./telerad/ephemeris_crc.c	7;"	d	file:
+_ISOC99_SOURCE	./telerad/laasMessageType1.c	2;"	d	file:
+_ISOC99_SOURCE	./telerad/laasMessageType2.c	2;"	d	file:
+_ISOC99_SOURCE	./telerad/laasMessageType4.c	2;"	d	file:
+_ISOC99_SOURCE	./test/main.c	13;"	d	file:
+_ISOC9X_SOURCE	./main.c	8;"	d	file:
+_ISOC9X_SOURCE	./snv_update.c	1;"	d	file:
+_ISOC9X_SOURCE	./source_availability_duration.c	1;"	d	file:
+_ISOC9X_SOURCE	./telerad/ephemeris_crc.c	6;"	d	file:
+_ISOC9X_SOURCE	./telerad/laasMessageType1.c	1;"	d	file:
+_ISOC9X_SOURCE	./telerad/laasMessageType2.c	1;"	d	file:
+_ISOC9X_SOURCE	./telerad/laasMessageType4.c	1;"	d	file:
+_ISOC9X_SOURCE	./test/main.c	12;"	d	file:
+_RR	./test/main.c	/^struct _RR$/;"	s	file:
+_SERIAL_H	./serial.h	9;"	d
+__EXTENSIONS__	./main.c	13;"	d	file:
+__USE_POSIX	./main.c	12;"	d	file:
+accuracy	./ashtech/ashtech.h	/^     int          accuracy; \/**< \\brief 2 Bytes - User range accuracy *\/$/;"	m	struct:str_ashtech_snv
+accuracy	./test/main.c	/^     short   accuracy;  \/* 2  User range accuracy *\/$/;"	m	struct:gg12_snv_new	file:
+adb	./telerad/laasMessageType2.h	/^    unsigned int adb;     \/* Additional Data Block *\/$/;"	m	struct:laasMessageType2
+af0	./ashtech/ashtech.h	/^     float             af0; \/**< \\brief 4 Bytes - Clock correction (sec) *\/$/;"	m	struct:str_ashtech_sal
+af0	./ashtech/ashtech.h	/^     float        af0;      \/**< \\brief 4 Bytes - Clock correction (sec) *\/$/;"	m	struct:str_ashtech_snv
+af0	./test/main.c	/^     float   af0;       \/* 4  Clock correction (sec) *\/$/;"	m	struct:gg12_snv_new	file:
+af1	./ashtech/ashtech.h	/^     float             af1; \/**< \\brief 4 Bytes - Clock correction (sec\/sec) *\/$/;"	m	struct:str_ashtech_sal
+af1	./ashtech/ashtech.h	/^     float        af1;      \/**< \\brief 4 Bytes - Clock correction (sec\/sec) *\/$/;"	m	struct:str_ashtech_snv
+af1	./test/main.c	/^     float   af1;       \/* 4  Clock correction (sec\/sec) *\/$/;"	m	struct:gg12_snv_new	file:
+af2	./ashtech/ashtech.h	/^     float        af2;      \/**< \\brief 4 Bytes - Clock correction (sec\/sec2) *\/$/;"	m	struct:str_ashtech_snv
+af2	./test/main.c	/^     float   af2;       \/* 4  Clock correction (sec\/sec2) *\/$/;"	m	struct:gg12_snv_new	file:
+aid	./telerad/laasMessageType4.h	/^                 char aid[5]; \/*  *\/$/;"	m	struct:laasMessageType4::str_fas_block
+alt	./test/main.c	/^     double alt;$/;"	m	struct:_RR	file:
+altitude	./laas.h	/^     double altitude;$/;"	m	struct:str_location
+altitude	./test/main.c	/^static const double altitude = 0;$/;"	v	file:
+amf	./telerad/laasMessageType1.h	/^    unsigned int amf;  \/* additionalMessageFlag      *\/$/;"	m	struct:laasMessageType1
+amf	./test/main.c	/^static const int    amf = 0;$/;"	v	file:
+aodc	./ashtech/ashtech.h	/^     int          aodc;     \/**< \\brief 4 Bytes - Clock data issue *\/$/;"	m	struct:str_ashtech_snv
+aodc	./test/main.c	/^     int     aodc;      \/* 4  Clock data issue *\/$/;"	m	struct:gg12_snv_new	file:
+aode	./ashtech/ashtech.h	/^     int          aode;     \/**< \\brief 4 Bytes - Orbit data issue *\/$/;"	m	struct:str_ashtech_snv
+aode	./binary_search/binary_search.h	/^     int aode;$/;"	m	struct:str_binary_search_node
+aode	./test/main.c	/^     int     aode;      \/* 4  Orbit data issue *\/$/;"	m	struct:gg12_snv_new	file:
+apd	./telerad/laasMessageType4.h	/^        unsigned int apd;$/;"	m	struct:laasMessageType4::str_fas_block
+ascii_hex_string_to_binary	./telerad/utils_string.c	/^ascii_hex_string_to_binary(char ascii[], unsigned char binary[], int size)$/;"	f
+ascii_hex_to_bin_hex	./telerad/utils_string.c	/^ascii_hex_to_bin_hex(char c)$/;"	f
+ashtech_checksum_16	./ashtech/ashtech.c	/^int ashtech_checksum_16(unsigned char *in, int size, FILE *console)$/;"	f
+ashtech_checksum_8	./ashtech/ashtech.c	/^int ashtech_checksum_8(unsigned char *in, int size, FILE *console)$/;"	f
+ashtech_parse_mca	./ashtech/ashtech.c	/^void ashtech_parse_mca(unsigned char *x, struct str_ashtech_mca *mca, int index)$/;"	f
+ashtech_parse_mis	./ashtech/ashtech.c	/^void ashtech_parse_mis(unsigned char *x, struct str_ashtech_mis *mis)$/;"	f
+ashtech_parse_mpc	./ashtech/ashtech.c	/^void ashtech_parse_mpc(unsigned char *x, struct str_ashtech_mpc *mpc, int index)$/;"	f
+ashtech_parse_pbn	./ashtech/ashtech.c	/^void ashtech_parse_pbn(unsigned char *x, struct str_ashtech_pbn *pbn)$/;"	f
+ashtech_parse_sal	./ashtech/ashtech.c	/^void ashtech_parse_sal(unsigned char *x, struct str_ashtech_sal *sal)$/;"	f
+ashtech_parse_snv	./ashtech/ashtech.c	/^void ashtech_parse_snv(unsigned char *x, struct str_ashtech_snv *snv)$/;"	f
+ashtech_parse_xyz	./ashtech/ashtech.c	/^void ashtech_parse_xyz(unsigned char *x, struct str_ashtech_xyz *xyz)$/;"	f
+ashtech_print_mca	./ashtech/ashtech.c	/^void ashtech_print_mca(struct str_ashtech_mca *mca, int i, unsigned int rcvtime)$/;"	f
+ashtech_print_mca_all	./ashtech/ashtech.c	/^void ashtech_print_mca_all(struct str_ashtech_mca *mca, unsigned int rcvtime)$/;"	f
+ashtech_print_mis	./ashtech/ashtech.c	/^void ashtech_print_mis(struct str_ashtech_mis *mis)$/;"	f
+ashtech_print_mpc	./ashtech/ashtech.c	/^void ashtech_print_mpc(struct str_ashtech_mpc *mpc, int index, unsigned int rcvtime)$/;"	f
+ashtech_print_mpc_all	./ashtech/ashtech.c	/^void ashtech_print_mpc_all(struct str_ashtech_mpc *mpc, unsigned int rcvtime)$/;"	f
+ashtech_print_pbn	./ashtech/ashtech.c	/^void ashtech_print_pbn(struct str_ashtech_pbn *pbn)$/;"	f
+ashtech_print_sal	./ashtech/ashtech.c	/^void ashtech_print_sal(struct str_ashtech_sal *sal, unsigned int rcvtime)$/;"	f
+ashtech_print_sal_stdio	./ashtech/ashtech.c	/^void ashtech_print_sal_stdio(struct str_ashtech_sal *sal, unsigned int rcvtime)$/;"	f
+ashtech_print_snv	./ashtech/ashtech.c	/^void ashtech_print_snv(struct str_ashtech_snv *snv)$/;"	f
+ashtech_print_xyz	./ashtech/ashtech.c	/^void ashtech_print_xyz(struct str_ashtech_xyz *xyz)$/;"	f
+ashtech_store_sal_old	./ashtech/ashtech.c	/^int ashtech_store_sal_old(struct str_ashtech_sal *sal, GDBM_FILE dbf)$/;"	f
+ashtech_store_snv_old	./ashtech/ashtech.c	/^int ashtech_store_snv_old(struct str_ashtech_snv *snv, GDBM_FILE dbf)$/;"	f
+ashtech_type	./ashtech/ashtech.h	/^enum ashtech_type {MCA, MIS, MPC, PBN, SAL, SNV, XYZ};$/;"	g
+ashtech_xyz_size	./ashtech/ashtech.c	/^unsigned int ashtech_xyz_size(unsigned char *x)$/;"	f
+ashtech_zero_snv	./ashtech/ashtech.c	/^void ashtech_zero_snv(struct str_ashtech_snv *snv)$/;"	f
+atch	./telerad/laasMessageType4.h	/^        double        atch;$/;"	m	struct:laasMessageType4::str_fas_block
+atus	./telerad/laasMessageType4.h	/^        unsigned int atus;$/;"	m	struct:laasMessageType4::str_fas_block
+average_xyz_position	./test/main.c	/^average_xyz_position()$/;"	f
+az	./test/main.c	/^     double az;$/;"	m	struct:Position	file:
+azim	./ashtech/ashtech.h	/^          unsigned int  azim;        \/* 1  Azimuth angle (2 deg increments) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+azim	./ashtech/ashtech.h	/^     unsigned int  azim;        \/* 1  Azimuth angle (2 deg increments) *\/$/;"	m	struct:str_ashtech_mca_data
+azim	./test/main.c	/^     unsigned short azim;      \/* 1  Azimuth angle (2 deg increments) *\/$/;"	m	struct:gg12_mca_new	file:
+azimuth	./gps.h	/^     double azimuth;$/;"	m	struct:str_satellite_position
+azimuth_elevation	./azimuth_elevation.c	/^void azimuth_elevation($/;"	f
+baud_rate	./laas.h	/^     int  baud_rate;         \/* 9600, 115200 most used      *\/$/;"	m	struct:str_serial_device
+binary_search	./binary_search/binary_search.c	/^binary_search(struct str_binary_search_array *emh, unsigned int value)$/;"	f
+binary_search_snv_history_insert	./binary_search/binary_search.c	/^binary_search_snv_history_insert(GDBM_FILE laas_dictionary,$/;"	f
+binary_search_snv_history_print	./binary_search/binary_search.c	/^binary_search_snv_history_print(struct str_binary_search_array *emh)$/;"	f
+buf	./telerad/telerad.h	/^	unsigned char buf[MAX_BUFFER_SIZE];	\/* incoming data stream buffer *\/$/;"	m	struct:telerad_receiver_dev
+buf_end	./telerad/telerad.h	/^	unsigned int buf_end;			\/* end of incoming data stream *\/$/;"	m	struct:telerad_receiver_dev
+buffer	./laas.h	/^     unsigned char buffer[MAX_BUFFER_SIZE];$/;"	m	struct:str_serial_device
+buffer_end	./laas.h	/^     int  buffer_end;$/;"	m	struct:str_serial_device
+build_measurement_block	./lens/measurement_block.c	/^void build_measurement_block(double PRsca[MAX_NUMBER_OF_GG12S][NUMBER_OF_GPS_SATELLITES],$/;"	f
+bytes_read	./laas.h	/^     int  bytes_read;$/;"	m	struct:str_serial_device
+ca	./telerad/telerad.h	/^    unsigned int ca;$/;"	m	struct:telerad_command_acknowledgement
+ca_checksum	./ashtech/ashtech.h	/^          unsigned int  ca_checksum;    \/* 1  XOR checksum of above data *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_doppler	./ashtech/ashtech.h	/^          int           ca_doppler;     \/* 4  doppler measurement (10-4 Hz) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_full_phase	./ashtech/ashtech.h	/^          double        ca_full_phase;  \/* 8  Full carrier phase (measured in cycles) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_goodbad	./ashtech/ashtech.h	/^          unsigned int  ca_goodbad;     \/* 1  Indicates the quality of measurement *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_ireg	./ashtech/ashtech.h	/^          unsigned int  ca_ireg;        \/* 1  Signal-to-noise measurement (db Hz) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_raw_range	./ashtech/ashtech.h	/^          double        ca_raw_range;   \/* 8  Raw range (in seconds) to the satellite$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_reserved	./ashtech/ashtech.h	/^          unsigned int  ca_reserved;    \/* 1  Set to 5 for backward compatibility *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_smoothing	./ashtech/ashtech.h	/^          unsigned int  ca_smoothing;   \/* 4  Smoothing Data *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_spare	./ashtech/ashtech.h	/^          unsigned int  ca_spare;       \/* 1  Not used; always zero *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+ca_warning	./ashtech/ashtech.h	/^          unsigned int  ca_warning;     \/* 1  See Table 4.39  *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+calculate_PR_sca	./test/main.c	/^calculate_PR_sca()$/;"	f
+calculate_PRcorr_BValues	./test/main.c	/^calculate_PRcorr_BValues(struct gg12_snv_new snvArray[number_of_satellites])$/;"	f
+calculate_centriod_location	./LAASInit.c	/^void calculate_centriod_location(struct str_location reference_stations[],$/;"	f
+calculate_clock_correction	./test/main.c	/^calculate_clock_correction(int rcvtime, struct gg12_snv_new *snv, float R)$/;"	f
+calculate_crc_32bit	./telerad/crc_32bit.c	/^calculate_crc_32bit(unsigned char *ch_ptr, int length)$/;"	f
+calculate_ephemeris_crc	./telerad/ephemeris_crc.c	/^calculate_ephemeris_crc(struct str_ashtech_snv *st_snv)$/;"	f
+centroid	./test/main.c	/^struct _RR centroid;$/;"	v	typeref:struct:_RR
+channel	./ashtech/ashtech.h	/^     struct str_ashtech_mca_data channel[MAX_ASHTECH_CHANNELS];$/;"	m	struct:str_ashtech_mca	typeref:struct:str_ashtech_mca::str_ashtech_mca_data
+channel	./ashtech/ashtech.h	/^     } channel[MAX_ASHTECH_CHANNELS];$/;"	m	struct:str_ashtech_mpc	typeref:struct:str_ashtech_mpc::str_mpc_data
+channel	./ashtech/ashtech.h	/^     } channel[MAX_ASHTECH_CHANNELS];$/;"	m	struct:str_ashtech_xyz	typeref:struct:str_ashtech_xyz::str_xyz_data
+check_date	./main.c	/^bool check_date(unsigned int *old_date)$/;"	f
+check_date_old	./main.c	/^bool check_date_old(unsigned int *old_date)$/;"	f
+checksum	./ashtech/ashtech.h	/^          unsigned int  checksum;    \/* 1  XOR checksum of above data *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+checksum	./ashtech/ashtech.h	/^     unsigned int  checksum;      \/* 2 The checksum is computed by breaking$/;"	m	struct:str_ashtech_pbn
+checksum	./ashtech/ashtech.h	/^     unsigned int  checksum;    \/* 1  XOR checksum of above data *\/$/;"	m	struct:str_ashtech_mca_data
+checksum	./ashtech/ashtech.h	/^     unsigned int  checksum;    \/* 1  XOR checksum of above data *\/$/;"	m	struct:str_ashtech_xyz
+checksum	./ashtech/ashtech.h	/^     unsigned int checksum;        \/* 2 Least sig. 16 bits of sum *\/$/;"	m	struct:str_ashtech_mis
+checksum	./ashtech/ashtech.h	/^     unsigned int checksum; \/**< \\brief 2 Bytes - The checksum is computed by breaking the   *\/$/;"	m	struct:str_ashtech_snv
+checksum	./ashtech/ashtech.h	/^     unsigned int checksum; \/**< \\brief 2 Bytes - The checksum is computed by breaking$/;"	m	struct:str_ashtech_sal
+checksum	./telerad/telerad.h	/^    unsigned int  checksum;   \/* 16 bit additive checksum  *\/$/;"	m	struct:str_telerad_message
+checksum	./test/main.c	/^     unsigned int   checksum;  \/* 1  XOR checksum of above data *\/$/;"	m	struct:gg12_mca_new	file:
+checksum_valid	./telerad/telerad.h	/^    unsigned checksum_valid;$/;"	m	struct:str_telerad_message
+chnind	./ashtech/ashtech.h	/^          unsigned int  chnind;      \/* 1  Channel (1 - 12) assigned to the sat *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+chnind	./ashtech/ashtech.h	/^     unsigned int  chnind;      \/* 1  Channel (1 - 12) assigned to the sat *\/$/;"	m	struct:str_ashtech_mca_data
+chnind	./test/main.c	/^     unsigned short chnind;    \/* 1  Channel (1 - 12) assigned to the sat *\/$/;"	m	struct:gg12_mca_new	file:
+cic	./ashtech/ashtech.h	/^     float        cic;      \/**< \\brief 4 Bytes - Harmonic correction term (radians) *\/$/;"	m	struct:str_ashtech_snv
+cic	./test/main.c	/^     float   cic;       \/* 4  Harmonic correction term (radians) *\/$/;"	m	struct:gg12_snv_new	file:
+cis	./ashtech/ashtech.h	/^     float        cis;      \/**< \\brief 4 Bytes - Harmonic correction term (radians) *\/$/;"	m	struct:str_ashtech_snv
+cis	./test/main.c	/^     float   cis;       \/* 4  Harmonic correction term (radians) *\/$/;"	m	struct:gg12_snv_new	file:
+clear_snv_current_and_hold	./snv_update.c	/^void clear_snv_current_and_hold(struct str_ashtech_snv *current, struct str_ashtech_snv *hold, struct str_satellite_position *xyzae)$/;"	f
+clock_error	./test/main.c	/^     double clock_error;      $/;"	m	struct:Receiver_Error	file:
+close_log_files	./LAASInit.c	/^void  close_log_files( struct str_serial_device serial_devices[], $/;"	f
+close_log_files	./test/satellite-position-test.c	/^void close_log_files(FILE *snv_infile, FILE *xyz_infile, FILE *xyz_outfile)$/;"	f
+complete	./test/main.c	/^     int    complete;     \/* "0" No XYZ, MCA, or SNV; "1" has MCA; "2" has XYZ; "4" has SNV *\/$/;"	m	struct:GPS_Minimum_Data_Set	file:
+configure_laas_ground_facility	./LAASInit.c	/^int configure_laas_ground_facility(const char *configuration_file, $/;"	f
+console	./laas.h	/^     FILE *console;          \/* Device output file *\/$/;"	m	struct:str_serial_device
+copy_snv	./test/satellite-position-test.c	/^copy_snv(struct str_ashtech_snv *snv, struct str_ashtech_snv snvArray[NUMBER_OF_GPS_SATELLITES])$/;"	f
+correction	./test/main.c	/^     double correction;$/;"	m	struct:SatelliteInformation	file:
+correction_previous	./test/main.c	/^     double correction_previous;$/;"	m	struct:SatelliteInformation	file:
+correlate_time_file	./main.c	/^unsigned int correlate_time_file($/;"	f
+correlate_time_serial	./main.c	/^void correlate_time_serial($/;"	f
+count	./ashtech/gg12.h	/^          unsigned int count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+count	./ashtech/gg12w.h	/^          unsigned int count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+count	./ashtech/zxtreme.h	/^          unsigned int count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+crc	./ashtech/ashtech.h	/^     float        crc;      \/**< \\brief 4 Bytes - Harmonic correction term (meters) *\/$/;"	m	struct:str_ashtech_snv
+crc	./telerad/laasMessage.h	/^    unsigned int  crc;$/;"	m	struct:laasMessage
+crc	./test/main.c	/^     float   crc;       \/* 4  Harmonic correction term (meters) *\/$/;"	m	struct:gg12_snv_new	file:
+crc_table_reflected	./telerad/crc_32bit.c	/^static unsigned long  crc_table_reflected[256] =$/;"	v	file:
+crcvtime	./test/main.c	/^static unsigned long   crcvtime = 0;$/;"	v	file:
+crs	./ashtech/ashtech.h	/^     float        crs;      \/**< \\brief 4 Bytes - Harmonic correction term (meters) *\/$/;"	m	struct:str_ashtech_snv
+crs	./test/main.c	/^     float   crs;       \/* 4  Harmonic correction term (meters) *\/$/;"	m	struct:gg12_snv_new	file:
+csv	./ashtech/ashtech.h	/^     FILE *csv;           \/**< \\brief CSV file handle that the SNV data will be written to *\/$/;"	m	struct:str_ashtech_snv
+csv	./ashtech/ashtech.h	/^     FILE *csv;$/;"	m	struct:str_ashtech_mca
+csv	./ashtech/ashtech.h	/^     FILE *csv;$/;"	m	struct:str_ashtech_mis
+csv	./ashtech/ashtech.h	/^     FILE *csv;$/;"	m	struct:str_ashtech_mpc
+csv	./ashtech/ashtech.h	/^     FILE *csv;$/;"	m	struct:str_ashtech_pbn
+csv	./ashtech/ashtech.h	/^     FILE *csv;$/;"	m	struct:str_ashtech_sal
+csv	./ashtech/ashtech.h	/^     FILE *csv;$/;"	m	struct:str_ashtech_xyz
+cuc	./ashtech/ashtech.h	/^     float        cuc;      \/**< \\brief 4 Bytes - Harmonic correction term (radians) *\/$/;"	m	struct:str_ashtech_snv
+cuc	./test/main.c	/^     float   cuc;       \/* 4  Harmonic correction term (radians) *\/$/;"	m	struct:gg12_snv_new	file:
+current_time	./test/main.c	/^static long   current_time = 0;$/;"	v	file:
+current_time_as_string	./time_conversions.c	/^char * current_time_as_string(char current_time[])$/;"	f
+cus	./ashtech/ashtech.h	/^     float        cus;      \/**< \\brief 4 Bytes - Harmonic correction term (radians) *\/$/;"	m	struct:str_ashtech_snv
+cus	./test/main.c	/^     float   cus;       \/* 4  Harmonic correction term (radians) *\/$/;"	m	struct:gg12_snv_new	file:
+cwat	./telerad/laasMessageType4.h	/^        double        cwat;$/;"	m	struct:laasMessageType4::str_fas_block
+d_lat	./telerad/laasMessageType4.h	/^        double        d_lat;$/;"	m	struct:laasMessageType4::str_fas_block
+d_lon	./telerad/laasMessageType4.h	/^        double        d_lon;$/;"	m	struct:laasMessageType4::str_fas_block
+data_source	./laas.h	/^     enum enum_data_source  data_source;$/;"	m	struct:str_laas_logging_control	typeref:enum:str_laas_logging_control::enum_data_source
+data_sources_configured	./laas.h	/^     bool data_sources_configured;$/;"	m	struct:str_laas_logging_control
+date_gps_to_unix	./time_conversions.c	/^time_t date_gps_to_unix(unsigned int gps_week, unsigned int gps_rcvtime)$/;"	f
+date_init	./time_conversions.c	/^void date_init()$/;"	f
+date_unix_to_gps	./time_conversions.c	/^time_t date_unix_to_gps(struct str_time_gps *gps_time)$/;"	f
+dbr	./telerad/telerad.h	/^    unsigned char dbr[2];$/;"	m	struct:telerad_status
+debug_print_sal	./satellite_position.c	/^void debug_print_sal(unsigned int rcvtime, struct str_ashtech_sal *sal)$/;"	f
+debug_print_snv	./satellite_position.c	/^void debug_print_snv(unsigned int rcvtime, struct str_ashtech_snv *snv)$/;"	f
+delta_tr	./gps.h	/^     double delta_tr;  $/;"	m	struct:str_satellite_position
+deltan	./ashtech/ashtech.h	/^     float        deltan;   \/**< \\brief 4 Bytes - Mean anomaly correction (semicirc\/sec) *\/$/;"	m	struct:str_ashtech_snv
+deltan	./test/main.c	/^     float   deltan;    \/* 4  Mean anomaly correction (semicirc\/sec) *\/$/;"	m	struct:gg12_snv_new	file:
+device_num	./telerad/telerad.h	/^	int device_num;					\/* ID number of device *\/$/;"	m	struct:telerad_receiver_dev
+dlo	./telerad/laasMessageType4.h	/^        unsigned int  dlo;$/;"	m	struct:laasMessageType4::str_fas_block
+doppler	./ashtech/ashtech.h	/^     int     doppler;     \/* 4  doppler measurement (10-4 Hz) *\/$/;"	m	struct:str_ashtech_mca_data
+doppler	./test/main.c	/^     int            doppler;   \/* 4  doppler measurement (10-4 Hz) *\/$/;"	m	struct:gg12_mca_new	file:
+dsl	./telerad/laasMessageType4.h	/^        unsigned int dsl;$/;"	m	struct:laasMessageType4::str_fas_block
+e	./ashtech/ashtech.h	/^     double       e;        \/**< \\brief 8 Bytes - Eccentricity *\/$/;"	m	struct:str_ashtech_snv
+e	./ashtech/ashtech.h	/^     float               e; \/**< \\brief 4 Bytes - Eccentricity *\/$/;"	m	struct:str_ashtech_sal
+e	./test/main.c	/^     double  e;         \/* 8  Eccentricity *\/$/;"	m	struct:gg12_snv_new	file:
+ecrc	./telerad/laasMessageType1.h	/^    unsigned int ecrc;  \/* ephemerisCRC               *\/$/;"	m	struct:laasMessageType1
+ed	./telerad/laasMessageType1.h	/^    double ed;          \/* ephemerisDecorrelation     *\/$/;"	m	struct:laasMessageType1
+el	./test/main.c	/^     double el;$/;"	m	struct:Position	file:
+elev	./ashtech/ashtech.h	/^          unsigned int  elev;        \/* 1  Elevation angle (degrees) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+elev	./ashtech/ashtech.h	/^     unsigned int  elev;        \/* 1  Elevation angle (degrees) *\/$/;"	m	struct:str_ashtech_mca_data
+elev	./test/main.c	/^     unsigned short elev;      \/* 1  Elevation angle (degrees) *\/$/;"	m	struct:gg12_mca_new	file:
+elev	./test/main.c	/^} elev[number_of_satellites];$/;"	v	typeref:struct:elevation_table
+elevation	./gps.h	/^     double elevation;   $/;"	m	struct:str_satellite_position
+elevation	./test/main.c	/^     double elevation;$/;"	m	struct:elevation_table	file:
+elevation_table	./test/main.c	/^struct elevation_table$/;"	s	file:
+enum_data_source	./laas.h	/^enum enum_data_source {SERIAL, DATA_FILE};$/;"	g
+enum_device_type	./laas.h	/^enum enum_device_type {GG12, GG12W, TELERAD, FFM, BLINE, ZXTREME, RAW};$/;"	g
+exit	./main.c	/^void exit(int signo)$/;"	f
+f_date_gps_to_unix	./time_conversions.c	/^double f_date_gps_to_unix(unsigned int gps_week, unsigned int gps_rcvtime)$/;"	f
+fas	./telerad/laasMessageType4.h	/^    } fas[16];$/;"	m	struct:laasMessageType4	typeref:struct:laasMessageType4::str_fas_block
+fas_count	./telerad/laasMessageType4.h	/^    int fas_count;$/;"	m	struct:laasMessageType4
+fas_crc	./telerad/laasMessageType4.h	/^        unsigned int  fas_crc;$/;"	m	struct:laasMessageType4::str_fas_block
+fas_lal	./telerad/laasMessageType4.h	/^        double        fas_lal;$/;"	m	struct:laasMessageType4::str_fas_block
+fas_val	./telerad/laasMessageType4.h	/^        double        fas_val;$/;"	m	struct:laasMessageType4::str_fas_block
+fhb	./telerad/telerad.h	/^    unsigned int fhb;$/;"	m	struct:telerad_status
+fid	./laas.h	/^     int  fid;               \/* device file descriptor      *\/$/;"	m	struct:str_serial_device
+fid	./telerad/telerad.h	/^	int fid;						\/* device file descriptor *\/$/;"	m	struct:telerad_receiver_dev
+find_max	./lens/pseudorange_calculations.c	/^int find_max(int Array[], int length)$/;"	f
+find_sigma	./lens/measurement_block.c	/^double find_sigma(double elevation)$/;"	f
+find_string	./find_string.c	/^find_string(haystack, haystack_len, needle, needle_len)$/;"	f
+first	./test/main.c	/^     int first;                                    \/* The first elevation stored *\/$/;"	m	struct:elevation_table	file:
+fit	./ashtech/ashtech.h	/^     int          fit;      \/**< \\brief 2 Bytes - Curve fit interval *\/$/;"	m	struct:str_ashtech_snv
+fit	./test/main.c	/^     short   fit;       \/* 2  Curve fit interval *\/$/;"	m	struct:gg12_snv_new	file:
+flb	./telerad/telerad.h	/^    unsigned int flb;$/;"	m	struct:telerad_status
+full_phase	./ashtech/ashtech.h	/^     double  full_phase;  \/* 8  Full carrier phase (measured in cycles) *\/$/;"	m	struct:str_ashtech_mca_data
+full_phase	./test/main.c	/^     double         full_phase;\/* 8  Full carrier phase (measured in cycles) *\/$/;"	m	struct:gg12_mca_new	file:
+full_phase	./test/main.c	/^     double full_phase;   \/* From MCA *\/$/;"	m	struct:GPS_Minimum_Data_Set	file:
+gbas_id	./telerad/laasMessage.h	/^    char gbas_id[5];           \/* GBAS ID                  *\/$/;"	m	struct:laasMessage
+gcid	./telerad/laasMessageType2.h	/^    unsigned int gcid;$/;"	m	struct:laasMessageType2
+gdbm_binary_search_array_update	./gdbm/gdbm_dictionary.c	/^int gdbm_binary_search_array_update(GDBM_FILE laas_dictionary, struct str_binary_search_array *emh, int prn)$/;"	f
+gdbm_delete_all	./gdbm/gdbm_dictionary.c	/^void gdbm_delete_all(GDBM_FILE laas_dictionary)$/;"	f
+gdbm_delete_from_dictionary	./gdbm/gdbm_dictionary.c	/^int gdbm_delete_from_dictionary(GDBM_FILE laas_dictionary, datum key)$/;"	f
+gdbm_delete_list	./gdbm/gdbm_dictionary.c	/^void gdbm_delete_list(GDBM_FILE laas_dictionary)$/;"	f
+gdbm_fetch_array_head	./gdbm/gdbm_dictionary.c	/^int gdbm_fetch_array_head(GDBM_FILE laas_dictionary, int array_head[])$/;"	f
+gdbm_fetch_from_dictionary	./gdbm/gdbm_dictionary.c	/^int gdbm_fetch_from_dictionary(GDBM_FILE laas_dictionary, datum key, datum *content)$/;"	f
+gdbm_initialize_almanac_ephemeris	./gdbm/gdbm_dictionary.c	/^void gdbm_initialize_almanac_ephemeris(GDBM_FILE laas_dictionary,$/;"	f
+gdbm_initialize_binary_search_array	./gdbm/gdbm_dictionary.c	/^void gdbm_initialize_binary_search_array($/;"	f
+gdbm_initialize_laas_data	./gdbm/gdbm_dictionary.c	/^void gdbm_initialize_laas_data($/;"	f
+gdbm_print_keys	./gdbm/gdbm_dictionary.c	/^void gdbm_print_keys(GDBM_FILE laas_dictionary)$/;"	f
+gdbm_sal_update_current	./gdbm/gdbm_dictionary.c	/^int gdbm_sal_update_current(GDBM_FILE laas_dictionary, struct str_ashtech_sal *sal)$/;"	f
+gdbm_snv_archive_history	./gdbm/gdbm_dictionary.c	/^int gdbm_snv_archive_history(GDBM_FILE laas_dictionary, struct str_ashtech_snv *snv)$/;"	f
+gdbm_snv_exists	./gdbm/gdbm_dictionary.c	/^bool gdbm_snv_exists(GDBM_FILE laas_dictionary, int prn, int aode)$/;"	f
+gdbm_snv_fetch_history	./gdbm/gdbm_dictionary.c	/^int gdbm_snv_fetch_history(GDBM_FILE laas_dictionary, int prn, int aode, struct str_ashtech_snv *snv)$/;"	f
+gdbm_snv_history_remove	./gdbm/gdbm_dictionary.c	/^int gdbm_snv_history_remove(GDBM_FILE laas_dictionary, int prn, int aode)$/;"	f
+gdbm_snv_update_current	./gdbm/gdbm_dictionary.c	/^int gdbm_snv_update_current(GDBM_FILE laas_dictionary, struct str_ashtech_snv *snv)$/;"	f
+gdbm_store_array_head	./gdbm/gdbm_dictionary.c	/^int gdbm_store_array_head(GDBM_FILE laas_dictionary, int array_head[])$/;"	f
+gdbm_store_to_dictionary	./gdbm/gdbm_dictionary.c	/^int gdbm_store_to_dictionary(GDBM_FILE laas_dictionary, datum key, datum content)$/;"	f
+generate_crc_16bit	./telerad/crc_16bit.c	/^generate_crc_16bit(unsigned char *buf, int length)$/;"	f
+generate_crc_32bit	./telerad/crc_32bit.c	/^generate_crc_32bit(unsigned char *ch_ptr, int length)$/;"	f
+geoidalSep	./ashtech/ashtech.h	/^     int          geoidalSep;      \/* 2 Geoidal Seperation (100x) *\/$/;"	m	struct:str_ashtech_mis
+getLaasMessageAsByteArray	./telerad/laasMessage.c	/^getLaasMessageAsByteArray(struct laasMessage *laasMsg, unsigned char message[])$/;"	f
+getLaasMessageType4Aid	./telerad/laasMessageType4.c	/^getLaasMessageType4Aid(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Apd	./telerad/laasMessageType4.c	/^getLaasMessageType4Apd(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Atch	./telerad/laasMessageType4.c	/^getLaasMessageType4Atch(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Atus	./telerad/laasMessageType4.c	/^getLaasMessageType4Atus(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Cwat	./telerad/laasMessageType4.c	/^getLaasMessageType4Cwat(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4D_lat	./telerad/laasMessageType4.c	/^getLaasMessageType4D_lat(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4D_lon	./telerad/laasMessageType4.c	/^getLaasMessageType4D_lon(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Dlo	./telerad/laasMessageType4.c	/^getLaasMessageType4Dlo(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Dsl	./telerad/laasMessageType4.c	/^getLaasMessageType4Dsl(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4FAS_Count	./telerad/laasMessageType4.c	/^getLaasMessageType4FAS_Count(struct laasMessageType4 *msg)$/;"	f
+getLaasMessageType4Fas_crc	./telerad/laasMessageType4.c	/^getLaasMessageType4Fas_crc(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Fas_lal	./telerad/laasMessageType4.c	/^getLaasMessageType4Fas_lal(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Fas_val	./telerad/laasMessageType4.c	/^getLaasMessageType4Fas_val(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Gpa	./telerad/laasMessageType4.c	/^getLaasMessageType4Gpa(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Height	./telerad/laasMessageType4.c	/^getLaasMessageType4Height(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Lat	./telerad/laasMessageType4.c	/^getLaasMessageType4Lat(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Lon	./telerad/laasMessageType4.c	/^getLaasMessageType4Lon(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Ot	./telerad/laasMessageType4.c	/^getLaasMessageType4Ot(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Ri	./telerad/laasMessageType4.c	/^getLaasMessageType4Ri(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Rl	./telerad/laasMessageType4.c	/^getLaasMessageType4Rl(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Rn	./telerad/laasMessageType4.c	/^getLaasMessageType4Rn(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Rpds	./telerad/laasMessageType4.c	/^getLaasMessageType4Rpds(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Rpid	./telerad/laasMessageType4.c	/^getLaasMessageType4Rpid(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLaasMessageType4Ssp	./telerad/laasMessageType4.c	/^getLaasMessageType4Ssp(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+getLmt1AdditionalMessageFlag	./telerad/laasMessageType1.c	/^getLmt1AdditionalMessageFlag(struct laasMessageType1 *msg)$/;"	f
+getLmt1AsByteArray	./telerad/laasMessageType1.c	/^getLmt1AsByteArray(struct laasMessageType1 *mt1, unsigned char msgData[])$/;"	f
+getLmt1B1	./telerad/laasMessageType1.c	/^getLmt1B1(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1B2	./telerad/laasMessageType1.c	/^getLmt1B2(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1B3	./telerad/laasMessageType1.c	/^getLmt1B3(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1B4	./telerad/laasMessageType1.c	/^getLmt1B4(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1EphemerisCRC	./telerad/laasMessageType1.c	/^getLmt1EphemerisCRC(struct laasMessageType1 *msg)$/;"	f
+getLmt1EphemerisDecorrelation	./telerad/laasMessageType1.c	/^getLmt1EphemerisDecorrelation(struct laasMessageType1 *msg)$/;"	f
+getLmt1IssueOfData	./telerad/laasMessageType1.c	/^getLmt1IssueOfData(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1MeasurementType	./telerad/laasMessageType1.c	/^getLmt1MeasurementType(struct laasMessageType1 *msg)$/;"	f
+getLmt1ModifiedZCount	./telerad/laasMessageType1.c	/^getLmt1ModifiedZCount(struct laasMessageType1 *msg)$/;"	f
+getLmt1NumberOfMeasurements	./telerad/laasMessageType1.c	/^getLmt1NumberOfMeasurements(struct laasMessageType1 *msg)$/;"	f
+getLmt1PseudorangeCorrection	./telerad/laasMessageType1.c	/^getLmt1PseudorangeCorrection(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1RangeRateCorrection	./telerad/laasMessageType1.c	/^getLmt1RangeRateCorrection(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1RangingSourceID	./telerad/laasMessageType1.c	/^getLmt1RangingSourceID(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1SigmaPrGnd	./telerad/laasMessageType1.c	/^getLmt1SigmaPrGnd(struct laasMessageType1 *msg, int index)$/;"	f
+getLmt1SourceAvailabilityDuration	./telerad/laasMessageType1.c	/^getLmt1SourceAvailabilityDuration(struct laasMessageType1 *msg)$/;"	f
+getLmt2Adb	./telerad/laasMessageType2.c	/^getLmt2Adb(struct laasMessageType2 *msg)$/;"	f
+getLmt2AsByteArray	./telerad/laasMessageType2.c	/^getLmt2AsByteArray(struct laasMessageType2 *msgType2, unsigned char msgData[])$/;"	f
+getLmt2Gcid	./telerad/laasMessageType2.c	/^getLmt2Gcid(struct laasMessageType2 *msg)$/;"	f
+getLmt2Gsad	./telerad/laasMessageType2.c	/^getLmt2Gsad(struct laasMessageType2 *msg)$/;"	f
+getLmt2Gsrr	./telerad/laasMessageType2.c	/^getLmt2Gsrr(struct laasMessageType2 *msg)$/;"	f
+getLmt2Kmecg	./telerad/laasMessageType2.c	/^getLmt2Kmecg(struct laasMessageType2 *msg)$/;"	f
+getLmt2Kmecgl	./telerad/laasMessageType2.c	/^getLmt2Kmecgl(struct laasMessageType2 *msg)$/;"	f
+getLmt2Kmepg	./telerad/laasMessageType2.c	/^getLmt2Kmepg(struct laasMessageType2 *msg)$/;"	f
+getLmt2Kmepgl	./telerad/laasMessageType2.c	/^getLmt2Kmepgl(struct laasMessageType2 *msg)$/;"	f
+getLmt2Lat	./telerad/laasMessageType2.c	/^getLmt2Lat(struct laasMessageType2 *msg)$/;"	f
+getLmt2Lmv	./telerad/laasMessageType2.c	/^getLmt2Lmv(struct laasMessageType2 *msg)$/;"	f
+getLmt2Lon	./telerad/laasMessageType2.c	/^getLmt2Lon(struct laasMessageType2 *msg)$/;"	f
+getLmt2Mud	./telerad/laasMessageType2.c	/^getLmt2Mud(struct laasMessageType2 *msg)$/;"	f
+getLmt2Ri	./telerad/laasMessageType2.c	/^getLmt2Ri(struct laasMessageType2 *msg)$/;"	f
+getLmt2Rph	./telerad/laasMessageType2.c	/^getLmt2Rph(struct laasMessageType2 *msg)$/;"	f
+getLmt2Rsds	./telerad/laasMessageType2.c	/^getLmt2Rsds(struct laasMessageType2 *msg)$/;"	f
+getLmt2Ru	./telerad/laasMessageType2.c	/^getLmt2Ru(struct laasMessageType2 *msg)$/;"	f
+getLmt2Sh	./telerad/laasMessageType2.c	/^getLmt2Sh(struct laasMessageType2 *msg)$/;"	f
+getLmt2Spare1	./telerad/laasMessageType2.c	/^getLmt2Spare1(struct laasMessageType2 *msg)$/;"	f
+getLmt2Spare2	./telerad/laasMessageType2.c	/^getLmt2Spare2(struct laasMessageType2 *msg)$/;"	f
+getLmt2Svig	./telerad/laasMessageType2.c	/^getLmt2Svig(struct laasMessageType2 *msg)$/;"	f
+getLmt4AsByteArray	./telerad/laasMessageType4.c	/^getLmt4AsByteArray(struct laasMessageType4 *msgType4, unsigned char msgData[])$/;"	f
+getTlmAsByteArray	./telerad/telerad.c	/^getTlmAsByteArray(struct telerad_laas_message *tlm, unsigned char message[])$/;"	f
+getTlmMS	./telerad/telerad.c	/^getTlmMS(struct telerad_laas_message *tlm)$/;"	f
+getTlmRSSI	./telerad/telerad.c	/^getTlmRSSI(struct telerad_laas_message *tlm)$/;"	f
+getTlmTDMA	./telerad/telerad.c	/^getTlmTDMA(struct telerad_laas_message *tlm)$/;"	f
+getTmAsByteArray	./telerad/telerad.c	/^getTmAsByteArray(struct str_telerad_message *tm,$/;"	f
+get_date	./main.c	/^unsigned int get_date()$/;"	f
+get_elevation	./azimuth_elevation.c	/^double get_elevation($/;"	f
+get_satellite_distance	./satellite_position.c	/^get_satellite_distance(struct str_satellite_position *position1, struct str_satellite_position *position2)$/;"	f
+get_satellite_range	./satellite_position.c	/^get_satellite_range(struct str_satellite_position *position1, struct str_location *position2)$/;"	f
+getlaasMessageGbasId	./telerad/laasMessage.c	/^getlaasMessageGbasId(struct laasMessage *laasMsg)$/;"	f
+getlaasMessageLength	./telerad/laasMessage.c	/^getlaasMessageLength(struct laasMessage *laasMsg)$/;"	f
+getlaasMessageMBI	./telerad/laasMessage.c	/^getlaasMessageMBI(struct laasMessage *laasMsg)$/;"	f
+getlaasMessageMT	./telerad/laasMessage.c	/^getlaasMessageMT(struct laasMessage *laasMsg)$/;"	f
+gg12_mca_new	./test/main.c	/^struct gg12_mca_new$/;"	s	file:
+gg12_print_statistics	./ashtech/gg12.c	/^void gg12_print_statistics(struct str_gg12_device gg12[], struct str_limits *limits)$/;"	f
+gg12_process_incoming	./ashtech/gg12.c	/^int gg12_process_incoming($/;"	f
+gg12_receiver_hardware_bias_calibration	./test/main.c	/^gg12_receiver_hardware_bias_calibration()$/;"	f
+gg12_snv_new	./test/main.c	/^struct gg12_snv_new$/;"	s	file:
+gg12_xyz_new	./test/main.c	/^struct gg12_xyz_new$/;"	s	file:
+gg12w_print_statistics	./ashtech/gg12w.c	/^void gg12w_print_statistics(struct str_gg12w_device gg12w[], struct str_limits *limits)$/;"	f
+gg12w_process_incoming	./ashtech/gg12w.c	/^int gg12w_process_incoming(struct str_gg12w_device *c, GDBM_FILE dbf)$/;"	f
+gloExcSats	./ashtech/ashtech.h	/^     unsigned int gloExcSats;      \/* 4 GLONASS exclusion bitmask *\/$/;"	m	struct:str_ashtech_mis
+gloNavFlags	./ashtech/ashtech.h	/^     unsigned int gloNavFlags;     \/* 4 See pg. 91 *\/$/;"	m	struct:str_ashtech_mis
+gloTimeShift	./ashtech/ashtech.h	/^     float        gloTimeShift;    \/* 4 Offset between GLO and GPS *\/$/;"	m	struct:str_ashtech_mis
+gmds	./test/main.c	/^} gmds[number_of_satellites][number_of_gps_sources];$/;"	v	typeref:struct:GPS_Minimum_Data_Set
+goodbad	./ashtech/ashtech.h	/^     unsigned int  goodbad;     \/* 1  Indicates the quality of measurement *\/$/;"	m	struct:str_ashtech_mca_data
+goodbad	./lens/pseudorange_calculations.h	/^     unsigned int goodbad; \/* From MCA *\/$/;"	m	struct:str_prsc_filter
+goodbad	./test/main.c	/^     unsigned int goodbad;    \/* From MCA *\/$/;"	m	struct:GPS_Minimum_Data_Set	file:
+goodbad	./test/main.c	/^     unsigned short goodbad;   \/* 1  Indicates the quality of measurement *\/$/;"	m	struct:gg12_mca_new	file:
+gpa	./telerad/laasMessageType4.h	/^        double        gpa;$/;"	m	struct:laasMessageType4::str_fas_block
+gps	./time_struct.h	/^     struct str_time_gps  gps;$/;"	m	struct:str_time	typeref:struct:str_time::str_time_gps
+gpsExcSats	./ashtech/ashtech.h	/^     unsigned int gpsExcSats;      \/* 4 GPS exclusion bitmask *\/$/;"	m	struct:str_ashtech_mis
+gpsNavFlags	./ashtech/ashtech.h	/^     unsigned int gpsNavFlags;     \/* 4 See pg. 91 *\/$/;"	m	struct:str_ashtech_mis
+gps_add_time	./time_conversions.c	/^void gps_add_time(struct str_time *t, unsigned int value)$/;"	f
+gps_sub_time	./time_conversions.c	/^void gps_sub_time(struct str_time *t, unsigned int value)$/;"	f
+gsad	./telerad/laasMessageType2.h	/^    unsigned int gsad;$/;"	m	struct:laasMessageType2
+gsrr	./telerad/laasMessageType2.h	/^    unsigned int gsrr;$/;"	m	struct:laasMessageType2
+hardware_bias	./test/main.c	/^double hardware_bias[4];$/;"	v
+hdop	./ashtech/ashtech.h	/^     unsigned int hdop;            \/* 2 HDOP value (100x) *\/$/;"	m	struct:str_ashtech_mis
+head	./binary_search/binary_search.h	/^     int head;$/;"	m	struct:str_binary_search_array
+head	./test/main.c	/^     int head;                                     \/* Next avaliable position in the history array *\/$/;"	m	struct:elevation_table	file:
+health	./ashtech/ashtech.h	/^     int            health; \/**< \\brief 2 Bytes - Satellite health *\/$/;"	m	struct:str_ashtech_sal
+health	./ashtech/ashtech.h	/^     int          health;   \/**< \\brief 2 Bytes - Satellite health *\/$/;"	m	struct:str_ashtech_snv
+health	./test/main.c	/^     short   health;    \/* 2  Satellite health *\/$/;"	m	struct:gg12_snv_new	file:
+height	./telerad/laasMessageType4.h	/^        double        height;$/;"	m	struct:laasMessageType4::str_fas_block
+history	./binary_search/binary_search.h	/^     struct str_binary_search_node history[EPHEMERIS_ARCHIVE_SIZE];$/;"	m	struct:str_binary_search_array	typeref:struct:str_binary_search_array::str_binary_search_node
+history	./test/main.c	/^     double history[N];$/;"	m	struct:elevation_table	file:
+history_count	./test/main.c	/^     int history_count;$/;"	m	struct:elevation_table	file:
+i0	./ashtech/ashtech.h	/^     double       i0;       \/**< \\brief 8 Bytes - Inclination angle (semicircles) *\/$/;"	m	struct:str_ashtech_snv
+i0	./ashtech/ashtech.h	/^     float              i0; \/**< \\brief 4 Bytes - Inclination angle (semicircles) *\/$/;"	m	struct:str_ashtech_sal
+i0	./test/main.c	/^     double  i0;        \/* 8  Inclination angle (semicircles) *\/$/;"	m	struct:gg12_snv_new	file:
+ia_5	./laas.h	/^static const char ia_5[] = {'\\0', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '\\0', '\\0', '\\0', '\\0', '\\0', ' ', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\\0', '\\0', '\\0', '\\0', '\\0'};$/;"	v
+ia_5_to_bin	./laas.h	/^static const unsigned char ia_5_to_bin[] = {'\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', 0x20, '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0', '\\0','\\0', '\\0', 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, '\\0', '\\0',  '\\0',  '\\0',  '\\0',  '\\0',  '\\0', 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, '\\0',  '\\0',  '\\0',  '\\0',  '\\0',  '\\0',  0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A};$/;"	v
+identifier	./test/main.c	/^static char   identifier[5];$/;"	v	file:
+idot	./ashtech/ashtech.h	/^     float        idot;     \/**< \\brief 4 Bytes - Rate of inclination (semicircles\/sec) *\/$/;"	m	struct:str_ashtech_snv
+idot	./test/main.c	/^     float   idot;      \/* 4  Rate of inclination (semicircles\/sec) *\/$/;"	m	struct:gg12_snv_new	file:
+init_serial_settings9600	./serial.c	/^int init_serial_settings9600(int fid)$/;"	f
+initialize_almanac_ephemeris_data_DEPRECATED	./LAASInit.c	/^initialize_almanac_ephemeris_data_DEPRECATED($/;"	f
+initialize_sal_array	./test/satellite-position-test.c	/^initialize_sal_array(char inputBuffer[], struct str_ashtech_sal salArray[NUMBER_OF_GPS_SATELLITES])$/;"	f
+initialize_snv_array	./test/satellite-position-test.c	/^initialize_snv_array(char inputBuffer[], struct str_ashtech_snv snvArray[NUMBER_OF_GPS_SATELLITES])$/;"	f
+iod	./lens/measurement_block.h	/^     int iod;$/;"	m	struct:str_measurement_block
+iod	./telerad/laasMessageType1.h	/^        unsigned int iod;    \/* Issue of Data          *\/$/;"	m	struct:laasMessageType1::str_mesaurement_block
+ireg	./ashtech/ashtech.h	/^     unsigned int  ireg;      \/* 1  Signal-to-noise measurement (db Hz) *\/$/;"	m	struct:str_ashtech_mca_data
+ireg	./test/main.c	/^     unsigned short ireg;      \/* 1  Signal-to-noise measurement (db Hz) *\/$/;"	m	struct:gg12_mca_new	file:
+isValidLaasMessageType4Apd	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Apd(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Atch	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Atch(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Cwat	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Cwat(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4D_lat	./telerad/laasMessageType4.c	/^isValidLaasMessageType4D_lat(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4D_lon	./telerad/laasMessageType4.c	/^isValidLaasMessageType4D_lon(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Dlo	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Dlo(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Dsl	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Dsl(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Fas_lal	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Fas_lal(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Fas_val	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Fas_val(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Gpa	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Gpa(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Height	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Height(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Lat	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Lat(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Lon	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Lon(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Ot	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Ot(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Rn	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Rn(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Rpds	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Rpds(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLaasMessageType4Ssp	./telerad/laasMessageType4.c	/^isValidLaasMessageType4Ssp(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+isValidLmt1AdditionalMessageFlag	./telerad/laasMessageType1.c	/^isValidLmt1AdditionalMessageFlag(struct laasMessageType1 *msgType1)$/;"	f
+isValidLmt1B1	./telerad/laasMessageType1.c	/^isValidLmt1B1(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1B2	./telerad/laasMessageType1.c	/^isValidLmt1B2(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1B3	./telerad/laasMessageType1.c	/^isValidLmt1B3(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1B4	./telerad/laasMessageType1.c	/^isValidLmt1B4(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1EphemerisDecorrelation	./telerad/laasMessageType1.c	/^isValidLmt1EphemerisDecorrelation(struct laasMessageType1 *msgType1)$/;"	f
+isValidLmt1MeasurementType	./telerad/laasMessageType1.c	/^isValidLmt1MeasurementType(struct laasMessageType1 *msgType1)$/;"	f
+isValidLmt1ModifiedZCount	./telerad/laasMessageType1.c	/^isValidLmt1ModifiedZCount(struct laasMessageType1 *msgType1)$/;"	f
+isValidLmt1NumberOfMeasurements	./telerad/laasMessageType1.c	/^isValidLmt1NumberOfMeasurements(struct laasMessageType1 *msgType1)$/;"	f
+isValidLmt1PseudorangeCorrection	./telerad/laasMessageType1.c	/^isValidLmt1PseudorangeCorrection(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1RangeRateCorrection	./telerad/laasMessageType1.c	/^isValidLmt1RangeRateCorrection(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1RangingSourceID	./telerad/laasMessageType1.c	/^isValidLmt1RangingSourceID(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1SigmaPrGnd	./telerad/laasMessageType1.c	/^isValidLmt1SigmaPrGnd(struct laasMessageType1 *msg, int index)$/;"	f
+isValidLmt1SourceAvailabilityDuration	./telerad/laasMessageType1.c	/^isValidLmt1SourceAvailabilityDuration(struct laasMessageType1 *msgType1)$/;"	f
+isValidLmt2Gcid	./telerad/laasMessageType2.c	/^isValidLmt2Gcid(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Gsad	./telerad/laasMessageType2.c	/^isValidLmt2Gsad(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Gsrr	./telerad/laasMessageType2.c	/^isValidLmt2Gsrr(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Kmecg	./telerad/laasMessageType2.c	/^isValidLmt2Kmecg(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Kmecgl	./telerad/laasMessageType2.c	/^isValidLmt2Kmecgl(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Kmepg	./telerad/laasMessageType2.c	/^isValidLmt2Kmepg(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Kmepgl	./telerad/laasMessageType2.c	/^isValidLmt2Kmepgl(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Lat	./telerad/laasMessageType2.c	/^isValidLmt2Lat(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Lmv	./telerad/laasMessageType2.c	/^isValidLmt2Lmv(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Lon	./telerad/laasMessageType2.c	/^isValidLmt2Lon(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Mud	./telerad/laasMessageType2.c	/^isValidLmt2Mud(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Ri	./telerad/laasMessageType2.c	/^isValidLmt2Ri(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Rph	./telerad/laasMessageType2.c	/^isValidLmt2Rph(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Rsds	./telerad/laasMessageType2.c	/^isValidLmt2Rsds(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Sh	./telerad/laasMessageType2.c	/^isValidLmt2Sh(struct laasMessageType2 *msg)$/;"	f
+isValidLmt2Svig	./telerad/laasMessageType2.c	/^isValidLmt2Svig(struct laasMessageType2 *msg)$/;"	f
+isValidlaasMessageMBI	./telerad/laasMessage.c	/^isValidlaasMessageMBI(struct laasMessage *laasMsg)$/;"	f
+is_set	./ashtech/ashtech.h	/^     bool is_set;         \/**< \\brief Boolean flag is set for a newly received SNV *\/$/;"	m	struct:str_ashtech_snv
+is_set	./ashtech/ashtech.h	/^     bool is_set;$/;"	m	struct:str_ashtech_sal
+items	./gdbm/gdbm_dictionary.c	16;"	d	file:
+kmecg	./telerad/laasMessageType2.h	/^    double        kmecg;$/;"	m	struct:laasMessageType2
+kmecgl	./telerad/laasMessageType2.h	/^    double        kmecgl;$/;"	m	struct:laasMessageType2
+kmepg	./telerad/laasMessageType2.h	/^    double        kmepg;$/;"	m	struct:laasMessageType2
+kmepgl	./telerad/laasMessageType2.h	/^    double        kmepgl;$/;"	m	struct:laasMessageType2
+l1_checksum	./ashtech/ashtech.h	/^          unsigned int  l1_checksum;    \/* 1  XOR checksum of above data *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_doppler	./ashtech/ashtech.h	/^          int           l1_doppler;     \/* 4  doppler measurement (10-4 Hz) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_full_phase	./ashtech/ashtech.h	/^          double        l1_full_phase;  \/* 8  Full carrier phase (measured in cycles) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_goodbad	./ashtech/ashtech.h	/^          unsigned int  l1_goodbad;     \/* 1  Indicates the quality of measurement *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_ireg	./ashtech/ashtech.h	/^          unsigned int  l1_ireg;        \/* 1  Signal-to-noise measurement (db Hz) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_raw_range	./ashtech/ashtech.h	/^          double        l1_raw_range;   \/* 8  Raw range (in seconds) to the satellite$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_reserved	./ashtech/ashtech.h	/^          unsigned int  l1_reserved;    \/* 1  Set to 5 for backward compatibility *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_smoothing	./ashtech/ashtech.h	/^          unsigned int  l1_smoothing;   \/* 4  Smoothing Data *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_spare	./ashtech/ashtech.h	/^          unsigned int  l1_spare;       \/* 1  Not used; always zero *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l1_warning	./ashtech/ashtech.h	/^          unsigned int  l1_warning;     \/* 1  See Table 4.39  *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_doppler	./ashtech/ashtech.h	/^          int           l2_doppler;     \/* 4  doppler measurement (10-4 Hz) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_full_phase	./ashtech/ashtech.h	/^          double        l2_full_phase;  \/* 8  Full carrier phase (measured in cycles) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_goodbad	./ashtech/ashtech.h	/^          unsigned int  l2_goodbad;     \/* 1  Indicates the quality of measurement *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_ireg	./ashtech/ashtech.h	/^          unsigned int  l2_ireg;        \/* 1  Signal-to-noise measurement (db Hz) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_raw_range	./ashtech/ashtech.h	/^          double        l2_raw_range;   \/* 8  Raw range (in seconds) to the satellite$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_reserved	./ashtech/ashtech.h	/^          unsigned int  l2_reserved;    \/* 1  Set to 5 for backward compatibility *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_smoothing	./ashtech/ashtech.h	/^          unsigned int  l2_smoothing;   \/* 4  Smoothing Data *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_spare	./ashtech/ashtech.h	/^          unsigned int  l2_spare;       \/* 1  Not used; always zero *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+l2_warning	./ashtech/ashtech.h	/^          unsigned int  l2_warning;     \/* 1  See Table 4.39  *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+laasMessage	./telerad/laasMessage.h	/^struct laasMessage$/;"	s
+laasMessageType1	./telerad/laasMessageType1.h	/^struct laasMessageType1$/;"	s
+laasMessageType1_clear	./telerad/laasMessageType1.c	/^laasMessageType1_clear(struct laasMessageType1 *mt1)$/;"	f
+laasMessageType1_delete	./telerad/laasMessageType1.c	/^laasMessageType1_delete(struct laasMessageType1 *mt1)$/;"	f
+laasMessageType1_init	./telerad/laasMessageType1.c	/^laasMessageType1_init()$/;"	f
+laasMessageType1_print	./telerad/laasMessageType1.c	/^laasMessageType1_print(struct laasMessageType1 *msgType1, unsigned char msgData[])$/;"	f
+laasMessageType1_print_csv	./telerad/laasMessageType1.c	/^laasMessageType1_print_csv(struct laasMessageType1 *msgType1, FILE *csv)$/;"	f
+laasMessageType1_process	./telerad/laasMessageType1.c	/^laasMessageType1_process(struct laasMessageType1 *msgType1, unsigned char msgData[])$/;"	f
+laasMessageType2	./telerad/laasMessageType2.h	/^struct laasMessageType2$/;"	s
+laasMessageType2_clear	./telerad/laasMessageType2.c	/^laasMessageType2_clear(struct laasMessageType2 *mt2)$/;"	f
+laasMessageType2_delete	./telerad/laasMessageType2.c	/^laasMessageType2_delete(struct laasMessageType2 *mt2)$/;"	f
+laasMessageType2_init	./telerad/laasMessageType2.c	/^laasMessageType2_init()$/;"	f
+laasMessageType2_print	./telerad/laasMessageType2.c	/^void laasMessageType2_print(struct laasMessageType2 *msg, unsigned char msgData[])$/;"	f
+laasMessageType2_print_csv	./telerad/laasMessageType2.c	/^void laasMessageType2_print_csv(struct laasMessageType2 *msg, unsigned char msgData[])$/;"	f
+laasMessageType2_process	./telerad/laasMessageType2.c	/^laasMessageType2_process(struct laasMessageType2 *msgType2, unsigned char msgData[], unsigned int length)$/;"	f
+laasMessageType2_raw_set	./telerad/laasMessageType2.c	/^void laasMessageType2_raw_set(struct laasMessageType2 *msg,$/;"	f
+laasMessageType2_set	./telerad/laasMessageType2.c	/^void laasMessageType2_set(struct laasMessageType2 *msg,$/;"	f
+laasMessageType4	./telerad/laasMessageType4.h	/^struct laasMessageType4$/;"	s
+laasMessageType4Size	./telerad/laasMessageType4.c	25;"	d	file:
+laasMessageType4_clear	./telerad/laasMessageType4.c	/^laasMessageType4_clear(struct laasMessageType4 *mt4)$/;"	f
+laasMessageType4_delete	./telerad/laasMessageType4.c	/^laasMessageType4_delete(struct laasMessageType4 *mt4)$/;"	f
+laasMessageType4_init	./telerad/laasMessageType4.c	/^laasMessageType4_init()$/;"	f
+laasMessageType4_print	./telerad/laasMessageType4.c	/^void laasMessageType4_print(struct laasMessageType4 *msg, unsigned char msgData[])$/;"	f
+laasMessageType4_print2	./telerad/laasMessageType4.c	/^laasMessageType4_print2(struct laasMessageType4 *msg, unsigned char msgData[])$/;"	f
+laasMessageType4_print_csv	./telerad/laasMessageType4.c	/^laasMessageType4_print_csv(struct laasMessageType4 *msg, unsigned char msgData[])$/;"	f
+laasMessageType4_process	./telerad/laasMessageType4.c	/^laasMessageType4_process(struct laasMessageType4 *msgType4, unsigned char msgData[], int length)$/;"	f
+laasMessage_clear	./telerad/laasMessage.c	/^laasMessage_clear(struct laasMessage *lm)$/;"	f
+laasMessage_delete	./telerad/laasMessage.c	/^laasMessage_delete(struct laasMessage *lm)$/;"	f
+laasMessage_init	./telerad/laasMessage.c	/^laasMessage_init()$/;"	f
+laasMessage_print	./telerad/laasMessage.c	/^laasMessage_print(struct laasMessage *laasMsg, unsigned char rawMsg[])$/;"	f
+laasMessage_print_csv	./telerad/laasMessage.c	/^laasMessage_print_csv(struct laasMessage *laasMsg, FILE *csv)$/;"	f
+laasMessage_process	./telerad/laasMessage.c	/^laasMessage_process(struct laasMessage *laasMsg, unsigned char rawMsg[])$/;"	f
+laas_calculation_sequence	./lens/laas_calculation_sequence.c	/^void laas_calculation_sequence($/;"	f
+last	./test/main.c	/^     int last;                                     \/* The last elevation stored *\/$/;"	m	struct:elevation_table	file:
+lat	./telerad/laasMessageType2.h	/^    double        lat;$/;"	m	struct:laasMessageType2
+lat	./telerad/laasMessageType4.h	/^        double        lat;$/;"	m	struct:laasMessageType4::str_fas_block
+lat	./test/main.c	/^     double lat;$/;"	m	struct:_RR	file:
+latitude	./laas.h	/^     double latitude;$/;"	m	struct:str_location
+latitude	./test/main.c	/^static const double latitude  = 0.6145437060832786478;$/;"	v	file:
+left	./ashtech/ashtech.h	/^          unsigned int  left;        \/* 1  Number of remaining MCA msg to be sent *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+left	./ashtech/ashtech.h	/^     unsigned int  left;        \/* 1  Number of remaining MCA msg to be sent *\/$/;"	m	struct:str_ashtech_mca_data
+left	./test/main.c	/^     unsigned short left;      \/* 1  Number of remaining MCA msg to be sent *\/$/;"	m	struct:gg12_mca_new	file:
+length	./telerad/laasMessage.h	/^    unsigned int length;      \/* Message Length           *\/$/;"	m	struct:laasMessage
+length	./telerad/telerad.h	/^    unsigned int length;     \/* Message Length            *\/$/;"	m	struct:str_telerad_message
+lens_print_xyzae	./lens/xyzae.c	/^void lens_print_xyzae(struct str_satellite_position *xyzae,$/;"	f
+lm	./telerad/telerad.h	/^    struct laasMessage lm;$/;"	m	struct:telerad_laas_message	typeref:struct:telerad_laas_message::laasMessage
+lmv	./telerad/laasMessageType2.h	/^    double        lmv;$/;"	m	struct:laasMessageType2
+loc	./ashtech/gg12.h	/^     struct str_location loc;     \/* gps antenna location *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_location
+loc	./ashtech/gg12w.h	/^     struct str_location loc;     \/* gps antenna location *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_location
+loc	./ashtech/zxtreme.h	/^     struct str_location loc;     \/* gps antenna location *\/$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_location
+loc	./laas.h	/^     struct str_location       loc;$/;"	m	struct:str_bline_device	typeref:struct:str_bline_device::str_location
+loc	./laas.h	/^     struct str_location       loc;$/;"	m	struct:str_far_field_monitor_device	typeref:struct:str_far_field_monitor_device::str_location
+location_identification	./laas.h	/^     char location_identification[MAX_LINE_LENGTH];$/;"	m	struct:str_laas_logging_control
+log_directory	./laas.h	/^     char log_directory[MAX_LINE_LENGTH];$/;"	m	struct:str_laas_logging_control
+log_message	./ashtech/ashtech.h	/^     bool log_message;$/;"	m	struct:str_ashtech_mca_data
+logging_console	./laas.h	/^     int logging_console;$/;"	m	struct:str_serial_logging_control
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed; \/**< \\brief Boolean flag is set if the LGF is going to log the data to a csv file *\/$/;"	m	struct:str_ashtech_snv
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed;$/;"	m	struct:str_ashtech_mca
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed;$/;"	m	struct:str_ashtech_mis
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed;$/;"	m	struct:str_ashtech_mpc
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed;$/;"	m	struct:str_ashtech_pbn
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed;$/;"	m	struct:str_ashtech_sal
+logging_parsed	./ashtech/ashtech.h	/^     bool logging_parsed;$/;"	m	struct:str_ashtech_xyz
+logging_raw	./laas.h	/^     int logging_raw;$/;"	m	struct:str_serial_logging_control
+lon	./telerad/laasMessageType2.h	/^    double        lon;$/;"	m	struct:laasMessageType2
+lon	./telerad/laasMessageType4.h	/^        double        lon;$/;"	m	struct:laasMessageType4::str_fas_block
+lon	./test/main.c	/^     double lon;$/;"	m	struct:_RR	file:
+longitude	./laas.h	/^     double longitude;$/;"	m	struct:str_location
+longitude	./test/main.c	/^static const double longitude = -1.7007017408682060798;$/;"	v	file:
+m0	./ashtech/ashtech.h	/^     double             m0; \/**< \\brief 8 Bytes - Mean anomaly at ref. time (semicircle) *\/$/;"	m	struct:str_ashtech_sal
+m0	./ashtech/ashtech.h	/^     double       m0;       \/**< \\brief 8 Bytes - Mean anomaly at ref. time (semicirc) *\/$/;"	m	struct:str_ashtech_snv
+m0	./test/main.c	/^     double  m0;        \/* 8  Mean anomaly at ref. time (semicirc) *\/$/;"	m	struct:gg12_snv_new	file:
+main	./main.c	/^int main(int argc, char **argv)$/;"	f
+main	./test/main.c	/^int main()$/;"	f
+main	./test/satellite-position-test.c	/^int main()$/;"	f
+maximum_azimuth	./laas.h	/^     float maximum_azimuth;$/;"	m	struct:str_sector_mask
+maximum_elevation	./laas.h	/^     float maximum_elevation;$/;"	m	struct:str_sector_mask
+mb	./telerad/laasMessageType1.h	/^    } mb[12];$/;"	m	struct:laasMessageType1	typeref:struct:laasMessageType1::str_mesaurement_block
+mbi	./telerad/laasMessage.h	/^    unsigned int mbi;         \/* Message Block Identifier *\/$/;"	m	struct:laasMessage
+mca	./ashtech/gg12.h	/^     struct str_ashtech_mca mca;     \/* pseudorange data *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_ashtech_mca
+mca	./ashtech/gg12w.h	/^     struct str_ashtech_mca mca;     \/* pseudorange data *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_ashtech_mca
+mca_checksum_count	./ashtech/gg12.h	/^          int mca_checksum_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+mca_checksum_count	./ashtech/gg12w.h	/^          int mca_checksum_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+mca_count	./ashtech/gg12.h	/^          int mca_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+mca_count	./ashtech/gg12w.h	/^          int mca_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+minimum_azimuth	./laas.h	/^     float minimum_azimuth;$/;"	m	struct:str_sector_mask
+minimum_elevation	./laas.h	/^     float minimum_elevation;$/;"	m	struct:str_sector_mask
+mis	./ashtech/gg12.h	/^     struct str_ashtech_mis mis;     \/* misc. timing info *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_ashtech_mis
+mis	./ashtech/gg12w.h	/^     struct str_ashtech_mis mis;     \/* misc. timing info *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_ashtech_mis
+mis_checksum_count	./ashtech/gg12.h	/^          int mis_checksum_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+mis_checksum_count	./ashtech/gg12w.h	/^          int mis_checksum_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+mis_checksum_count	./ashtech/zxtreme.h	/^          int mis_checksum_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+mis_count	./ashtech/gg12.h	/^          int mis_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+mis_count	./ashtech/gg12w.h	/^          int mis_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+mis_count	./ashtech/zxtreme.h	/^          int mis_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+modified_z_count	./test/main.c	/^modified_z_count(long rcvtime)$/;"	f
+mpc	./ashtech/zxtreme.h	/^     struct str_ashtech_mpc mpc;  \/* pseudorange data *\/$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_ashtech_mpc
+mpc_checksum_count	./ashtech/zxtreme.h	/^          int mpc_checksum_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+mpc_count	./ashtech/zxtreme.h	/^          int mpc_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+ms	./telerad/telerad.h	/^    unsigned int ms;     \/* Message Status *\/$/;"	m	struct:telerad_laas_message
+ms_id	./telerad/telerad.h	/^    unsigned int ms_id;      \/* Message ID                *\/$/;"	m	struct:str_telerad_message
+mt	./telerad/laasMessage.h	/^    unsigned int mt;          \/* Message Type             *\/$/;"	m	struct:laasMessage
+mt	./telerad/laasMessageType1.h	/^    unsigned int mt;   \/* measurementType            *\/$/;"	m	struct:laasMessageType1
+mt	./test/main.c	/^static const int    mt  = 0;$/;"	v	file:
+mt1	./telerad/laasMessage.h	/^    struct laasMessageType1 mt1; $/;"	m	struct:laasMessage	typeref:struct:laasMessage::laasMessageType1
+mt2	./telerad/laasMessage.h	/^    struct laasMessageType2 mt2; $/;"	m	struct:laasMessage	typeref:struct:laasMessage::laasMessageType2
+mt4	./telerad/laasMessage.h	/^    struct laasMessageType4 mt4; $/;"	m	struct:laasMessage	typeref:struct:laasMessage::laasMessageType4
+mud	./telerad/laasMessageType2.h	/^    unsigned int  mud;$/;"	m	struct:laasMessageType2
+mzc	./telerad/laasMessageType1.h	/^    double mzc;         \/* modifiedZCount             *\/$/;"	m	struct:laasMessageType1
+name	./ashtech/ashtech.h	/^     char    name[4];       \/* 4 character ASCII user string *\/$/;"	m	struct:str_ashtech_pbn
+name	./laas.h	/^     char name[MAX_LINE_LENGTH];          \/* RR-1.1, LM-1                *\/$/;"	m	struct:str_serial_device
+navt	./ashtech/ashtech.h	/^     float   navt;         \/* 4 Receiver clock offset (error) (m) *\/$/;"	m	struct:str_ashtech_pbn
+navtdot	./ashtech/ashtech.h	/^     float   navtdot;      \/* 4 Receiver clock drift (m\/s) *\/$/;"	m	struct:str_ashtech_pbn
+navx	./ashtech/ashtech.h	/^     double  navx;         \/* 8 Antenna position ECEF x coordinate (m) *\/$/;"	m	struct:str_ashtech_pbn
+navxdot	./ashtech/ashtech.h	/^     float   navxdot;      \/* 4 The antenna x velocity (m\/s) *\/$/;"	m	struct:str_ashtech_pbn
+navy	./ashtech/ashtech.h	/^     double  navy;         \/* 8 Antenna position ECEF y coordinate (m) *\/$/;"	m	struct:str_ashtech_pbn
+navydot	./ashtech/ashtech.h	/^     float   navydot;      \/* 4 The antenna y velocity (m\/s) *\/$/;"	m	struct:str_ashtech_pbn
+navz	./ashtech/ashtech.h	/^     double  navz;         \/* 8 Antenna position ECEF z coordinate (m) *\/$/;"	m	struct:str_ashtech_pbn
+navzdot	./ashtech/ashtech.h	/^     float   navzdot;      \/* 4 The antenna z velocity (m\/s) *\/$/;"	m	struct:str_ashtech_pbn
+new_message	./ashtech/ashtech.h	/^          bool new_message;$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+new_message	./ashtech/ashtech.h	/^     bool new_message;$/;"	m	struct:str_ashtech_mca_data
+new_message	./ashtech/ashtech.h	/^     bool new_message;$/;"	m	struct:str_ashtech_mis
+new_message	./ashtech/ashtech.h	/^     bool new_message;$/;"	m	struct:str_ashtech_pbn
+new_message	./ashtech/ashtech.h	/^     bool new_message;$/;"	m	struct:str_ashtech_sal
+new_message	./ashtech/ashtech.h	/^     bool new_message;$/;"	m	struct:str_ashtech_xyz
+nom	./telerad/laasMessageType1.h	/^    int nom;  \/* numberOfMeasurements       *\/$/;"	m	struct:laasMessageType1
+nominal_carrier_frequency	./lens/pseudorange_calculations.c	/^const double nominal_carrier_frequency =  1575420000.0;$/;"	v
+nominal_carrier_frequency	./test/main.c	/^static const long nominal_carrier_frequency =  1575420000;$/;"	v	file:
+numGloSatsTrkd	./ashtech/ashtech.h	/^     unsigned int numGloSatsTrkd;  \/* 1 No. of GLONASS SVs tracked *\/$/;"	m	struct:str_ashtech_mis
+numGloSatsUsed	./ashtech/ashtech.h	/^     unsigned int numGloSatsUsed;  \/* 1 No. of GLONASS SVs in soln. *\/$/;"	m	struct:str_ashtech_mis
+numGpsSatsTrkd	./ashtech/ashtech.h	/^     unsigned int numGpsSatsTrkd;  \/* 1 No. of GPS SVs tracked *\/$/;"	m	struct:str_ashtech_mis
+numGpsSatsUsed	./ashtech/ashtech.h	/^     unsigned int numGpsSatsUsed;  \/* 1 No. of GPS SVs in soln. *\/$/;"	m	struct:str_ashtech_mis
+numSats	./ashtech/ashtech.h	/^     unsigned int numSats;$/;"	m	struct:str_ashtech_xyz
+number_of_gps_sources	./test/main.c	136;"	d	file:
+number_of_measurements	./test/main.c	/^number_of_measurements()$/;"	f
+number_of_reference_receivers	./test/main.c	137;"	d	file:
+number_of_rs	./lens/measurement_block.h	/^     int number_of_rs;$/;"	m	struct:str_measurement_block
+number_of_satellites	./test/main.c	135;"	d	file:
+offset	./test/main.c	/^double offset[4];$/;"	v
+omega	./ashtech/ashtech.h	/^     double          omega; \/**< \\brief 8 Bytes - Argument of perigee (semicircles) *\/$/;"	m	struct:str_ashtech_sal
+omega	./ashtech/ashtech.h	/^     double       omega;    \/**< \\brief 8 Bytes - Argument of perigee (semicircles) *\/$/;"	m	struct:str_ashtech_snv
+omega	./test/main.c	/^     double  omega;     \/* 8  Argument of perigee (semicircles) *\/$/;"	m	struct:gg12_snv_new	file:
+omega0	./ashtech/ashtech.h	/^     double         omega0; \/**< \\brief 8 Bytes - Longitude of ascending node (semicircles) *\/$/;"	m	struct:str_ashtech_sal
+omega0	./ashtech/ashtech.h	/^     double       omega0;   \/**< \\brief 8 Bytes - Longitude of ascending node (semicircles) *\/$/;"	m	struct:str_ashtech_snv
+omega0	./test/main.c	/^     double  omega0;    \/* 8  Longitude of ascending node (semicircles) *\/$/;"	m	struct:gg12_snv_new	file:
+omegadot	./ashtech/ashtech.h	/^     float        omegadot; \/**< \\brief 4 Bytes - Rate of right ascension (semicircles\/sec) *\/$/;"	m	struct:str_ashtech_sal
+omegadot	./ashtech/ashtech.h	/^     float        omegadot; \/**< \\brief 4 Bytes - Rate of right ascension (semicircles\/sec) *\/$/;"	m	struct:str_ashtech_snv
+omegadot	./test/main.c	/^     float   omegadot;  \/* 4  Rate of right ascension (semicircles\/sec) *\/$/;"	m	struct:gg12_snv_new	file:
+open_data_sources	./LAASInit.c	/^int open_data_sources(struct str_limits *limits, $/;"	f
+open_log_files	./LAASInit.c	/^int open_log_files($/;"	f
+open_log_files	./test/satellite-position-test.c	/^void open_log_files(FILE **snv_infile, FILE **sal_infile, FILE **xyz_infile, FILE **xyz_outfile)$/;"	f
+option	./telerad/laasMessageType4.c	/^int option = 0;$/;"	v
+ot	./telerad/laasMessageType4.h	/^        unsigned int ot;$/;"	m	struct:laasMessageType4::str_fas_block
+other_count	./ashtech/gg12.h	/^          int other_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+other_count	./ashtech/gg12w.h	/^          int other_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+other_count	./ashtech/zxtreme.h	/^          int other_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+p_value	./gps.h	/^     double p_value;  $/;"	m	struct:str_satellite_position
+p_value	./test/main.c	/^static const int    p_value  = 0;$/;"	v	file:
+parseLAASConfigurationFile	./LAASInit.c	/^int parseLAASConfigurationFile(const char *configuration_file, $/;"	f
+parse_key_value_pairs	./key_value_parser.c	/^int parse_key_value_pairs(char buf[], char key[], char value[])$/;"	f
+parsing	./laas.h	/^     int parsing;$/;"	m	struct:str_serial_logging_control
+pbn	./ashtech/gg12.h	/^     struct str_ashtech_pbn pbn;     \/* position solution data *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_ashtech_pbn
+pbn	./ashtech/gg12w.h	/^     struct str_ashtech_pbn pbn;     \/* position solution data *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_ashtech_pbn
+pbn	./ashtech/zxtreme.h	/^     struct str_ashtech_pbn pbn;     \/* position solution data *\/$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_ashtech_pbn
+pbn_checksum_count	./ashtech/gg12.h	/^          int pbn_checksum_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+pbn_checksum_count	./ashtech/gg12w.h	/^          int pbn_checksum_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+pbn_checksum_count	./ashtech/zxtreme.h	/^          int pbn_checksum_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+pbn_count	./ashtech/gg12.h	/^          int pbn_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+pbn_count	./ashtech/gg12w.h	/^          int pbn_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+pbn_count	./ashtech/zxtreme.h	/^          int pbn_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+pdop	./ashtech/ashtech.h	/^     unsigned int  pdop;          \/* 2 PDOP multiplied by 100. *\/$/;"	m	struct:str_ashtech_pbn
+phase	./lens/pseudorange_calculations.h	/^     double phase;$/;"	m	struct:str_prsc_filter
+phase_previous	./lens/pseudorange_calculations.h	/^     double phase_previous;$/;"	m	struct:str_prsc_filter
+polarity	./ashtech/ashtech.h	/^     int           polarity;    \/* 1  This number is either zero or five:$/;"	m	struct:str_ashtech_mca_data
+polarity	./test/main.c	/^     unsigned short polarity;  \/* 1  This number is either zero or five:$/;"	m	struct:gg12_mca_new	file:
+port_name	./telerad/telerad.h	/^	char port_name[80];				\/* name of serial port the device is connected to *\/$/;"	m	struct:telerad_receiver_dev
+position	./test/main.c	/^     struct Position position;$/;"	m	struct:GPS_Minimum_Data_Set	typeref:struct:GPS_Minimum_Data_Set::Position	file:
+positionMode	./ashtech/ashtech.h	/^     unsigned int positionMode;    \/* 2 See pg. 90 *\/$/;"	m	struct:str_ashtech_mis
+prc	./lens/measurement_block.h	/^     double prc;$/;"	m	struct:str_measurement_block
+prc	./telerad/laasMessageType1.h	/^        double prc;              \/* Pseudorange Correction *\/$/;"	m	struct:laasMessageType1::str_mesaurement_block
+previous_aode	./gps.h	/^     int                        previous_aode;$/;"	m	struct:str_satellite_almanac_ephemeris_position
+print_buffer	./telerad/utils_string.c	/^print_buffer(unsigned char buf[],int size)$/;"	f
+print_buffer_ascii	./main.c	/^void print_buffer_ascii(unsigned char buf[],int size)$/;"	f
+print_buffer_hex	./main.c	/^void print_buffer_hex(unsigned char buf[],int size)$/;"	f
+print_buffer_in_binary	./telerad/utils_string.c	/^print_buffer_in_binary(unsigned char data[], int size)$/;"	f
+print_csv	./test/main.c	/^print_csv(FILE *gmdsFile)$/;"	f
+print_sal	./test/satellite-position-test.c	/^void print_sal(unsigned int rcvtime, struct str_ashtech_sal *sal)$/;"	f
+print_table	./test/main.c	/^print_table()$/;"	f
+print_xyz_position	./test/main.c	/^print_xyz_position()$/;"	f
+prn	./ashtech/ashtech.h	/^     int               prn; \/**< \\brief 2 Bytes - Satellite PRN number minus 1 (0 to 31) *\/$/;"	m	struct:str_ashtech_sal
+prn	./lens/measurement_block.h	/^     int prn;$/;"	m	struct:str_measurement_block
+prnFile	./test/main.c	/^static FILE *prnFile = 0;$/;"	v	file:
+prn_count	./test/main.c	/^     int    prn_count;           \/* Nc *\/$/;"	m	struct:Receiver_Error	file:
+prnnum	./ashtech/ashtech.h	/^     int          prnnum;   \/**< \\brief 1 Bytes - Satellite PRN number minus 1 (0 to 31) *\/$/;"	m	struct:str_ashtech_snv
+prnnum	./test/main.c	/^     short   prnnum;    \/* 1  Satellite PRN number minus 1 (0 to 31) *\/$/;"	m	struct:gg12_snv_new	file:
+process_mca	./test/main.c	/^process_mca(char inputBuffer[], FILE *invalidPRN, FILE *invalidSignalIntegrity, int antennaId)$/;"	f
+process_sal	./test/satellite-position-test.c	/^process_sal(char inputBuffer[], struct str_ashtech_sal *sal)$/;"	f
+process_snv	./test/main.c	/^process_snv(char inputBuffer[], FILE *invalidPRN, struct gg12_snv_new snvArray[number_of_satellites])$/;"	f
+process_snv	./test/satellite-position-test.c	/^process_snv(char inputBuffer[], struct str_ashtech_snv *snv)$/;"	f
+process_xyz	./test/main.c	/^process_xyz(char inputBuffer[], FILE *invalidPRN, int antennaId)$/;"	f
+process_xyz	./test/satellite-position-test.c	/^process_xyz(char inputBuffer[], struct str_ashtech_xyz *xyz)$/;"	f
+processing_done	./ashtech/gg12.h	/^     bool processing_done;$/;"	m	struct:str_gg12_device
+processing_done	./ashtech/gg12w.h	/^     bool processing_done;$/;"	m	struct:str_gg12w_device
+processing_done	./ashtech/zxtreme.h	/^     bool processing_done;$/;"	m	struct:str_zxtreme_device
+prs	./lens/pseudorange_calculations.h	/^     double prs;$/;"	m	struct:str_prsc_filter
+prs_previous	./lens/pseudorange_calculations.h	/^     double prs_previous;$/;"	m	struct:str_prsc_filter
+prsc	./lens/pseudorange_calculations.h	/^     double prsc;$/;"	m	struct:str_prsc_filter
+ps	./telerad/telerad.h	/^    unsigned char ps[2];      \/* Packet Sync               *\/$/;"	m	struct:str_telerad_message
+pseudorange_correction	./test/main.c	/^pseudorange_correction(int prn, int antenna, struct gg12_snv_new snvArray[32])$/;"	f
+qa_phase	./ashtech/ashtech.h	/^     unsigned int  qa_phase;  \/* 1  Not used; always zero *\/$/;"	m	struct:str_ashtech_mca_data
+qa_phase	./test/main.c	/^     unsigned short qa_phase;  \/* 1  Not used; always zero *\/$/;"	m	struct:gg12_mca_new	file:
+r_err	./test/main.c	/^} r_err[8];$/;"	v	typeref:struct:Receiver_Error
+range	./ashtech/ashtech.h	/^          double    range; $/;"	m	struct:str_ashtech_xyz::str_xyz_data
+range	./gps.h	/^     double range;  $/;"	m	struct:str_satellite_position
+range	./test/main.c	/^     double  range;$/;"	m	struct:gg12_xyz_new	file:
+raw	./laas.h	/^     int  raw;               \/* File to log the raw data to *\/$/;"	m	struct:str_serial_device
+raw_range	./ashtech/ashtech.h	/^     double  raw_range;   \/* 8  Raw range (in seconds) to the satellite$/;"	m	struct:str_ashtech_mca_data
+raw_range	./lens/pseudorange_calculations.h	/^     double raw_range;     \/* From MCA *\/$/;"	m	struct:str_prsc_filter
+raw_range	./test/main.c	/^     double         raw_range; \/* 8  Raw range (in seconds) to the satellite$/;"	m	struct:gg12_mca_new	file:
+raw_range	./test/main.c	/^     double raw_range;    \/* From MCA *\/$/;"	m	struct:GPS_Minimum_Data_Set	file:
+raw_to_double	./conversions.c	/^double raw_to_double(unsigned char *in)$/;"	f
+raw_to_float	./conversions.c	/^float raw_to_float(unsigned char *in)$/;"	f
+raw_to_int	./conversions.c	/^int raw_to_int(unsigned char *in)$/;"	f
+raw_to_short	./conversions.c	/^short raw_to_short(unsigned char *in)$/;"	f
+raw_to_uint	./conversions.c	/^uint raw_to_uint(unsigned char *in)$/;"	f
+raw_to_ushort	./conversions.c	/^ushort raw_to_ushort(unsigned char *in)$/;"	f
+rcvtime	./ashtech/ashtech.h	/^     unsigned int  rcvtime;\/* 4 time of week in which the signal (ms) *\/$/;"	m	struct:str_ashtech_pbn
+rcvtime	./ashtech/ashtech.h	/^     unsigned int rcvtime;         \/* 4 Time of GPS week (ms) *\/$/;"	m	struct:str_ashtech_mis
+rcvtime	./ashtech/ashtech.h	/^     unsigned int rcvtime; $/;"	m	struct:str_ashtech_xyz
+rcvtime	./test/main.c	/^     int rcvtime;$/;"	m	struct:gg12_xyz_new	file:
+rcvtime	./test/main.c	/^     long   rcvtime;      \/* From XYZ *\/$/;"	m	struct:GPS_Minimum_Data_Set	file:
+rcvtime	./test/main.c	/^     long   rcvtime;$/;"	m	struct:SatelliteInformation	file:
+rcvtime	./time_struct.h	/^     unsigned int rcvtime;$/;"	m	struct:str_time_gps
+rcvtime_previous	./test/main.c	/^     long   rcvtime_previous; $/;"	m	struct:SatelliteInformation	file:
+rcvtimefrac	./ashtech/ashtech.h	/^     unsigned int rcvtimefrac;     \/* 2 Fraction of time (microsec) *\/$/;"	m	struct:str_ashtech_mis
+res	./ashtech/ashtech.h	/^     int          res;      \/**< \\brief 1 Bytes - Reserved character *\/$/;"	m	struct:str_ashtech_snv
+res	./test/main.c	/^     short   res;       \/* 1  Reserved character *\/$/;"	m	struct:gg12_snv_new	file:
+rf	./telerad/telerad.h	/^    unsigned int rf;$/;"	m	struct:telerad_status
+ri	./telerad/laasMessageType2.h	/^    unsigned int  ri;$/;"	m	struct:laasMessageType2
+ri	./telerad/laasMessageType4.h	/^                 char ri;     \/*  *\/$/;"	m	struct:laasMessageType4::str_fas_block
+rl	./telerad/laasMessageType4.h	/^                 char rl;     \/*  *\/$/;"	m	struct:laasMessageType4::str_fas_block
+rn	./telerad/laasMessageType4.h	/^        unsigned int rn;$/;"	m	struct:laasMessageType4::str_fas_block
+roota	./ashtech/ashtech.h	/^     double          roota; \/**< \\brief 8 Bytes - Sqr root of semi-major axis (met 1\/2) *\/$/;"	m	struct:str_ashtech_sal
+roota	./ashtech/ashtech.h	/^     double       roota;    \/**< \\brief 8 Bytes - Sqr root of semi-major axis (met 1\/2) *\/$/;"	m	struct:str_ashtech_snv
+roota	./test/main.c	/^     double  roota;     \/* 8  Sqr root of semi-major axis (met 1\/2) *\/$/;"	m	struct:gg12_snv_new	file:
+rpds	./telerad/laasMessageType4.h	/^        unsigned int rpds;$/;"	m	struct:laasMessageType4::str_fas_block
+rph	./telerad/laasMessageType2.h	/^    double        rph;$/;"	m	struct:laasMessageType2
+rpid	./telerad/laasMessageType4.h	/^                 char rpid[5]; \/* *\/$/;"	m	struct:laasMessageType4::str_fas_block
+rrc	./lens/measurement_block.h	/^     double rrc;$/;"	m	struct:str_measurement_block
+rrc	./telerad/laasMessageType1.h	/^        double rrc;              \/* Range Rate Correction  *\/$/;"	m	struct:laasMessageType1::str_mesaurement_block
+rs_count	./lens/pseudorange_calculations.c	/^rs_count(double d_array[])$/;"	f
+rs_id	./telerad/laasMessageType1.h	/^        unsigned int rs_id;  \/* Ranging Source Id      *\/$/;"	m	struct:laasMessageType1::str_mesaurement_block
+rsds	./telerad/laasMessageType2.h	/^    unsigned int rsds;$/;"	m	struct:laasMessageType2
+rssi	./telerad/telerad.h	/^    unsigned int rssi;   \/* Received Signal Strength Indicator *\/$/;"	m	struct:telerad_laas_message
+ru	./telerad/laasMessageType2.h	/^    unsigned int ru;$/;"	m	struct:laasMessageType2
+sad	./gps.h	/^     double sad;  $/;"	m	struct:str_satellite_position
+sad	./telerad/laasMessageType1.h	/^    unsigned int sad;   \/* sourceAvailabilityDuration *\/$/;"	m	struct:laasMessageType1
+sal	./ashtech/gg12.h	/^     struct str_ashtech_sal sal;     \/* ephemeris almanac data *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_ashtech_sal
+sal	./ashtech/gg12w.h	/^     struct str_ashtech_sal sal;     \/* ephemeris almanac data *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_ashtech_sal
+sal	./ashtech/zxtreme.h	/^     struct str_ashtech_sal sal;     \/* ephemeris almanac data *\/$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_ashtech_sal
+sal	./gps.h	/^     struct str_ashtech_sal          sal;$/;"	m	struct:str_satellite_almanac_ephemeris_position	typeref:struct:str_satellite_almanac_ephemeris_position::str_ashtech_sal
+sal_checksum_count	./ashtech/gg12.h	/^          int sal_checksum_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+sal_checksum_count	./ashtech/gg12w.h	/^          int sal_checksum_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+sal_checksum_count	./ashtech/zxtreme.h	/^          int sal_checksum_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+sal_count	./ashtech/gg12.h	/^          int sal_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+sal_count	./ashtech/gg12w.h	/^          int sal_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+sal_count	./ashtech/zxtreme.h	/^          int sal_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+satellite_position	./satellite_position.c	/^satellite_position($/;"	f
+satx	./test/main.c	/^     double  satx;$/;"	m	struct:gg12_xyz_new	file:
+saty	./test/main.c	/^     double  saty;$/;"	m	struct:gg12_xyz_new	file:
+satz	./test/main.c	/^     double  satz;$/;"	m	struct:gg12_xyz_new	file:
+search_start	./laas.h	/^     unsigned int search_start;$/;"	m	struct:str_serial_device
+sec	./time_struct.h	/^     time_t      sec;     \/* seconds *\/$/;"	m	struct:str_time_unix
+sequence	./ashtech/ashtech.h	/^          unsigned int  sequence;    \/* 2  Sequence ID (units of 50 ms, mod 30 min) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+sequence	./ashtech/ashtech.h	/^     unsigned int  sequence;    \/* 2  Sequence ID (units of 50 ms, mod 30 min) *\/$/;"	m	struct:str_ashtech_mca_data
+sequence	./test/main.c	/^     unsigned short sequence;  \/* 2  Sequence ID (units of 50 ms, mod 30 min) *\/$/;"	m	struct:gg12_mca_new	file:
+serial	./laas.h	/^     struct str_serial_logging_control serial[MAX_NUMBER_OF_SERIAL_DEVICES];$/;"	m	struct:str_laas_logging_control	typeref:struct:str_laas_logging_control::str_serial_logging_control
+serial_device	./ashtech/gg12.h	/^     struct str_serial_device *serial_device;$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_serial_device
+serial_device	./ashtech/gg12w.h	/^     struct str_serial_device *serial_device;$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_serial_device
+serial_device	./ashtech/zxtreme.h	/^     struct str_serial_device *serial_device;$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_serial_device
+serial_device	./laas.h	/^     struct str_serial_device *serial_device;$/;"	m	struct:str_bline_device	typeref:struct:str_bline_device::str_serial_device
+serial_device	./laas.h	/^     struct str_serial_device *serial_device;$/;"	m	struct:str_far_field_monitor_device	typeref:struct:str_far_field_monitor_device::str_serial_device
+serial_device	./telerad/telerad.h	/^     struct str_serial_device *serial_device;$/;"	m	struct:str_telerad_device	typeref:struct:str_telerad_device::str_serial_device
+serial_set_speed	./serial.c	/^int serial_set_speed(int fid, int baud_rate)$/;"	f
+setLaasMessageType4Aid	./telerad/laasMessageType4.c	/^setLaasMessageType4Aid(struct laasMessageType4 *msg, unsigned int index, char val[])$/;"	f
+setLaasMessageType4Apd	./telerad/laasMessageType4.c	/^setLaasMessageType4Apd(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Atch	./telerad/laasMessageType4.c	/^setLaasMessageType4Atch(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Atus	./telerad/laasMessageType4.c	/^setLaasMessageType4Atus(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Cwat	./telerad/laasMessageType4.c	/^setLaasMessageType4Cwat(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4D_lat	./telerad/laasMessageType4.c	/^setLaasMessageType4D_lat(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4D_lon	./telerad/laasMessageType4.c	/^setLaasMessageType4D_lon(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Dlo	./telerad/laasMessageType4.c	/^setLaasMessageType4Dlo(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Dsl	./telerad/laasMessageType4.c	/^setLaasMessageType4Dsl(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4FAS_Count	./telerad/laasMessageType4.c	/^setLaasMessageType4FAS_Count(struct laasMessageType4 *msg, int val)$/;"	f
+setLaasMessageType4Fas_crc	./telerad/laasMessageType4.c	/^setLaasMessageType4Fas_crc(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Fas_lal	./telerad/laasMessageType4.c	/^setLaasMessageType4Fas_lal(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Fas_val	./telerad/laasMessageType4.c	/^setLaasMessageType4Fas_val(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Gpa	./telerad/laasMessageType4.c	/^setLaasMessageType4Gpa(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Height	./telerad/laasMessageType4.c	/^setLaasMessageType4Height(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Lat	./telerad/laasMessageType4.c	/^setLaasMessageType4Lat(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Lon	./telerad/laasMessageType4.c	/^setLaasMessageType4Lon(struct laasMessageType4 *msg, unsigned int index, double val)$/;"	f
+setLaasMessageType4Ot	./telerad/laasMessageType4.c	/^setLaasMessageType4Ot(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Ri	./telerad/laasMessageType4.c	/^setLaasMessageType4Ri(struct laasMessageType4 *msg, unsigned int index, char val)$/;"	f
+setLaasMessageType4Rl	./telerad/laasMessageType4.c	/^setLaasMessageType4Rl(struct laasMessageType4 *msg, unsigned int index, char val)$/;"	f
+setLaasMessageType4Rn	./telerad/laasMessageType4.c	/^setLaasMessageType4Rn(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Rpds	./telerad/laasMessageType4.c	/^setLaasMessageType4Rpds(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLaasMessageType4Rpid	./telerad/laasMessageType4.c	/^setLaasMessageType4Rpid(struct laasMessageType4 *msg, unsigned int index, char val[])$/;"	f
+setLaasMessageType4Ssp	./telerad/laasMessageType4.c	/^setLaasMessageType4Ssp(struct laasMessageType4 *msg, unsigned int index, unsigned int val)$/;"	f
+setLmt1AdditionalMessageFlag	./telerad/laasMessageType1.c	/^setLmt1AdditionalMessageFlag(struct laasMessageType1 *msgType1, unsigned int param)$/;"	f
+setLmt1B1	./telerad/laasMessageType1.c	/^setLmt1B1(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1B2	./telerad/laasMessageType1.c	/^setLmt1B2(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1B3	./telerad/laasMessageType1.c	/^setLmt1B3(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1B4	./telerad/laasMessageType1.c	/^setLmt1B4(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1EphemerisCRC	./telerad/laasMessageType1.c	/^setLmt1EphemerisCRC(struct laasMessageType1 *msgType1, unsigned int param)$/;"	f
+setLmt1EphemerisDecorrelation	./telerad/laasMessageType1.c	/^setLmt1EphemerisDecorrelation(struct laasMessageType1 *msgType1, double param)$/;"	f
+setLmt1IssueOfData	./telerad/laasMessageType1.c	/^setLmt1IssueOfData(struct laasMessageType1 *msg, int index, unsigned int param)$/;"	f
+setLmt1MeasurementType	./telerad/laasMessageType1.c	/^setLmt1MeasurementType(struct laasMessageType1 *msgType1, unsigned int param)$/;"	f
+setLmt1ModifiedZCount	./telerad/laasMessageType1.c	/^setLmt1ModifiedZCount(struct laasMessageType1 *msgType1, double param)$/;"	f
+setLmt1NumberOfMeasurements	./telerad/laasMessageType1.c	/^setLmt1NumberOfMeasurements(struct laasMessageType1 *msgType1, unsigned int param)$/;"	f
+setLmt1PseudorangeCorrection	./telerad/laasMessageType1.c	/^setLmt1PseudorangeCorrection(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1RangeRateCorrection	./telerad/laasMessageType1.c	/^setLmt1RangeRateCorrection(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1RangingSourceID	./telerad/laasMessageType1.c	/^setLmt1RangingSourceID(struct laasMessageType1 *msg, int index, unsigned int param)$/;"	f
+setLmt1SigmaPrGnd	./telerad/laasMessageType1.c	/^setLmt1SigmaPrGnd(struct laasMessageType1 *msg, int index, double param)$/;"	f
+setLmt1SourceAvailabilityDuration	./telerad/laasMessageType1.c	/^setLmt1SourceAvailabilityDuration(struct laasMessageType1 *msgType1, unsigned int param)$/;"	f
+setLmt1Validity	./telerad/laasMessageType1.c	/^setLmt1Validity(struct laasMessageType1 *msg)$/;"	f
+setLmt2Adb	./telerad/laasMessageType2.c	/^setLmt2Adb(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Gcid	./telerad/laasMessageType2.c	/^setLmt2Gcid(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Gsad	./telerad/laasMessageType2.c	/^setLmt2Gsad(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Gsrr	./telerad/laasMessageType2.c	/^setLmt2Gsrr(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Kmecg	./telerad/laasMessageType2.c	/^setLmt2Kmecg(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Kmecgl	./telerad/laasMessageType2.c	/^setLmt2Kmecgl(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Kmepg	./telerad/laasMessageType2.c	/^setLmt2Kmepg(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Kmepgl	./telerad/laasMessageType2.c	/^setLmt2Kmepgl(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Lat	./telerad/laasMessageType2.c	/^setLmt2Lat(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Lmv	./telerad/laasMessageType2.c	/^setLmt2Lmv(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Lon	./telerad/laasMessageType2.c	/^setLmt2Lon(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Mud	./telerad/laasMessageType2.c	/^setLmt2Mud(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Ri	./telerad/laasMessageType2.c	/^setLmt2Ri(struct laasMessageType2 *msg, int val)$/;"	f
+setLmt2Rph	./telerad/laasMessageType2.c	/^setLmt2Rph(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt2Rsds	./telerad/laasMessageType2.c	/^setLmt2Rsds(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Ru	./telerad/laasMessageType2.c	/^setLmt2Ru(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Sh	./telerad/laasMessageType2.c	/^setLmt2Sh(struct laasMessageType2 *msg, int val)$/;"	f
+setLmt2Spare1	./telerad/laasMessageType2.c	/^setLmt2Spare1(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Spare2	./telerad/laasMessageType2.c	/^setLmt2Spare2(struct laasMessageType2 *msg, unsigned int val)$/;"	f
+setLmt2Svig	./telerad/laasMessageType2.c	/^setLmt2Svig(struct laasMessageType2 *msg, double val)$/;"	f
+setLmt4Validity	./telerad/laasMessageType4.c	/^setLmt4Validity(struct laasMessageType4 *msg, unsigned int index)$/;"	f
+setTlmMS	./telerad/telerad.c	/^setTlmMS(struct telerad_laas_message *tlm, unsigned char var)$/;"	f
+setTlmRSSI	./telerad/telerad.c	/^setTlmRSSI(struct telerad_laas_message *tlm, unsigned char var)$/;"	f
+setTlmTDMA	./telerad/telerad.c	/^setTlmTDMA(struct telerad_laas_message *tlm, unsigned char var)$/;"	f
+setValidityLmt2	./telerad/laasMessageType2.c	/^setValidityLmt2(struct laasMessageType2 *msg)$/;"	f
+set_time_mark	./LAASInit.c	/^void set_time_mark($/;"	f
+setlaasMessageGbasId	./telerad/laasMessage.c	/^setlaasMessageGbasId(struct laasMessage *laasMsg, char gbas_id[])$/;"	f
+setlaasMessageLength	./telerad/laasMessage.c	/^setlaasMessageLength(struct laasMessage *laasMsg, unsigned int length)$/;"	f
+setlaasMessageMBI	./telerad/laasMessage.c	/^setlaasMessageMBI(struct laasMessage *laasMsg, unsigned int mbi)$/;"	f
+setlaasMessageMT	./telerad/laasMessage.c	/^setlaasMessageMT(struct laasMessage *laasMsg, unsigned int mt)$/;"	f
+sh	./telerad/laasMessageType2.h	/^    unsigned int  sh;$/;"	m	struct:laasMessageType2
+shift_buffer	./ashtech/shift_buffer.c	/^void shift_buffer(struct str_serial_device *c, unsigned char *header)$/;"	f
+sigma	./lens/measurement_block.h	/^     double sigma;$/;"	m	struct:str_measurement_block
+signal_integrity_check	./test/main.c	/^signal_integrity_check(int prn, int antenna)$/;"	f
+smoothing	./ashtech/ashtech.h	/^     unsigned int  smoothing;   \/* 4  Smoothing Data *\/$/;"	m	struct:str_ashtech_mca_data
+smoothing	./test/main.c	/^     int            smoothing; \/* 4  Smoothing Data *\/$/;"	m	struct:gg12_mca_new	file:
+snr	./lens/pseudorange_calculations.h	/^     unsigned int snr;           \/* From MCA ireg*\/$/;"	m	struct:str_prsc_filter
+snr_previous	./lens/pseudorange_calculations.h	/^     unsigned int snr_previous;           \/* From MCA ireg*\/$/;"	m	struct:str_prsc_filter
+snv	./ashtech/gg12.h	/^     struct str_ashtech_snv snv;     \/* ephemeris data *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_ashtech_snv
+snv	./ashtech/gg12w.h	/^     struct str_ashtech_snv snv;     \/* ephemeris data *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_ashtech_snv
+snv	./ashtech/zxtreme.h	/^     struct str_ashtech_snv snv;     \/* ephemeris data *\/$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_ashtech_snv
+snv	./gps.h	/^     struct str_ashtech_snv          snv;$/;"	m	struct:str_satellite_almanac_ephemeris_position	typeref:struct:str_satellite_almanac_ephemeris_position::str_ashtech_snv
+snv_archive	./snv_update.c	/^int snv_archive(GDBM_FILE dbf,$/;"	f
+snv_checksum_count	./ashtech/gg12.h	/^          int snv_checksum_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+snv_checksum_count	./ashtech/gg12w.h	/^          int snv_checksum_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+snv_checksum_count	./ashtech/zxtreme.h	/^          int snv_checksum_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+snv_count	./ashtech/gg12.h	/^          int snv_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+snv_count	./ashtech/gg12w.h	/^          int snv_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+snv_count	./ashtech/zxtreme.h	/^          int snv_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+snv_elevation_check	./snv_update.c	/^bool snv_elevation_check(struct str_satellite_almanac_ephemeris_position *all_sats_aep_information,$/;"	f
+snv_failed_validation	./snv_update.c	/^void snv_failed_validation($/;"	f
+snv_hold	./gps.h	/^     struct str_ashtech_snv     snv_hold;$/;"	m	struct:str_satellite_almanac_ephemeris_position	typeref:struct:str_satellite_almanac_ephemeris_position::str_ashtech_snv
+snv_hold_check	./snv_update.c	/^int snv_hold_check(struct str_satellite_almanac_ephemeris_position *all_sats_aep_information,$/;"	f
+snv_update_current	./snv_update.c	/^int snv_update_current(GDBM_FILE dbf, struct str_ashtech_snv *snv)$/;"	f
+snv_validate	./snv_update.c	/^int snv_validate(struct str_satellite_almanac_ephemeris_position *satellite_aep_information,$/;"	f
+snv_validate_by_almanac	./snv_update.c	/^snv_validate_by_almanac($/;"	f
+snv_validate_by_almanac_test_case	./snv_update.c	/^snv_validate_by_almanac_test_case($/;"	f
+snv_validate_by_previous_ephemeris	./snv_update.c	/^void snv_validate_by_previous_ephemeris($/;"	f
+snv_validate_by_yesterdays_ephemeris	./snv_update.c	/^void snv_validate_by_yesterdays_ephemeris($/;"	f
+solve_transendental_equation	./test/main.c	/^solve_transendental_equation(double M, double e)$/;"	f
+source_availability_duration	./source_availability_duration.c	/^source_availability_duration($/;"	f
+spare1	./telerad/laasMessageType2.h	/^    unsigned int spare1;$/;"	m	struct:laasMessageType2
+spare2	./telerad/laasMessageType2.h	/^    unsigned int spare2;$/;"	m	struct:laasMessageType2
+spg	./telerad/laasMessageType1.h	/^        double spg;    \/* Sigma pr_gnd           *\/$/;"	m	struct:laasMessageType1::str_mesaurement_block
+ssp	./telerad/laasMessageType4.h	/^        unsigned int ssp;$/;"	m	struct:laasMessageType4::str_fas_block
+stats	./ashtech/gg12.h	/^     } stats;$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_gg12_stats
+stats	./ashtech/gg12w.h	/^     } stats;$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_gg12w_stats
+stats	./ashtech/zxtreme.h	/^     } stats;$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_zxtreme_stats
+str_ashtech_mca	./ashtech/ashtech.h	/^struct str_ashtech_mca$/;"	s
+str_ashtech_mca_data	./ashtech/ashtech.h	/^struct str_ashtech_mca_data$/;"	s
+str_ashtech_mis	./ashtech/ashtech.h	/^struct str_ashtech_mis$/;"	s
+str_ashtech_mpc	./ashtech/ashtech.h	/^struct str_ashtech_mpc$/;"	s
+str_ashtech_pbn	./ashtech/ashtech.h	/^struct str_ashtech_pbn$/;"	s
+str_ashtech_sal	./ashtech/ashtech.h	/^struct str_ashtech_sal$/;"	s
+str_ashtech_snv	./ashtech/ashtech.h	/^struct str_ashtech_snv$/;"	s
+str_ashtech_xyz	./ashtech/ashtech.h	/^struct str_ashtech_xyz$/;"	s
+str_binary_search_array	./binary_search/binary_search.h	/^struct str_binary_search_array$/;"	s
+str_binary_search_node	./binary_search/binary_search.h	/^struct str_binary_search_node$/;"	s
+str_bline_device	./laas.h	/^struct str_bline_device$/;"	s
+str_far_field_monitor_device	./laas.h	/^struct str_far_field_monitor_device$/;"	s
+str_fas_block	./telerad/laasMessageType4.h	/^    struct str_fas_block$/;"	s	struct:laasMessageType4
+str_gg12_device	./ashtech/gg12.h	/^struct str_gg12_device$/;"	s
+str_gg12_stats	./ashtech/gg12.h	/^     struct str_gg12_stats$/;"	s	struct:str_gg12_device
+str_gg12w_device	./ashtech/gg12w.h	/^struct str_gg12w_device$/;"	s
+str_gg12w_stats	./ashtech/gg12w.h	/^     struct str_gg12w_stats$/;"	s	struct:str_gg12w_device
+str_laas_logging_control	./laas.h	/^struct str_laas_logging_control$/;"	s
+str_limits	./laas.h	/^struct str_limits$/;"	s
+str_location	./laas.h	/^struct str_location$/;"	s
+str_measurement_block	./lens/measurement_block.h	/^struct str_measurement_block$/;"	s
+str_mesaurement_block	./telerad/laasMessageType1.h	/^    struct str_mesaurement_block$/;"	s	struct:laasMessageType1
+str_mpc_data	./ashtech/ashtech.h	/^     struct str_mpc_data$/;"	s	struct:str_ashtech_mpc
+str_prsc_filter	./lens/pseudorange_calculations.h	/^struct str_prsc_filter$/;"	s
+str_satellite_almanac_ephemeris_position	./gps.h	/^struct str_satellite_almanac_ephemeris_position$/;"	s
+str_satellite_position	./gps.h	/^struct str_satellite_position$/;"	s
+str_sector_mask	./laas.h	/^struct str_sector_mask$/;"	s
+str_serial_device	./laas.h	/^struct str_serial_device$/;"	s
+str_serial_logging_control	./laas.h	/^struct str_serial_logging_control {$/;"	s
+str_telerad_device	./telerad/telerad.h	/^struct str_telerad_device$/;"	s
+str_telerad_message	./telerad/telerad.h	/^struct str_telerad_message$/;"	s
+str_time	./time_struct.h	/^struct str_time$/;"	s
+str_time_gps	./time_struct.h	/^struct str_time_gps$/;"	s
+str_time_unix	./time_struct.h	/^struct str_time_unix$/;"	s
+str_xyz_data	./ashtech/ashtech.h	/^     struct str_xyz_data$/;"	s	struct:str_ashtech_xyz
+str_zxtreme_device	./ashtech/zxtreme.h	/^struct str_zxtreme_device$/;"	s
+str_zxtreme_stats	./ashtech/zxtreme.h	/^     struct str_zxtreme_stats$/;"	s	struct:str_zxtreme_device
+sv	./ashtech/ashtech.h	/^          unsigned int sv; \/* 2  PRN of channel *\/$/;"	m	struct:str_ashtech_xyz::str_xyz_data
+sv	./test/main.c	/^     short   sv;$/;"	m	struct:gg12_xyz_new	file:
+svig	./telerad/laasMessageType2.h	/^    double        svig;$/;"	m	struct:laasMessageType2
+svprn	./ashtech/ashtech.h	/^          unsigned int  svprn;       \/* 1  Satellite PRN number (1 - 56) *\/$/;"	m	struct:str_ashtech_mpc::str_mpc_data
+svprn	./ashtech/ashtech.h	/^     unsigned int  svprn;       \/* 1  Satellite PRN number (1 - 56) *\/$/;"	m	struct:str_ashtech_mca_data
+svprn	./gps.h	/^     unsigned int svprn;$/;"	m	struct:str_satellite_position
+svprn	./test/main.c	/^     short  svprn;        \/* From MCA *\/$/;"	m	struct:GPS_Minimum_Data_Set	file:
+svprn	./test/main.c	/^     unsigned short svprn;     \/* 1  Satellite PRN number (1 - 56) *\/$/;"	m	struct:gg12_mca_new	file:
+swap	./conversions.c	/^void swap(unsigned char *x, unsigned char *y)$/;"	f
+tdma	./telerad/telerad.h	/^    unsigned int tdma;   \/* TDMA Received Frame \/ Slot(0-15) *\/$/;"	m	struct:telerad_laas_message
+telerad_cat_1_message_process	./telerad/telerad.c	/^telerad_cat_1_message_process(struct str_telerad_message *tm, unsigned char rawMsg[])$/;"	f
+telerad_clear	./telerad/telerad.c	/^telerad_clear(struct str_telerad_message *tm)$/;"	f
+telerad_command_acknowledgement	./telerad/telerad.h	/^struct telerad_command_acknowledgement$/;"	s
+telerad_command_acknowledgement_print	./telerad/telerad.c	/^telerad_command_acknowledgement_print(struct str_telerad_message *tm, unsigned char trca[])$/;"	f
+telerad_command_acknowledgement_process	./telerad/telerad.c	/^telerad_command_acknowledgement_process(struct str_telerad_message *tm, unsigned char rawMsg[])$/;"	f
+telerad_generate_checksum	./telerad/telerad.c	/^telerad_generate_checksum(unsigned char msg[],int size)$/;"	f
+telerad_init	./telerad/telerad.c	/^telerad_init(struct str_telerad_message *tm)$/;"	f
+telerad_laas_message	./telerad/telerad.h	/^struct telerad_laas_message$/;"	s
+telerad_laas_message_clear	./telerad/telerad.c	/^telerad_laas_message_clear(struct telerad_laas_message *tlm)$/;"	f
+telerad_laas_message_delete	./telerad/telerad.c	/^telerad_laas_message_delete(struct telerad_laas_message *tlm)$/;"	f
+telerad_laas_message_init	./telerad/telerad.c	/^telerad_laas_message_init()$/;"	f
+telerad_laas_message_print	./telerad/telerad.c	/^telerad_laas_message_print(struct str_telerad_message *tm, unsigned char rawMsg[])$/;"	f
+telerad_laas_message_print_csv	./telerad/telerad.c	/^telerad_laas_message_print_csv(struct str_telerad_message *tm, unsigned char rawMsg[])$/;"	f
+telerad_print	./telerad/telerad.c	/^telerad_print(struct str_telerad_message *tm, unsigned char rawMsg[], int length)$/;"	f
+telerad_print_csv	./telerad/telerad.c	/^telerad_print_csv(struct str_telerad_message *tm, unsigned char rawMsg[], int length)$/;"	f
+telerad_process	./telerad/telerad.c	/^telerad_process(struct str_telerad_message *tm, unsigned char telerad_message[], int num_bytes)$/;"	f
+telerad_process_incoming	./telerad/telerad.c	/^telerad_process_incoming(struct str_telerad_message *tm, unsigned char buf[], int *size, int *messageSize)$/;"	f
+telerad_receiver_dev	./telerad/telerad.h	/^struct telerad_receiver_dev$/;"	s
+telerad_status	./telerad/telerad.h	/^struct telerad_status$/;"	s
+telerad_status_print	./telerad/telerad.c	/^telerad_status_print(struct str_telerad_message *tm, unsigned char trs[])$/;"	f
+telerad_status_process	./telerad/telerad.c	/^telerad_status_process(struct str_telerad_message *tm, unsigned char rawMsg[])$/;"	f
+telerad_sync_message	./telerad/telerad.c	/^void telerad_sync_message(unsigned char buf[],int *size)$/;"	f
+telerad_validate_checksum	./telerad/telerad.c	/^telerad_validate_checksum(unsigned char msg[],int size)$/;"	f
+test	./lens/pseudorange_calculations.c	/^void test()$/;"	f
+tgd	./ashtech/ashtech.h	/^     float        tgd;      \/**< \\brief 4 Bytes - Group delay (seconds) *\/$/;"	m	struct:str_ashtech_snv
+tgd	./test/main.c	/^     float   tgd;       \/* 4  Group delay (seconds) *\/$/;"	m	struct:gg12_snv_new	file:
+time	./binary_search/binary_search.h	/^     unsigned int time;$/;"	m	struct:str_binary_search_node
+time_gps_to_unix	./time_conversions.c	/^void time_gps_to_unix(struct str_time *time)$/;"	f
+time_mark	./ashtech/gg12.h	/^     bool time_mark;$/;"	m	struct:str_gg12_device
+time_mark	./ashtech/gg12w.h	/^     bool time_mark;$/;"	m	struct:str_gg12w_device
+time_mark	./ashtech/zxtreme.h	/^     bool time_mark;$/;"	m	struct:str_zxtreme_device
+time_received	./ashtech/ashtech.h	/^     struct str_time time_received;$/;"	m	struct:str_ashtech_sal	typeref:struct:str_ashtech_sal::str_time
+time_received	./ashtech/ashtech.h	/^     struct str_time time_received;$/;"	m	struct:str_ashtech_snv	typeref:struct:str_ashtech_snv::str_time
+time_received	./gps.h	/^     struct str_time time_received;$/;"	m	struct:str_satellite_position	typeref:struct:str_satellite_position::str_time
+time_received	./laas.h	/^     struct str_time time_received;$/;"	m	struct:str_serial_device	typeref:struct:str_serial_device::str_time
+time_unix_to_gps	./time_conversions.c	/^void time_unix_to_gps(struct str_time *time)$/;"	f
+tlm	./telerad/telerad.h	/^    struct telerad_laas_message tlm;$/;"	m	struct:str_telerad_message	typeref:struct:str_telerad_message::telerad_laas_message
+toa	./ashtech/ashtech.h	/^     int               toa; \/**< \\brief 4 Bytes - Reference time for orbit (sec) *\/$/;"	m	struct:str_ashtech_sal
+toc	./ashtech/ashtech.h	/^     int          toc;      \/**< \\brief 4 Bytes - Clock data reference time in seconds *\/$/;"	m	struct:str_ashtech_snv
+toc	./test/main.c	/^     int     toc;       \/* 4  Clock data reference time in seconds *\/$/;"	m	struct:gg12_snv_new	file:
+toe	./ashtech/ashtech.h	/^     int          toe;      \/**< \\brief 4 Bytes - Reference time for orbit (sec) *\/$/;"	m	struct:str_ashtech_snv
+toe	./test/main.c	/^     int     toe;       \/* 4  Reference time for orbit (sec) *\/$/;"	m	struct:gg12_snv_new	file:
+total_flags	./lens/pseudorange_calculations.c	/^int total_flags(int RS_Config) $/;"	f
+tow	./ashtech/ashtech.h	/^     int               tow; \/**< \\brief 4 Bytes - Seconds of GPS week *\/$/;"	m	struct:str_ashtech_sal
+tow	./ashtech/ashtech.h	/^     int          tow;      \/**< \\brief 4 Bytes - Seconds of GPS week *\/$/;"	m	struct:str_ashtech_snv
+tow	./test/main.c	/^     int     tow;       \/* 4  Seconds of GPS week *\/$/;"	m	struct:gg12_snv_new	file:
+transaction	./laas.h	/^     FILE *transaction;      \/* Device transaction log *\/$/;"	m	struct:str_serial_device
+transaction_log	./laas.h	/^     int transaction_log;$/;"	m	struct:str_serial_logging_control
+trca	./telerad/telerad.h	/^    struct telerad_command_acknowledgement trca;$/;"	m	struct:str_telerad_message	typeref:struct:str_telerad_message::telerad_command_acknowledgement
+trs	./telerad/telerad.h	/^    struct telerad_status trs;$/;"	m	struct:str_telerad_message	typeref:struct:str_telerad_message::telerad_status
+tty	./laas.h	/^     char tty[MAX_LINE_LENGTH];           \/* \/dev\/tty# port name         *\/$/;"	m	struct:str_serial_device
+type	./laas.h	/^     enum enum_device_type type;$/;"	m	struct:str_serial_device	typeref:enum:str_serial_device::enum_device_type
+type_index	./laas.h	/^     int  type_index;$/;"	m	struct:str_serial_device
+type_semantic	./laas.h	/^     char type_semantic[MAX_LINE_LENGTH]; \/* GG12, GG12W, TELERAD...     *\/$/;"	m	struct:str_serial_device
+uchar	./conversions.h	10;"	d
+uint	./conversions.h	12;"	d
+unix	./time_struct.h	/^     struct str_time_unix unix;$/;"	m	struct:str_time	typeref:struct:str_time::str_time_unix
+unix_to_gps_rcvtime	./time_conversions.c	/^unsigned int unix_to_gps_rcvtime()$/;"	f
+urcvtime	./test/main.c	/^static double urcvtime = 0;$/;"	v	file:
+usec	./time_struct.h	/^     suseconds_t usec;    \/* microseconds *\/$/;"	m	struct:str_time_unix
+ushort	./conversions.h	11;"	d
+utils_string_parse	./telerad/utils_string.c	/^utils_string_parse(char *string, char c, int *i)$/;"	f
+utils_string_raw_to_double	./telerad/utils_string.c	/^double utils_string_raw_to_double(unsigned char in[])$/;"	f
+utils_string_raw_to_float	./telerad/utils_string.c	/^float utils_string_raw_to_float(unsigned char in[])$/;"	f
+utils_string_raw_to_int	./telerad/utils_string.c	/^int utils_string_raw_to_int(unsigned char in[])$/;"	f
+utils_string_raw_to_short	./telerad/utils_string.c	/^short utils_string_raw_to_short(unsigned char in[])$/;"	f
+utils_string_raw_to_uint	./telerad/utils_string.c	/^unsigned int utils_string_raw_to_uint(unsigned char in[])$/;"	f
+utils_string_raw_to_ushort	./telerad/utils_string.c	/^unsigned short utils_string_raw_to_ushort(unsigned char in[])$/;"	f
+utils_string_swap	./telerad/utils_string.c	/^void utils_string_swap(unsigned char *x, unsigned char *y)$/;"	f
+utils_string_swap_bytes	./telerad/utils_string.c	/^void utils_string_swap_bytes(char a, char b)$/;"	f
+valid	./ashtech/ashtech.h	/^     bool valid;                          \/**< \\brief Valid Flag defined in the LLRD for snv_update() *\/$/;"	m	struct:str_ashtech_snv
+valid	./telerad/laasMessage.h	/^    unsigned int valid;       $/;"	m	struct:laasMessage
+valid	./telerad/laasMessageType1.h	/^        unsigned int  valid;$/;"	m	struct:laasMessageType1::str_mesaurement_block
+valid	./telerad/laasMessageType1.h	/^    unsigned int valid;     \/* do the range of values fall in the valid range for the field *\/$/;"	m	struct:laasMessageType1
+valid	./telerad/laasMessageType2.h	/^    unsigned int  valid;$/;"	m	struct:laasMessageType2
+valid	./telerad/laasMessageType4.h	/^        unsigned int  valid;$/;"	m	struct:laasMessageType4::str_fas_block
+vdop	./ashtech/ashtech.h	/^     unsigned int vdop;            \/* 2 VDOP value (100x) *\/$/;"	m	struct:str_ashtech_mis
+verify_pr_corr	./lens/measurement_block.c	/^void verify_pr_corr(double PRsca1, double PRsca2, double PRsca3, double PRsca4,$/;"	f
+warning	./ashtech/ashtech.h	/^     unsigned int  warning;     \/* 1  See Table 4.39  *\/$/;"	m	struct:str_ashtech_mca_data
+warning	./test/main.c	/^     unsigned short warning;   \/* 1  See Table 4.39  *\/$/;"	m	struct:gg12_mca_new	file:
+week	./time_struct.h	/^     int week;$/;"	m	struct:str_time_gps
+wn	./ashtech/ashtech.h	/^     int                wn; \/**< \\brief 2 Bytes - GPS week number *\/$/;"	m	struct:str_ashtech_sal
+wn	./ashtech/ashtech.h	/^     int          wn;       \/**< \\brief 2 Bytes - GPS week number *\/$/;"	m	struct:str_ashtech_snv
+wn	./test/main.c	/^     short   wn;        \/* 2  GPS week number *\/$/;"	m	struct:gg12_snv_new	file:
+wna	./ashtech/ashtech.h	/^     int               wna; \/**< \\brief 2 Bytes - Almanac week number *\/$/;"	m	struct:str_ashtech_sal
+x	./ashtech/ashtech.h	/^          double        x; \/* 8  X coord of satellite (WGS-84) *\/$/;"	m	struct:str_ashtech_xyz::str_xyz_data
+x	./gps.h	/^     double x;  $/;"	m	struct:str_satellite_position
+x	./laas.h	/^     double x;$/;"	m	struct:str_location
+x	./test/main.c	/^     double x;$/;"	m	struct:Position	file:
+x	./test/main.c	/^     double x;$/;"	m	struct:_RR	file:
+xrld	./test/main.c	/^static const double xrld =  -675846.6843;$/;"	v	file:
+xyz	./ashtech/gg12.h	/^     struct str_ashtech_xyz xyz;     \/* Satelitte position *\/$/;"	m	struct:str_gg12_device	typeref:struct:str_gg12_device::str_ashtech_xyz
+xyz	./ashtech/gg12w.h	/^     struct str_ashtech_xyz xyz;     \/* Satelitte position *\/$/;"	m	struct:str_gg12w_device	typeref:struct:str_gg12w_device::str_ashtech_xyz
+xyz	./ashtech/zxtreme.h	/^     struct str_ashtech_xyz xyz;     \/* Satelitte position *\/$/;"	m	struct:str_zxtreme_device	typeref:struct:str_zxtreme_device::str_ashtech_xyz
+xyz_checksum_count	./ashtech/gg12.h	/^          int xyz_checksum_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+xyz_checksum_count	./ashtech/gg12w.h	/^          int xyz_checksum_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+xyz_checksum_count	./ashtech/zxtreme.h	/^          int xyz_checksum_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+xyz_count	./ashtech/gg12.h	/^          int xyz_count;$/;"	m	struct:str_gg12_device::str_gg12_stats
+xyz_count	./ashtech/gg12w.h	/^          int xyz_count;$/;"	m	struct:str_gg12w_device::str_gg12w_stats
+xyz_count	./ashtech/zxtreme.h	/^          int xyz_count;$/;"	m	struct:str_zxtreme_device::str_zxtreme_stats
+xyz_current	./test/main.c	/^     struct Position xyz_current; $/;"	m	struct:SatelliteInformation	typeref:struct:SatelliteInformation::Position	file:
+xyz_previous	./test/main.c	/^     struct Position xyz_previous; $/;"	m	struct:SatelliteInformation	typeref:struct:SatelliteInformation::Position	file:
+xyzae	./gps.h	/^     struct str_satellite_position xyzae;$/;"	m	struct:str_satellite_almanac_ephemeris_position	typeref:struct:str_satellite_almanac_ephemeris_position::str_satellite_position
+y	./ashtech/ashtech.h	/^          double        y; \/* 8  Y coord of satellite (WGS-84) *\/$/;"	m	struct:str_ashtech_xyz::str_xyz_data
+y	./gps.h	/^     double y;$/;"	m	struct:str_satellite_position
+y	./laas.h	/^     double y;$/;"	m	struct:str_location
+y	./test/main.c	/^     double y;$/;"	m	struct:Position	file:
+y	./test/main.c	/^     double y;$/;"	m	struct:_RR	file:
+yrld	./test/main.c	/^static const double yrld = -5173307.6231;$/;"	v	file:
+z	./ashtech/ashtech.h	/^          double        z; \/* 8  Z coord of satellite (WGS-84) *\/$/;"	m	struct:str_ashtech_xyz::str_xyz_data
+z	./gps.h	/^     double z; $/;"	m	struct:str_satellite_position
+z	./laas.h	/^     double z;$/;"	m	struct:str_location
+z	./test/main.c	/^     double z;$/;"	m	struct:Position	file:
+z	./test/main.c	/^     double z;$/;"	m	struct:_RR	file:
+zrld	./test/main.c	/^static const double zrld =  3657198.7184;$/;"	v	file:
+zxtreme_print_statistics	./ashtech/zxtreme.c	/^void zxtreme_print_statistics(struct str_zxtreme_device zxtreme[], struct str_limits *limits)$/;"	f
+zxtreme_process_incoming	./ashtech/zxtreme.c	/^int zxtreme_process_incoming(struct str_zxtreme_device *c, GDBM_FILE dbf)$/;"	f

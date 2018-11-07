@@ -1,0 +1,300 @@
+/* 
+    LAAS Ground Facility Low Level Requirment
+    Ephemeris CRC
+    Section 3.2.1.6
+*/
+#define _ISOC9X_SOURCE  1
+#define _ISOC99_SOURCE  1
+#include  <math.h>
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <termios.h>
+#include <signal.h>
+#include <sys/time.h>
+#include <time.h>
+#include <math.h>
+
+#include "../conversions.h"
+#include "crc_16bit.h"
+/*
+#include "../ashtech/ashtech.h"
+#include "../ashtech/gg12.h"
+*/
+
+
+#include "ephemeris_crc.h"
+
+unsigned int
+calculate_ephemeris_crc(struct str_ashtech_snv *st_snv)
+{
+    unsigned char sf1[72];
+    unsigned char *sf2;
+    unsigned char *sf3;
+
+    long lng = 0;
+    unsigned long ulng = 0;
+    double dbl = 0;
+    double fractional = 0;
+    double integral = 0;
+    int sign = 0;
+
+    unsigned int crc = 0;
+
+    memset(sf1,0,72);
+
+    sf2 = &sf1[24];
+    sf3 = &sf1[48];
+
+/** Subframe 1 **********************************************************/
+
+    sf1[2]  = (st_snv->aodc >> 8) & 0x03;
+
+    dbl = st_snv->tgd / pow(2,-31);
+    lng = lrint(dbl);
+
+    sf1[14] = (lng         & 0x000000FF);
+
+    sf1[15] = (st_snv->aodc        & 0xFF);
+
+    lng = st_snv->toc / pow(2,4);
+    sf1[16] = (lng  >> 8)  & 0xFF;
+    sf1[17] = (lng         & 0xFF);
+
+    dbl = st_snv->af2 / pow(2,-55);
+    lng = lrint(dbl);
+    sf1[18] = (lng         & 0xFF);
+
+    printf("af2: %.25f\n",st_snv->af2);
+    printf("ar2: %.25f\n",dbl);
+    printf("af2: %ld\n",lng);
+    /* printf("af2: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->af1 / pow(2,-43);
+    lng = lrint(dbl);
+    sf1[19] = ((lng  >> 8) & 0xFF);
+    sf1[20] = (lng         & 0xFF);
+
+    printf("af1: %.25f\n",st_snv->af1);
+    printf("af1: %.25f\n",dbl);
+    printf("af1: %ld\n",lng);
+    /* printf("af1: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->af0 / pow(2,-31);
+    lng = lrint(dbl);
+    sf1[21] = (lng  >> 14  & 0xFF);
+    sf1[22] = (lng  >>  6  & 0xFF);
+    sf1[23] = (lng         & 0x3F) << 2;
+
+    printf("af0: %.25f\n",st_snv->af0);
+    printf("af0: %.25f\n",dbl);
+    printf("af0: %ld\n",lng);
+    /* printf("af0: %08X\n\n", (unsigned long) lng); */
+
+/** Subframe 2 **********************************************************/
+
+    sf2[0]  = (st_snv->aode & 0xFF);
+
+    dbl = st_snv->crs / pow(2,-5);
+    lng = lrint(dbl);
+    sf2[1]  = ((lng >> 8 ) & 0xFF);
+    sf2[2] = ((lng & 0xFF));
+
+    dbl = st_snv->deltan / pow(2,-43);
+    lng = lrint(dbl);
+    sf2[3] = ((lng >> 8) & 0xFF);
+    sf2[4] = ((lng & 0xFF));
+
+    printf("deltan: %.25f\n",st_snv->deltan);
+    printf("deltan: %.25f\n",dbl);
+    printf("deltan: %ld\n",lng);
+    /* printf("deltan: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->m0 / pow(2,-31);
+    fractional = modf(dbl,&integral);
+    sign = (integral >= 0) ? 1 : -1;
+    ulng = (fabs(fractional) < 0.5) ? integral : integral + (sign * 1);
+    sf2[5] = ((ulng >> 24) & 0xFF);
+    sf2[6] = ((ulng >> 16) & 0xFF);
+    sf2[7] = ((ulng >> 8) & 0xFF);
+    sf2[8] = ((ulng & 0xFF));
+
+    printf("m0: %.25f\n",st_snv->m0);
+    printf("m0: %.25f\n",dbl);
+    printf("m0: %ld\n",ulng);
+    /* printf("m0: 0x%X\n\n", (unsigned long) ulng); */
+
+    dbl = st_snv->cuc / pow(2,-29);
+    lng = lrint(dbl);
+    sf2[9] = ((lng >> 8) & 0xFF);
+    sf2[10] = ((lng & 0xFF));
+
+    printf("cuc: %.25f\n",st_snv->cuc);
+    printf("cuc: %.25f\n",dbl);
+    printf("cuc: %ld\n",lng);
+    /* printf("cuc: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->e / pow(2,-33);
+    fractional = modf(dbl,&integral);
+    sign = (integral >= 0) ? 1 : -1;
+    ulng = (fabs(fractional) < 0.5) ? integral : integral + (sign * 1);
+    sf2[11] = ((ulng >> 24) & 0xFF);
+    sf2[12] = ((ulng >> 16) & 0xFF);
+    sf2[13] = ((ulng >> 8) & 0xFF);
+    sf2[14] = ((ulng & 0xFF));
+
+    printf("e: %.25f\n",st_snv->e);
+    printf("e: %.25f\n",dbl);
+    printf("e: %ld\n",ulng);
+    /* printf("e: 0x%X\n\n", (unsigned long) ulng); */
+
+    dbl = st_snv->cus / pow(2,-29);
+    lng = lrint(dbl);
+    sf2[15] = ((lng >> 8) & 0xFF);
+    sf2[16] = ((lng & 0xFF));
+
+    printf("cus: %.25f\n",st_snv->cus);
+    printf("cus: %.25f\n",dbl);
+    printf("cus: %ld\n",lng);
+    /* printf("cus: %X\n\n", (unsigned long) lng); */
+
+    dbl = (double) st_snv->roota / pow(2,-19);
+    fractional = modf(dbl,&integral);
+    sign = (integral >= 0) ? 1 : -1;
+    ulng = (fabs(fractional) < 0.5) ? integral : integral + (sign * 1);
+    sf2[17] = ((ulng >> 24) & 0xFF);
+    sf2[18] = ((ulng >> 16) & 0xFF);
+    sf2[19] = ((ulng >> 8) & 0xFF);
+    sf2[20] = ((ulng & 0xFF));
+
+    printf("integral: %.25f\n",integral);
+    printf("Fractional: %.25f\n",fractional);
+    printf("roota: %.25f\n",st_snv->roota);
+    printf("roota: %.25f\n",dbl);
+    printf("roota: %ld\n", ulng);
+    /* printf("roota: 0x%X\n\n", (unsigned long) ulng); */
+
+    dbl = st_snv->toe / pow(2,4);
+    lng = lrint(dbl);
+    sf2[21] = ((lng >> 8) & 0xFF);
+    sf2[22] = ((lng & 0xFF));
+
+    /* printf("toe: %.25f\n",st_snv->toe); */
+    printf("toe: %.25f\n",dbl);
+    printf("toe: %ld\n",lng);
+    /* printf("toe: %X\n\n", (unsigned long) lng); */
+
+    sf2[23] = 0x00;
+
+/** Subframe 3 **********************************************************/
+
+    dbl = st_snv->cic / pow(2,-29);
+    lng = lrint(dbl);
+    sf3[0] = ((lng >> 8 ) & 0xFF);
+    sf3[1] = ((lng & 0xFF));
+
+    printf("cic: %.25f\n",st_snv->cic);
+    printf("cic: %.25f\n",dbl);
+    printf("cic: %ld\n",lng);
+    /* printf("cic: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->omega0 / pow(2,-31);
+    fractional = modf(dbl,&integral);
+    sign = (integral >= 0) ? 1 : -1;
+    ulng = (fabs(fractional) < 0.5) ? integral : integral + (sign * 1);
+    sf3[2] = ((ulng >> 24) & 0xFF);
+    sf3[3] = ((ulng >> 16) & 0xFF);
+    sf3[4] = ((ulng >> 8) & 0xFF);
+    sf3[5] = ((ulng & 0xFF));
+
+    printf("omega0: %.25f\n",st_snv->omega0);
+    printf("omega0: %.25f\n",dbl);
+    printf("omega0: %ld\n",ulng);
+    /* printf("omega0: 0x%X\n\n", (unsigned long) ulng); */
+
+    dbl = st_snv->cis / pow(2,-29);
+    lng = lrint(dbl);
+    sf3[6] = ((lng >> 8 ) & 0xFF);
+    sf3[7] = ((lng & 0xFF));
+
+    printf("cis: %.25f\n",st_snv->cis);
+    printf("cis: %.25f\n",dbl);
+    printf("cis: %ld\n",lng);
+    /* printf("cis: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->i0 / pow(2,-31);
+    fractional = modf(dbl,&integral);
+    sign = (integral >= 0) ? 1 : -1;
+    ulng = (fabs(fractional) < 0.5) ? integral : integral + (sign * 1);
+    sf3[8] =  ((ulng >> 24) & 0xFF);
+    sf3[9] =  ((ulng >> 16) & 0xFF);
+    sf3[10] = ((ulng >> 8) & 0xFF);
+    sf3[11] = ((ulng & 0xFF));
+
+    printf("i0: %.25f\n",st_snv->i0);
+    printf("i0: %.25f\n",dbl);
+    printf("i0: %ld\n",ulng);
+    /* printf("i0: 0x%X\n\n", (unsigned long) ulng); */
+
+    dbl = st_snv->crc / pow(2,-5);
+    lng = lrint(dbl);
+    sf3[12] = ((lng >> 8 ) & 0xFF);
+    sf3[13] = ((lng & 0xFF));
+
+    printf("crc: %.25f\n",st_snv->crc);
+    printf("crc: %.25f\n",dbl);
+    printf("crc: %ld\n",lng);
+    /* printf("crc: %X\n\n", (unsigned long) lng); */
+
+    dbl = st_snv->omega / pow(2,-31);
+    fractional = modf(dbl,&integral);
+    sign = (integral >= 0) ? 1 : -1;
+    ulng = (fabs(fractional) < 0.5) ? integral : integral + (sign * 1);
+    sf3[14] = ((ulng >> 24) & 0xFF);
+    sf3[15] = ((ulng >> 16) & 0xFF);
+    sf3[16] = ((ulng >> 8) & 0xFF);
+    sf3[17] = ((ulng & 0xFF));
+
+    printf("omega: %.25f\n",st_snv->omega);
+    printf("omega: %.25f\n",dbl);
+    printf("omega: %ld\n",ulng);
+    /* printf("omega: 0x%X\n\n", (unsigned long) ulng); */
+
+    dbl = st_snv->omegadot / pow(2,-43);
+    lng = lrint(dbl);
+    sf3[18] = ((lng >> 16) & 0xFF);
+    sf3[19] = ((lng >> 8) & 0xFF);
+    sf3[20] = ((lng & 0xFF));
+
+    printf("omegadot: %.25f\n",st_snv->omegadot);
+    printf("omegadot: %.25f\n",dbl);
+    printf("omegadot: %ld\n",lng);
+    /* printf("omegadot: %X\n\n", (unsigned long) lng); */
+
+    sf3[21]  = (st_snv->aode & 0xFF);
+
+    dbl = st_snv->idot / pow(2,-43);
+    lng = lrint(dbl);
+    sf3[22] = ((lng >> 6 ) & 0xFF);
+    sf3[23] = ((lng & 0x3F) << 2);
+
+    printf("idot: %.25f\n",st_snv->idot);
+    printf("idot: %.25f\n",dbl);
+    printf("idot: %ld\n",lng);
+    /* printf("idot: %X\n\n", (unsigned long) lng); */
+
+    crc = generate_crc_16bit(sf1, 72);
+
+/*
+    return crc;
+*/
+    return ((crc & 0xFF) << 8 | (crc & 0xFF00) >> 8);
+}
+
+
+/***************************************************************************************************************/
